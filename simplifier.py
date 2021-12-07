@@ -151,7 +151,7 @@ class ForceView:
                 number = int(element.get("number", 1))
                 name: str = element.get("name", "<Unparsed selection>")
                 if number > 1:
-                    name = f"{number}x{name.capitalize()}"
+                    name = f"{number}x{name}"
 
                 elements_inside = self.__enumerate_all_selections(element)
                 if elements_inside:
