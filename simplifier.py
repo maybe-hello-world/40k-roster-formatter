@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import Optional
 from zipfile import ZipFile
-from dataclasses import dataclass
 
 from lxml import objectify
 from lxml.objectify import ObjectifiedElement
@@ -52,7 +51,7 @@ class ForceView:
 
         for key in ["No Force Org Slot", "Agent of the Imperium"]:
             self.non_enumerated_units[key].extend([
-                self.__parse_unit(unit) for unit
+                self.__parse_units(unit) for unit
                 in self.__get_selections_of_category(force, key)
             ])
 
@@ -68,7 +67,7 @@ class ForceView:
 
         for key, (_, storage) in self.enumerated_units.items():
             storage.extend([
-                self.__parse_unit(unit) for unit
+                self.__parse_units(unit) for unit
                 in self.__get_selections_of_category(force, key)
             ])
 
@@ -116,10 +115,56 @@ class ForceView:
                     " (" + ', '.join(x.get("name", "") for x in faction[1:]) + ")"
             )
 
-    def __parse_unit(self, unit: objectify.ObjectifiedElement) -> str:
-        return "UNIT!"
+    @staticmethod
+    def __recursive_pts_cost_search(unit: objectify.ObjectifiedElement) -> int:
+        total_cost = 0
+        for cost in unit.iter(tag="{*}cost"):
+            if cost.get("name", "") == "pts":
+                total_cost += int(float(cost.get("value")))
+        return total_cost
 
-    def __parse_stratagem(self, stratagem: objectify.ObjectifiedElement) -> str:
+    def __get_unit_cost(self, unit: objectify.ObjectifiedElement) -> str:
+        cost_pts = self.__recursive_pts_cost_search(unit)
+        self.pts += cost_pts
+
+        cost_pl = single_children_by_name(unit.costs.getchildren(), " PL")
+        cost_pl = cost_pl.get("value", 0.0) if cost_pl is not None else 0
+        cost_pl = int(float(cost_pl))
+
+        cost_cp = single_children_by_name(unit.costs.getchildren(), "CP")
+        cost_cp = cost_cp.get("value", 0.0) if cost_cp is not None else 0
+        cost_cp = int(float(cost_cp))
+
+        total_cost = f"[{cost_pts} pts, {cost_pl} PL"
+        total_cost += f", {cost_cp} CP" if cost_cp else ""
+        total_cost += "]"
+        return total_cost
+
+    def __enumerate_all_selections(self, selection: objectify.ObjectifiedElement) -> str:
+        children = selection.iterchildren(tag=self.PREFIX + "{*}selections")
+        output = []
+        for child in children:
+            for element in child.getchildren():
+                number = int(element.get("number", 1))
+                name: str = element.get("name", "<Unparsed selection>")
+                if number > 1:
+                    name = f"{number}x{name.capitalize()}"
+
+                elements_inside = self.__enumerate_all_selections(element)
+                if elements_inside:
+                    name = f"{name} ({elements_inside})"
+
+                output.append(name)
+        return ', '.join(output)
+
+    def __parse_units(self, unit: objectify.ObjectifiedElement) -> str:
+        name = unit.get("name", "Unparsed Model Name")
+        selections = self.__enumerate_all_selections(unit)
+        cost = self.__get_unit_cost(unit)
+        return f"{name}: {selections} {cost}" if selections else f"{name} {cost}"
+
+    @staticmethod
+    def __parse_stratagem(stratagem: objectify.ObjectifiedElement) -> str:
         name = "- " + stratagem.get("name", "Unparsed Stratagem").removeprefix("Stratagem: ")
         cost = int(float(single_children_by_name(stratagem.costs.getchildren(), "CP").get("value", "0.0")))
         return f"{name} ({cost} CP)"
@@ -158,7 +203,7 @@ class RosterView:
             f"Command Points: {self.cp_total}",
             f"Total cost: {self.pts_total} pts, {self.pl_total} PL",
             f"Reinforcement Points: {self.reinf_points}",
-            "+" * 75,
+            "-" * 10,
             "",
         ])
 
