@@ -105,13 +105,17 @@ class ForceView:
         faction = faction.selections.getchildren()
         if not faction:
             self.faction = "Unparsed Faction"
-        elif len(faction) == 1:
-            self.faction = faction[0].get("name", "Unparsed Faction")
-        else:
-            self.faction = (
-                    faction[0].get("name", "Unparsed Faction") +
-                    " (" + ', '.join(x.get("name", "") for x in faction[1:]) + ")"
-            )
+            return
+
+        faction_name = faction[0].get("name", "Unparsed Faction")
+
+        addons = [x.get("name", "Unparsed Subfaction") for x in faction[0].iterdescendants(tag="{*}selection")]
+        if addons:
+            faction_name = f"{faction_name} ({', '.join(addons)})"
+        if len(faction) > 1:
+            faction_name += " (" + ', '.join(x.get("name", "") for x in faction[1:]) + ")"
+
+        self.faction = faction_name
 
     @staticmethod
     def __recursive_cost_search(unit: objectify.ObjectifiedElement) -> (int, int, int):
@@ -260,6 +264,6 @@ class RosterView:
 
 
 if __name__ == '__main__':
-    filename = "data/750msu.rosz"
-    result = RosterView(filename, True)
+    filename = "data/ab.ros"
+    result = RosterView(filename, False)
     print(result)
