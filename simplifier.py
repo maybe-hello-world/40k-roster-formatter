@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from typing import Optional
 from zipfile import ZipFile
 from dataclasses import dataclass
 
@@ -8,6 +10,14 @@ from lxml.objectify import ObjectifiedElement
 
 class SimplifierException(Exception):
     pass
+
+
+def single_children_by_name(children: list[ObjectifiedElement], name: str) -> Optional[ObjectifiedElement]:
+    children = [x for x in children if x.get("name", None) == name]
+    if len(children) == 1:
+        return children[0]
+    else:
+        return None
 
 
 class ForceView:
@@ -26,18 +36,62 @@ class ForceView:
         self.detachment = name
         self.__parse_faction(force)
 
-    def __check_primary(self, children: list[ObjectifiedElement], category_name: str, primary: bool = True) -> bool:
-        primary = 'true' if primary else 'false'
-        children = [x for x in children if x.tag == self.PREFIX + "category"]
-        children = [x for x in children if x.get("primary", 'false') == primary]
-        return len(children) == 1 and children[0].get("name", "") == category_name
+        force = force.selections.getchildren()
+
+        self.non_enumerated_units = {
+            "Stratagems": [],
+            "No Force Org Slot": [],
+            "Agent of the Imperium": []
+        }
+
+        # parse stratagems
+        self.non_enumerated_units['Stratagems'].extend([
+            self.__parse_stratagem(x) for x
+            in self.__get_selections_of_category(force, "Stratagems")
+        ])
+
+        for key in ["No Force Org Slot", "Agent of the Imperium"]:
+            self.non_enumerated_units[key].extend([
+                self.__parse_unit(unit) for unit
+                in self.__get_selections_of_category(force, key)
+            ])
+
+        self.enumerated_units = {
+            "HQ": ["HQ", []],
+            "Troops": ["TR", []],
+            "Elites": ["EL", []],
+            "Fast Attack": ["FA", []],
+            "Heavy Support": ["HS", []],
+            "Flyer": ["FL", []],
+            "Dedicated Transport": ["DT", []]
+        }
+
+        for key, (_, storage) in self.enumerated_units.items():
+            storage.extend([
+                self.__parse_unit(unit) for unit
+                in self.__get_selections_of_category(force, key)
+            ])
+
+    @staticmethod
+    def __get_selections_of_category(
+            selections: list[ObjectifiedElement],
+            category_name: str,
+            primary: Optional[bool] = None
+    ):
+        primary = str(primary).lower()
+
+        return [
+            x for x in selections
+            if any(
+                category.get("name", "") == category_name and
+                (primary == 'none' or category.get("primary", "") == primary)
+                for category in x.categories.getchildren()
+            )
+        ]
 
     def __parse_faction(self, force: objectify.ObjectifiedElement):
         selections = force.selections.getchildren()
-        selections = [
-            x for x in selections
-            if self.__check_primary(x.categories.getchildren(), "Configuration")
-        ]
+        selections = self.__get_selections_of_category(selections, "Configuration", primary=True)
 
         selections = [
             x for x in selections
@@ -62,9 +116,34 @@ class ForceView:
                     " (" + ', '.join(x.get("name", "") for x in faction[1:]) + ")"
             )
 
+    def __parse_unit(self, unit: objectify.ObjectifiedElement) -> str:
+        return "UNIT!"
+
+    def __parse_stratagem(self, stratagem: objectify.ObjectifiedElement) -> str:
+        name = "- " + stratagem.get("name", "Unparsed Stratagem").removeprefix("Stratagem: ")
+        cost = int(float(single_children_by_name(stratagem.costs.getchildren(), "CP").get("value", "0.0")))
+        return f"{name} ({cost} CP)"
+
     def __str__(self):
+        header = f"== {self.faction} {self.detachment} == {self.cp} CP, {self.pts} pts, {self.pl} PL"
+
+        for key, value in self.non_enumerated_units.items():
+            if value:
+                value.insert(0, f"{key}:")
+                value.append("")
+
+        for key, value in self.enumerated_units.items():
+            if value[1]:
+                self.enumerated_units[key][1] = [f"{value[0]}{i + 1}: {v}" for i, v in enumerate(value[1])] + [""]
+
+        non_enumerated = ['\n'.join(x) for x in self.non_enumerated_units.values() if x]
+        enumerated = ['\n'.join(x[1]) for x in self.enumerated_units.values() if x[1]]
+
         return '\n'.join([
-            f"== {self.faction} {self.detachment} == {self.cp} CP, {self.pts} pts"
+            header,
+            "",
+            *non_enumerated,
+            *enumerated,
         ])
 
 
@@ -77,7 +156,7 @@ class RosterView:
             f"Army name: {self.name}",
             f"Factions used: {', '.join(self.factions)}",
             f"Command Points: {self.cp_total}",
-            f"Total pts: {self.pts_total}",
+            f"Total cost: {self.pts_total} pts, {self.pl_total} PL",
             f"Reinforcement Points: {self.reinf_points}",
             "+" * 75,
             "",
@@ -136,6 +215,6 @@ class RosterView:
 
 
 if __name__ == '__main__':
-    filename = "data/Harlequins_500.rosz"
-    result = RosterView(filename, True)
+    filename = "data/bm.ros"
+    result = RosterView(filename, False)
     print(result)
