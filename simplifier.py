@@ -6,6 +6,8 @@ from zipfile import ZipFile
 from lxml import objectify
 from lxml.objectify import ObjectifiedElement
 
+from collections import Counter
+
 
 class SimplifierException(Exception):
     pass
@@ -20,14 +22,10 @@ def single_children_by_name(children: list[ObjectifiedElement], name: str) -> Op
 
 
 class ForceView:
-    PREFIX: str = "{http://www.battlescribe.net/schema/rosterSchema}"
-    pts: int = 0
-    cp: int = 0
-    pl: int = 0
-    faction: str = ""
-    detachment: str = ""
-
     def __init__(self, force: objectify.ObjectifiedElement):
+        self.pts = 0
+        self.pl = 0
+
         name: str = force.get("name", "Unparsed Detachment ?CP")
         if "Detachment" in name:
             name, cp = name.rsplit(" ", maxsplit=1)
@@ -116,24 +114,25 @@ class ForceView:
             )
 
     @staticmethod
-    def __recursive_pts_cost_search(unit: objectify.ObjectifiedElement) -> int:
-        total_cost = 0
+    def __recursive_cost_search(unit: objectify.ObjectifiedElement) -> (int, int, int):
+        total_cost_pts = 0
+        total_cost_pl = 0
+        total_cost_cp = 0
         for cost in unit.iter(tag="{*}cost"):
-            if cost.get("name", "") == "pts":
-                total_cost += int(float(cost.get("value")))
-        return total_cost
+            name = cost.get("name", "").lower().strip()
+            if name == "pts":
+                total_cost_pts += int(float(cost.get("value", 0)))
+            elif name == "pl":
+                total_cost_pl += int(float(cost.get("value", 0)))
+            elif name == "cp":
+                total_cost_cp += int(float(cost.get("value", 0)))
+
+        return total_cost_pts, total_cost_pl, total_cost_cp
 
     def __get_unit_cost(self, unit: objectify.ObjectifiedElement) -> str:
-        cost_pts = self.__recursive_pts_cost_search(unit)
+        cost_pts, cost_pl, cost_cp = self.__recursive_cost_search(unit)
         self.pts += cost_pts
-
-        cost_pl = single_children_by_name(unit.costs.getchildren(), " PL")
-        cost_pl = cost_pl.get("value", 0.0) if cost_pl is not None else 0
-        cost_pl = int(float(cost_pl))
-
-        cost_cp = single_children_by_name(unit.costs.getchildren(), "CP")
-        cost_cp = cost_cp.get("value", 0.0) if cost_cp is not None else 0
-        cost_cp = int(float(cost_cp))
+        self.pl += cost_pl
 
         total_cost = f"[{cost_pts} pts, {cost_pl} PL"
         total_cost += f", {cost_cp} CP" if cost_cp else ""
@@ -141,7 +140,7 @@ class ForceView:
         return total_cost
 
     def __enumerate_all_selections(self, selection: objectify.ObjectifiedElement) -> str:
-        children = selection.iterchildren(tag=self.PREFIX + "{*}selections")
+        children = selection.iterchildren(tag="{*}selections")
         output = []
         for child in children:
             for element in child.getchildren():
@@ -155,6 +154,9 @@ class ForceView:
                     name = f"{name} ({elements_inside})"
 
                 output.append(name)
+
+        counter = Counter(output)
+        output = [f"{'' if value == 1 else str(value) + 'x'}{key}" for key, value in counter.items()]
         return ', '.join(output)
 
     def __parse_units(self, unit: objectify.ObjectifiedElement) -> str:
@@ -193,8 +195,6 @@ class ForceView:
 
 
 class RosterView:
-    PREFIX = "{http://www.battlescribe.net/schema/rosterSchema}"
-
     def __str__(self):
         header = '\n'.join([
             f"PLAYER: ",
@@ -234,7 +234,7 @@ class RosterView:
     def __set_reinf_points(self, roster: objectify.ObjectifiedElement):
         pts_limit = [
             x.costLimit.get("value")
-            for x in roster.iter(tag=self.PREFIX + 'costLimits')
+            for x in roster.iter(tag='{*}costLimits')
             if x.costLimit.get("name", "") == "pts"
         ]
         pts_limit = int(float(pts_limit[0])) if pts_limit else 0
@@ -255,11 +255,11 @@ class RosterView:
         self.__set_reinf_points(roster)
         self.factions = set(x.attrib.get("catalogueName", "<ERROR: UNPARSED>") for x in roster.forces.iterchildren())
 
-        forces = (x for x in roster.forces.getchildren() if x.tag.removeprefix(self.PREFIX) == "force")
+        forces = (x for x in roster.forces.iterchildren(tag="{*}force"))
         self.forces = [ForceView(x) for x in forces]
 
 
 if __name__ == '__main__':
-    filename = "data/bm.ros"
-    result = RosterView(filename, False)
+    filename = "data/750msu.rosz"
+    result = RosterView(filename, True)
     print(result)
