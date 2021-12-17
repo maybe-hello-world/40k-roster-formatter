@@ -21,6 +21,18 @@ def single_children_by_name(children: list[ObjectifiedElement], name: str) -> Op
         return None
 
 
+def remove_prefix(_string: str, _prefix: str) -> str:
+    if _string.startswith(_prefix):
+        return _string[len(_prefix):]
+    return _string
+
+
+def remove_suffix(_string: str, _suffix: str) -> str:
+    if _suffix and _string.endswith(_suffix):
+        return _string[:-len(_suffix)]
+    return _string
+
+
 class ForceView:
     def __init__(self, force: objectify.ObjectifiedElement):
         self.pts = 0
@@ -29,7 +41,8 @@ class ForceView:
         name: str = force.get("name", "Unparsed Detachment ?CP")
         if "Detachment" in name:
             name, cp = name.rsplit(" ", maxsplit=1)
-            self.cp = int(cp.lower().strip().removesuffix("cp"))
+            cp = cp.lower().strip()
+            self.cp = int(remove_suffix(cp, "cp"))
         self.detachment = name
         self.__parse_faction(force)
 
@@ -171,7 +184,8 @@ class ForceView:
 
     @staticmethod
     def __parse_stratagem(stratagem: objectify.ObjectifiedElement) -> str:
-        name = "- " + stratagem.get("name", "Unparsed Stratagem").removeprefix("Stratagem: ")
+        name = stratagem.get("name", "Unparsed Stratagem")
+        name = "- " + remove_prefix(name, "Stratagem: ")
         cost = int(float(single_children_by_name(stratagem.costs.getchildren(), "CP").get("value", "0.0")))
         return f"{name} ({cost} CP)"
 
