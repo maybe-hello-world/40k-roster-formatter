@@ -206,7 +206,7 @@ class RosterView:
             f"Factions used: {', '.join(self.factions)}",
             f"Command Points: {self.cp_total}",
             f"Total cost: {self.pts_total} pts, {self.pl_total} PL",
-            f"Reinforcement Points: {self.reinf_points}",
+            f"Reinforcement Points: {self.reinf_points} pts",
             "-" * 10,
             "",
         ])
@@ -221,9 +221,7 @@ class RosterView:
             input_file = ZipFile(input_file)
             return {name: input_file.read(name) for name in input_file.namelist()}
         else:
-            with open(input_file, 'rt') as f:
-                input_file = f.read().encode('utf-8')
-            return {"default": input_file}
+            return {"default": input_file.encode('utf-8')}
 
     @staticmethod
     def __read_xml(content: dict) -> objectify.ObjectifiedElement:
@@ -245,8 +243,8 @@ class RosterView:
         reinf_points = pts_limit - self.pts_total
         self.reinf_points = str(reinf_points) if reinf_points > 0 else 'none'
 
-    def __init__(self, filename: str, zipped: bool = True):
-        roster = self.__read_xml(self.__extract(filename, zipped))
+    def __init__(self, file, zipped: bool = True):
+        roster = self.__read_xml(self.__extract(file, zipped))
         self.name = roster.attrib.get("name", "")
 
         total_cost = {
@@ -261,9 +259,3 @@ class RosterView:
 
         forces = (x for x in roster.forces.iterchildren(tag="{*}force"))
         self.forces = [ForceView(x) for x in forces]
-
-
-if __name__ == '__main__':
-    filename = "data/ab.ros"
-    result = RosterView(filename, False)
-    print(result)
