@@ -2,7 +2,7 @@ import azure.functions
 import logging
 import io
 
-from .simplifier import RosterView, SimplifierException
+from .formatter import RosterView, FormatterException
 
 
 def main(req: azure.functions.HttpRequest) -> azure.functions.HttpResponse:
@@ -10,7 +10,7 @@ def main(req: azure.functions.HttpRequest) -> azure.functions.HttpResponse:
     try:
         roster = req.files.get('roster', None)  # Werkzeug.datastructures.FileStorage
         if roster is None:
-            raise SimplifierException("File is not provided.")
+            raise FormatterException("File is not provided.")
 
         filename: str = roster.filename
         content: bytes = roster.read()
@@ -21,7 +21,7 @@ def main(req: azure.functions.HttpRequest) -> azure.functions.HttpResponse:
         elif filename.endswith(".rosz"):
             result = RosterView(io.BytesIO(content), zipped=True)
         else:
-            raise SimplifierException("Provided file doesn't end with .ros or .rosz and therefore "
+            raise FormatterException("Provided file doesn't end with .ros or .rosz and therefore "
                                       "couldn't be parsed as valid BattleScribe file.")
         logging.debug("Roster successfully parsed.")
         return azure.functions.HttpResponse(str(result), status_code=200)

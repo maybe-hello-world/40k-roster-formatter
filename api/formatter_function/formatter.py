@@ -9,7 +9,7 @@ from lxml.objectify import ObjectifiedElement
 from collections import Counter
 
 
-class SimplifierException(Exception):
+class FormatterException(Exception):
     pass
 
 
@@ -226,7 +226,7 @@ class RosterView:
     @staticmethod
     def __read_xml(content: dict) -> objectify.ObjectifiedElement:
         if len(content) != 1:
-            raise SimplifierException(f"Unknown structure of provided rosz archive. Content: {content.keys()}")
+            raise FormatterException(f"Unknown structure of provided rosz archive. Content: {content.keys()}")
 
         name: str = next(iter(content))
         roster: objectify.ObjectifiedElement = objectify.fromstring(content[name])
