@@ -9,6 +9,12 @@
 <body>
   <main>
     <h1>Vanilla HTML App</h1>
+    <!-- Простая форма, которая пошлёт POST запрос -->
+<form action="/api/formatter/formatter.py" method="post">
+  <label for="POST-name">Name:</label>
+  <input id="POST-name" type="text" name="name">
+  <input type="submit" value="Save">
+</form>
   </main>
 </body>
 
