@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 from typing import Optional
 from zipfile import ZipFile
 
@@ -156,6 +158,29 @@ class ForceView:
         total_cost += "]"
         return total_cost
 
+    @staticmethod
+    def __parse_multiplied_unit(name: str, number: int) -> (str, int):
+        """
+        This function is a damn crutch as BS data developers sometimes create units
+        like "2x MV1 Gun Drone" with number=1 (instead of correct version "MV1 Gun Drone" with number=2).
+
+        So here we receive the name and current number and if name starts with "<number>x "
+        then remove the prefix and return number * prefix
+
+        :param name: unit's name
+        :param number: amount of such units
+        :return: if in prefix multiplier exists then Tuple[name without multiplier, number * prefix],
+         original values otherwise
+        """
+
+        pattern = re.compile(r"(?P<multiplier>\d+)x (?P<unitname>.*)")
+        if match := pattern.match(name):
+            number *= int(match.group('multiplier'))
+            name = match.group('unitname')
+            return name, number
+
+        return name, number
+
     def __enumerate_all_selections(self, selection: objectify.ObjectifiedElement, modifier: int = 1) -> str:
         children = selection.iterchildren(tag="{*}selections")
         output = []
@@ -163,6 +188,7 @@ class ForceView:
             for element in child.getchildren():
                 number = int(element.get("number", 1))
                 name: str = element.get("name", "<Unparsed selection>")
+                name, number = self.__parse_multiplied_unit(name, number)
                 elements_inside = self.__enumerate_all_selections(element, modifier=number * modifier)
 
                 number //= modifier
