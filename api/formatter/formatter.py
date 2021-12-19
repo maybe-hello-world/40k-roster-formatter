@@ -156,17 +156,19 @@ class ForceView:
         total_cost += "]"
         return total_cost
 
-    def __enumerate_all_selections(self, selection: objectify.ObjectifiedElement) -> str:
+    def __enumerate_all_selections(self, selection: objectify.ObjectifiedElement, modifier: int = 1) -> str:
         children = selection.iterchildren(tag="{*}selections")
         output = []
         for child in children:
             for element in child.getchildren():
                 number = int(element.get("number", 1))
                 name: str = element.get("name", "<Unparsed selection>")
+                elements_inside = self.__enumerate_all_selections(element, modifier=number)
+
+                number //= modifier
                 if number > 1:
                     name = f"{number}x{name}"
 
-                elements_inside = self.__enumerate_all_selections(element)
                 if elements_inside:
                     name = f"{name} ({elements_inside})"
 
