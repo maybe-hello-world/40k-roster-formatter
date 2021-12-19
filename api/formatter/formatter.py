@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 
+from itertools import chain
 from typing import Optional
 from zipfile import ZipFile
 
@@ -39,6 +40,8 @@ class ForceView:
     def __init__(self, force: objectify.ObjectifiedElement):
         self.pts = 0
         self.pl = 0
+        self.cp_modifiers = []
+        self.__collect_cp_modifiers(force)
 
         name: str = force.get("name", "Unparsed Detachment ?CP")
         if "Detachment" in name:
@@ -217,6 +220,14 @@ class ForceView:
         cost = int(float(single_children_by_name(stratagem.costs.getchildren(), "CP").get("value", "0.0")))
         return f"{name} ({cost} CP)"
 
+    def __collect_cp_modifiers(self, force: objectify.ObjectifiedElement):
+        for cost in force.iter(tag="{*}cost"):
+            name = cost.get("name", "").lower().strip()
+            if name == "cp":
+                cp_cost = int(float(cost.get("value", 0)))
+                if cp_cost != 0:
+                    self.cp_modifiers.append(cp_cost)
+
     def __str__(self):
         header = f"== {self.faction} {self.detachment} == {self.cp} CP, {self.pts} pts, {self.pl} PL"
 
@@ -242,11 +253,13 @@ class ForceView:
 
 class RosterView:
     def __str__(self):
+        cp_modifiers = [str(self.cp_modifiers[0])] + [str(x) if x < 0 else f"+{x}" for x in self.cp_modifiers[1:]]
+
         header = '\n'.join([
             f"PLAYER: ",
             f"Army name: {self.name}",
             f"Factions used: {', '.join(self.factions)}",
-            f"Command Points: {self.cp_total}",
+            f"Command Points: {''.join(cp_modifiers)}={self.cp_total}",
             f"Total cost: {self.pts_total} pts, {self.pl_total} PL",
             f"Reinforcement Points: {self.reinf_points} pts",
             "-" * 10,
@@ -301,3 +314,4 @@ class RosterView:
 
         forces = (x for x in roster.forces.iterchildren(tag="{*}force"))
         self.forces = [ForceView(x) for x in forces]
+        self.cp_modifiers = sorted(chain.from_iterable(x.cp_modifiers for x in self.forces), reverse=True)
