@@ -163,7 +163,7 @@ class ForceView:
             for element in child.getchildren():
                 number = int(element.get("number", 1))
                 name: str = element.get("name", "<Unparsed selection>")
-                elements_inside = self.__enumerate_all_selections(element, modifier=number)
+                elements_inside = self.__enumerate_all_selections(element, modifier=number * modifier)
 
                 number //= modifier
                 if number > 1:
