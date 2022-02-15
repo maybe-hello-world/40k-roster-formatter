@@ -9,13 +9,44 @@
 <body>
   <main>
     <h1>Vanilla HTML App</h1>
-    <!-- Простая форма, которая пошлёт POST запрос -->
-<form action="/api/formatter/formatter.py" method="post">
-  <label for="POST-name">Name:</label>
-  <input id="POST-name" type="text" name="name">
-  <input type="submit" value="Save">
-</form>
+    <form id="bsdataform" enctype="multipart/form-data" action="#" method="post">
+      <label for="roster">Select Battlescribe Roster File:</label><br>
+      <input id="roster" type="file" name="roster" accept=".ros,.rosz"><br>
+      <button type="submit" value="Upload" name="submit">Upload</button>
+    </form>
+    <br>
+    <p id="output"></p>
   </main>
+
+<script>
+  var form = document.getElementById("bsdataform");
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const url = form.action;
+
+    var result = "";
+
+    // const url = "https://white-island-06bcc0e03.azurestaticapps.net/api/formatter";  // for local debug
+    const url = "/api/formatter";  // for public
+
+
+    try {
+        const formData = new FormData(form);
+        const response = await fetch(url, {
+            method: 'POST',
+            body: formData
+        });
+
+        result = await response.text();
+    } catch (error) {
+        result = await error.text();
+    }
+    var out = document.getElementById("output")
+    out.setAttribute('style', 'white-space: pre;');
+    out.textContent = result;
+  }  
+</script>
 </body>
 
 </html>
