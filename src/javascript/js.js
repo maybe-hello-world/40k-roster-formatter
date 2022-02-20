@@ -8,6 +8,7 @@
 
 let xhr = new XMLHttpRequest();
 xhr.open('POST','/api/formatter/formatter.py');
+xhr.responseType = 'json';
 xhr.send();
 
 xhr.onload = function() {
