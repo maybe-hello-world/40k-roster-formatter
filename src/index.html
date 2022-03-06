@@ -26,7 +26,7 @@
                 <div class="d-grid gap-2 mb-3 col-6 mx-auto ps-1">
                     <button type="submit" value="Upload" name="submit" class="btn btn-primary btn-lg mx-3"
                             id="uploadBtn">
-                    <span id="uploadSpan" class="spinner-grow-sm" role="status" style="display: none;"></span>
+                        <span id="uploadSpan" class="spinner-grow-sm spinner-grow" role="status" style="display: none;"></span>
                         <span id="submitText">Upload</span>
                     </button>
                 </div>
@@ -35,7 +35,8 @@
     </div>
 
     <div class="px-4 py-5 my-5 text-center container-sm mb-3">
-        <textarea class="form-control text-wrap font-monospace" id="output" style="height: auto" disabled readonly></textarea>
+        <textarea class="form-control text-wrap font-monospace" id="output" style="height: auto; white-space: pre-wrap;"
+                  disabled readonly></textarea>
     </div>
 </main>
 
