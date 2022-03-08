@@ -108,12 +108,14 @@ class ForceView:
         selections = force.selections.getchildren()
         selections = self.__get_selections_of_category(selections, "Configuration", primary=True)
 
+        # TODO: temporary solution, think how to get faction name more reliable
         selections = [
             x for x in selections
             if x.get("name", "") not in {
                 "Battle Size", "Detachment Command Cost", "Gametype", "Unit Filter", "Use Beta Rules"
             }
         ]
+        selections = [x for x in selections if "Reference" not in x.get("name", "")]
 
         if len(selections) != 1:
             self.faction = "Unparsed Faction"
