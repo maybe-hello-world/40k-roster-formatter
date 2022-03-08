@@ -292,7 +292,8 @@ class RosterView:
         pts_limit = [
             x.costLimit.get("value")
             for x in roster.iter(tag='{*}costLimits')
-            if x.costLimit.get("name", "") == "pts"
+            if x.find("costLimit") is not None
+            and x.costLimit.get("name", "") == "pts"
         ]
         pts_limit = int(float(pts_limit[0])) if pts_limit else 0
         reinf_points = pts_limit - self.pts_total
