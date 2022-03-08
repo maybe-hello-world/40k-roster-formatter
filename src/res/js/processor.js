@@ -1,6 +1,14 @@
-let form = document.getElementById("bsdataform");
-form.onsubmit = async (e) => {
+function copyToClipboard() {
+    let copytext = document.getElementById("output").innerText;
+    navigator.clipboard.writeText(copytext).then(function () {
+    }, function (err) {
+        console.error("Could not copy text", err)
+    });
+}
+
+document.getElementById("bsdataform").onsubmit = async (e) => {
     // UI
+    document.getElementById("copyBtn").disabled = true;
     document.getElementById("uploadBtn").disabled = true;
     document.getElementById("uploadSpan").style.display = 'inline-block';
     document.getElementById("submitText").textContent = "Uploading..."
@@ -23,9 +31,9 @@ form.onsubmit = async (e) => {
         result = await error.text();
     }
     let out = document.getElementById("output");
-    out.setAttribute('style', 'white-space: pre;');
     out.textContent = result;
 
+    document.getElementById("copyBtn").disabled = false;
     document.getElementById('uploadBtn').disabled = false;
     document.getElementById("uploadSpan").style.display = 'none';
     document.getElementById("submitText").textContent = "Upload"
