@@ -117,11 +117,11 @@ class ForceView:
         ]
         selections = [x for x in selections if "Reference" not in x.get("name", "")]
 
-        if len(selections) != 1:
+        if len(selections) == 0:
             self.faction = "Unparsed Faction"
             return
 
-        faction = selections[0]
+        faction = selections[0]     # if bigger than 1: let's hope chapter would be the first
         faction = faction.selections.getchildren()
         if not faction:
             self.faction = "Unparsed Faction"
