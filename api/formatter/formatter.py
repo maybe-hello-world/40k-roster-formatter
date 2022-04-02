@@ -105,6 +105,7 @@ class ForceView:
             "Flyer": ["FL", []],
             "Dedicated Transport": ["DT", []],
             "Lord of War": ["LOW", []],
+            "Fortification": ["FT", []],
         }
 
         for key, (_, storage) in self.enumerated_units.items():
