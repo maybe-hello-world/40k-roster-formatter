@@ -1,0 +1,194 @@
+---
+faction: T'au Empire
+selections:
+  Ethereal Guard:
+    - Honour Blade
+
+  Cadre Fireblade:
+    - Fireblade Pulse Rifle
+    - Markerlight
+
+  Commander Shadowsun:
+    - Light Missile Pod
+    - Fletchette Launcher
+    - Pulse Pistol
+    - Advanced Guardian Drone
+    - Command-link Drone
+
+  Darkstrider:
+    - Shade
+    - Markerlight
+
+  Ethereal:
+    - Honour Blade
+
+  Breacher Fire Warrior:
+    - Pulse Blaster
+    - Pulse Pistol
+
+  Breacher Fire Warrior Shas'ui:
+    - Pulse Blaster
+    - Pulse Pistol
+
+  Kroot:
+    - Quill Grenades
+    - Kroot Rifle
+
+  Fire Warrior Shas'ui:
+    - Pulse Pistol
+
+  Fire Warrior w/ Pulse Rifle:
+    - Pulse Rifle
+    - Pulse Pistol
+
+  Fire Warrior w/ Pulse Carbine:
+    - Pulse Carbine
+    - Pulse Pistol
+
+  Dahyak Grekh:
+    - Kroot pistol
+    - Kroot rifle
+
+  Firesight Marksman:
+    - Markerlight
+    - Pulse Pistol
+
+  Sniper Drone:
+    - Longshot Pulse Rifle
+
+  Ghostkeel Battlesuit:
+    - Ghostkeel Fists
+
+  Krootox Rider:
+    - Kroot Gun
+    - Krootox Fists
+
+  Stealth Shas'ui w/ Burst Cannon:
+    - Burst Cannon
+
+  Stealth Shas'ui w/ Fusion Blaster:
+    - Fusion Blaster
+
+  Kroot Hound:
+    - Ripping Fangs
+
+  Pathfinder Shas'ui:
+    - Pulse Pistol
+    - Markerlight
+    - Pulse Carbine
+
+  Pathfinder:
+    - Pulse Carbine
+    - Pulse Pistol
+    - Markerlight
+
+  Pathfinder w/ Grenade Launcher:
+    - Semi-automatic Grenade Launcher
+    - Pulse Pistol
+    - Markerlight
+    - Pulse Carbine
+
+  Pathfinder w/ Neuroweb System Jammer:
+    - Neuroweb System Jammer
+    - Pulse Pistol
+    - Markerlight
+    - Pulse Carbine
+
+  Pathfinder w/ Drone Controller:
+    - Drone Controller
+    - Pulse Pistol
+    - Markerlight
+    - Pulse Carbine
+
+  Pathfinder w/ Ion Rifle:
+    - Ion Rifle
+    - Pulse Pistol
+
+  Pathfinder w/ Rail Rifle:
+    - Rail Rifle
+    - Pulse Pistol
+
+  Piranha:
+    - Gun Drones
+
+  Tetra Scout Speeder:
+    - Pulse Rifle
+    - Markerlight
+
+  Vespid Stingwing:
+    - Neutron Blaster
+    - Stingwing Claws
+
+  Vespid Strain Leader:
+    - Neutron Blaster
+    - Stingwing Claws
+
+  XV107 R'varna Battlesuit:
+    - Pulse Submunitions Cannon
+
+  XV109 Y'vahra Battlesuit:
+    - Fletchette Pod
+    - Ionic Discharge Cannon
+    - Phased Plasma-flamer
+
+  Broadside Shas'vre:
+    - Crushing Bulk
+
+  Broadside Shas'ui:
+    - Crushing Bulk
+
+  Riptide Battlesuit:
+    - Riptide Fists
+
+  Sky Ray Gunship:
+    - Seeker Missile Rack
+    - Markerlight
+
+  AX-1-0 Tiger Shark:
+    - Missile Pod
+    - Heavy Rail Cannon
+
+  AX-5-2 Barracuda:
+    - Missile Pod
+
+  DX-6 Remora Stealth Drone:
+    - Long-barrelled Burst Cannon
+    - Remora Seeker Missile
+    - Markerlight
+
+  Razorshark Strike Fighter:
+    - Quad Ion Turret
+    - Seeker Missile
+
+  Sun Shark Bomber:
+    - Seeker Missile
+    - Markerlight
+
+  Tiger Shark:
+    - Missile Pod
+
+  Devilfish:
+    - Accelerator Burst Cannon
+
+  Recon Drone:
+    - Burst Cannon
+
+  Gun Drone:
+    - Pulse Carbine
+
+  # technical record :)
+  2x Gun Drones:
+    - Gun Drone
+
+  Marker Drone:
+    - Markerlight
+
+  Shield Drone:
+    - Shield Generator
+
+  Shielded Missile Drone:
+    - Shield Generator
+    - Missile Pod
+
+  Missile Drone:
+    - Missile Pod
