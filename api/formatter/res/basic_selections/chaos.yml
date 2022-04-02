@@ -1,6 +1,13 @@
 ---
 faction: Chaos
 selections:
+  Cultist w/ autogun:
+    - Autogun
+
+  Cultist w/ autopistol and brutal assault weapon:
+    - Autopistol
+    - Brutal assault weapon
+
   Chaos Spawn:
     - Hideous mutations
 
@@ -100,11 +107,15 @@ selections:
     - Melta array
     - Blade struts
 
-  Mortarion:
-    - Silence
-    - The Lantern
-    - Attendant's claws and teeth
-    - Phosphex bombs
+  Dreadclaw Drop Pod:
+    - Thermal jets
+    - Blade struts
+
+  Possessed:
+    - Horrifying Mutations
+
+  Maulerfiend:
+    - Maulerfiend fists
 
 
   2x Quad lascannons:

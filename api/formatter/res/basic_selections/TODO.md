@@ -14,7 +14,7 @@
   - Chaos Space Marines
   - Chaos Daemons
   - Chaos Knights
-  - Death Guard
+  - ~~Death Guard~~
   - Thousand Sons
 - Aeldari
   - Craftworlds

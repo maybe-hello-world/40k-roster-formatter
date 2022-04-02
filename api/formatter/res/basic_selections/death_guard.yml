@@ -54,9 +54,6 @@ selections:
     - Injector pistol
     - Hyper blight grenades
 
-  Possessed:
-    - Horrifying Mutations
-
   Deathshroud Champion:
     - Manreaper
 
@@ -84,10 +81,6 @@ selections:
     - Greater plague probe
     - Blightreaper cannon
 
-  Dreadclaw Drop Pod:
-    - Thermal jets
-    - Blade struts
-
   Foetid Bloat-drone:
     - Plague probe
 
@@ -99,3 +92,9 @@ selections:
 
   Plagueburst Crawler:
     - Plagueburst Mortar
+
+  Mortarion:
+    - Silence
+    - The Lantern
+    - Attendant's claws and teeth
+    - Phosphex bombs
