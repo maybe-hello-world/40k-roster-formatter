@@ -1,17 +1,22 @@
+/*jshint esversion: 8 */
+/* global console*/
+
 function copyToClipboard() {
+    "use strict";
     let copytext = document.getElementById("output").innerText;
     navigator.clipboard.writeText(copytext).then(function () {
     }, function (err) {
-        console.error("Could not copy text", err)
+        console.error("Could not copy text", err);
     });
 }
 
 document.getElementById("bsdataform").onsubmit = async (e) => {
+    "use strict";
     // UI
     document.getElementById("copyBtn").disabled = true;
     document.getElementById("uploadBtn").disabled = true;
     document.getElementById("uploadSpan").style.display = 'inline-block';
-    document.getElementById("submitText").textContent = "Uploading..."
+    document.getElementById("submitText").textContent = "Uploading...";
 
     e.preventDefault();
     const form = e.currentTarget;
@@ -36,5 +41,5 @@ document.getElementById("bsdataform").onsubmit = async (e) => {
     document.getElementById("copyBtn").disabled = false;
     document.getElementById('uploadBtn').disabled = false;
     document.getElementById("uploadSpan").style.display = 'none';
-    document.getElementById("submitText").textContent = "Upload"
-}
+    document.getElementById("submitText").textContent = "Upload";
+};

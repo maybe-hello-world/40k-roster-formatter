@@ -16,21 +16,32 @@
     <h1 class="display-5 fw-bold">Roster Formatter for Warhammer 40&nbsp;000</h1>
     <p class="lead">Here's your 40&nbsp;001st way to format rosters.</p>
     <form id="bsdataform" enctype="multipart/form-data" action="#" method="post">
-        <label for="roster" class="form-label">Select BattleScribe Roster File:</label>
+        <label class="form-label">Select options:</label><br>
+        <div class="form-check-inline my-2"
+             style="border-radius: .25rem; border: 1px solid #ced4da; background-color: #e9ecef; width: 100%;">
+            <input class="form-check-input" type="checkbox" id="minimize" name="minimize">
+            <label class="form-check-label" for="minimize">Minimize output</label>
+        </div>
+
+
+        <label for="roster" class="form-label">Select BattleScribe Roster file:</label>
         <input id="roster" class="form-control form-control-lg" type="file" name="roster">
         <div id="rosterHint" class="form-text">
             No, we never store any rosters (even before team tournaments&nbsp;&#128513;)
         </div>
         <div class="d-grid col-md-6 mx-auto">
             <button type="submit" value="Upload" name="submit" class="btn btn-primary btn-lg" id="uploadBtn">
-                <span id="uploadSpan" class="spinner-grow-sm spinner-grow" role="status" style="display: none;"></span>
+                    <span id="uploadSpan" class="spinner-grow-sm spinner-grow" role="status"
+                          style="display: none;"></span>
                 <span id="submitText">Upload</span>
             </button>
         </div>
     </form>
 
     <div class="my-5">
-        <button id="copyBtn" class="btn btn-success btn-lg w-100" onclick="copyToClipboard()" disabled>Copy to clipboard</button>
+        <button id="copyBtn" class="btn btn-success btn-lg w-100" onclick="copyToClipboard()" disabled>Copy to
+            clipboard
+        </button>
         <div class="form-control font-monospace text-start my-3" id="output"
              style="white-space: pre-wrap; transition: all 0.2s" readonly>
         </div>
