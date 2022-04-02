@@ -219,7 +219,7 @@ class ForceView:
     def __parse_stratagem(stratagem: objectify.ObjectifiedElement) -> str:
         name = stratagem.get("name", "Unparsed Stratagem")
         name = "- " + remove_prefix(name, "Stratagem: ")
-        cost = int(float(single_children_by_name(stratagem.costs.getchildren(), "CP").get("value", "0.0")))
+        _, _, cost = ForceView.__recursive_cost_search(stratagem)
         return f"{name} ({cost} CP)"
 
     def __collect_cp_modifiers(self, force: objectify.ObjectifiedElement):
