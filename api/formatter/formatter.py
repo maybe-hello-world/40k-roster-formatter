@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import re
+
+from itertools import chain
 from typing import Optional
 from zipfile import ZipFile
 
@@ -9,7 +12,7 @@ from lxml.objectify import ObjectifiedElement
 from collections import Counter
 
 
-class SimplifierException(Exception):
+class FormatterException(Exception):
     pass
 
 
@@ -21,15 +24,30 @@ def single_children_by_name(children: list[ObjectifiedElement], name: str) -> Op
         return None
 
 
+def remove_prefix(_string: str, _prefix: str) -> str:
+    if _string.startswith(_prefix):
+        return _string[len(_prefix):]
+    return _string
+
+
+def remove_suffix(_string: str, _suffix: str) -> str:
+    if _suffix and _string.endswith(_suffix):
+        return _string[:-len(_suffix)]
+    return _string
+
+
 class ForceView:
     def __init__(self, force: objectify.ObjectifiedElement):
         self.pts = 0
         self.pl = 0
+        self.cp_modifiers = []
+        self.__collect_cp_modifiers(force)
 
         name: str = force.get("name", "Unparsed Detachment ?CP")
         if "Detachment" in name:
             name, cp = name.rsplit(" ", maxsplit=1)
-            self.cp = int(cp.lower().strip().removesuffix("cp"))
+            cp = cp.lower().strip()
+            self.cp = int(remove_suffix(cp, "cp"))
         self.detachment = name
         self.__parse_faction(force)
 
@@ -90,18 +108,20 @@ class ForceView:
         selections = force.selections.getchildren()
         selections = self.__get_selections_of_category(selections, "Configuration", primary=True)
 
+        # TODO: temporary solution, think how to get faction name more reliable
         selections = [
             x for x in selections
             if x.get("name", "") not in {
                 "Battle Size", "Detachment Command Cost", "Gametype", "Unit Filter", "Use Beta Rules"
             }
         ]
+        selections = [x for x in selections if "Reference" not in x.get("name", "")]
 
-        if len(selections) != 1:
+        if len(selections) == 0:
             self.faction = "Unparsed Faction"
             return
 
-        faction = selections[0]
+        faction = selections[0]     # if bigger than 1: let's hope chapter would be the first
         faction = faction.selections.getchildren()
         if not faction:
             self.faction = "Unparsed Faction"
@@ -143,17 +163,43 @@ class ForceView:
         total_cost += "]"
         return total_cost
 
-    def __enumerate_all_selections(self, selection: objectify.ObjectifiedElement) -> str:
+    @staticmethod
+    def __parse_multiplied_unit(name: str, number: int) -> (str, int):
+        """
+        This function is a damn crutch as BS data developers sometimes create units
+        like "2x MV1 Gun Drone" with number=1 (instead of correct version "MV1 Gun Drone" with number=2).
+
+        So here we receive the name and current number and if name starts with "<number>x "
+        then remove the prefix and return number * prefix
+
+        :param name: unit's name
+        :param number: amount of such units
+        :return: if in prefix multiplier exists then Tuple[name without multiplier, number * prefix],
+         original values otherwise
+        """
+
+        pattern = re.compile(r"(?P<multiplier>\d+)x (?P<unitname>.*)")
+        if match := pattern.match(name):
+            number *= int(match.group('multiplier'))
+            name = match.group('unitname')
+            return name, number
+
+        return name, number
+
+    def __enumerate_all_selections(self, selection: objectify.ObjectifiedElement, modifier: int = 1) -> str:
         children = selection.iterchildren(tag="{*}selections")
         output = []
         for child in children:
             for element in child.getchildren():
                 number = int(element.get("number", 1))
                 name: str = element.get("name", "<Unparsed selection>")
+                name, number = self.__parse_multiplied_unit(name, number)
+                elements_inside = self.__enumerate_all_selections(element, modifier=number * modifier)
+
+                number //= modifier
                 if number > 1:
                     name = f"{number}x{name}"
 
-                elements_inside = self.__enumerate_all_selections(element)
                 if elements_inside:
                     name = f"{name} ({elements_inside})"
 
@@ -171,9 +217,18 @@ class ForceView:
 
     @staticmethod
     def __parse_stratagem(stratagem: objectify.ObjectifiedElement) -> str:
-        name = "- " + stratagem.get("name", "Unparsed Stratagem").removeprefix("Stratagem: ")
-        cost = int(float(single_children_by_name(stratagem.costs.getchildren(), "CP").get("value", "0.0")))
+        name = stratagem.get("name", "Unparsed Stratagem")
+        name = "- " + remove_prefix(name, "Stratagem: ")
+        _, _, cost = ForceView.__recursive_cost_search(stratagem)
         return f"{name} ({cost} CP)"
+
+    def __collect_cp_modifiers(self, force: objectify.ObjectifiedElement):
+        for cost in force.iter(tag="{*}cost"):
+            name = cost.get("name", "").lower().strip()
+            if name == "cp":
+                cp_cost = int(float(cost.get("value", 0)))
+                if cp_cost != 0:
+                    self.cp_modifiers.append(cp_cost)
 
     def __str__(self):
         header = f"== {self.faction} {self.detachment} == {self.cp} CP, {self.pts} pts, {self.pl} PL"
@@ -200,11 +255,13 @@ class ForceView:
 
 class RosterView:
     def __str__(self):
+        cp_modifiers = [str(self.cp_modifiers[0])] + [str(x) if x < 0 else f"+{x}" for x in self.cp_modifiers[1:]]
+
         header = '\n'.join([
             f"PLAYER: ",
             f"Army name: {self.name}",
             f"Factions used: {', '.join(self.factions)}",
-            f"Command Points: {self.cp_total}",
+            f"Command Points: {''.join(cp_modifiers)}={self.cp_total}",
             f"Total cost: {self.pts_total} pts, {self.pl_total} PL",
             f"Reinforcement Points: {self.reinf_points} pts",
             "-" * 10,
@@ -226,7 +283,7 @@ class RosterView:
     @staticmethod
     def __read_xml(content: dict) -> objectify.ObjectifiedElement:
         if len(content) != 1:
-            raise SimplifierException(f"Unknown structure of provided rosz archive. Content: {content.keys()}")
+            raise FormatterException(f"Unknown structure of provided rosz archive. Content: {content.keys()}")
 
         name: str = next(iter(content))
         roster: objectify.ObjectifiedElement = objectify.fromstring(content[name])
@@ -237,7 +294,8 @@ class RosterView:
         pts_limit = [
             x.costLimit.get("value")
             for x in roster.iter(tag='{*}costLimits')
-            if x.costLimit.get("name", "") == "pts"
+            if x.find("costLimit") is not None
+            and x.costLimit.get("name", "") == "pts"
         ]
         pts_limit = int(float(pts_limit[0])) if pts_limit else 0
         reinf_points = pts_limit - self.pts_total
@@ -259,3 +317,4 @@ class RosterView:
 
         forces = (x for x in roster.forces.iterchildren(tag="{*}force"))
         self.forces = [ForceView(x) for x in forces]
+        self.cp_modifiers = sorted(chain.from_iterable(x.cp_modifiers for x in self.forces), reverse=True)
