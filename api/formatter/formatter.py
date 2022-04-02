@@ -63,6 +63,7 @@ class ForceView:
         self.pts = 0
         self.pl = 0
         self.cp_modifiers = []
+        self.catalogue = force.get("catalogueName", "")
         self.__collect_cp_modifiers(force)
 
         name: str = force.get("name", "Unparsed Detachment ?CP")
@@ -219,7 +220,7 @@ class ForceView:
                 elements_inside = self.__enumerate_all_selections(element, modifier=number * modifier)
 
                 if self.options.hide_basic_selections:
-                    if self.options.selector_checker.is_basic(self.faction, selection.get("name"), name):
+                    if self.options.selector_checker.is_basic(self.catalogue, selection.get("name"), name):
                         continue
 
                 number //= modifier
