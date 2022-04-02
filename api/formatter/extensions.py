@@ -20,7 +20,24 @@ class BasicSelectorChecker:
                 self.database[data['faction']] = data['selections']
 
     def is_basic(self, catalogue: str, holder_name: str, selection_name: str):
-        return (
-                selection_name in self.database.get('general', {}) or
-                selection_name in self.database.get(catalogue, {}).get(holder_name, {})
-        )
+        # check in the general catalogue
+        if selection_name in self.database.get('general', set()):
+            return True
+
+        # check in the exact catalogue
+        if selection_name in self.database.get(catalogue, {}).get(holder_name, {}):
+            return True
+
+        # remove last dash-separated word iteratively and check again
+        # it would allow constructing catalogues like
+        # "Imperium",
+        # "Imperium - Adeptus Astartes",
+        # and "Imperium - Adeptus Astartes - Iron Hands"
+        dash_separated = catalogue.split('-')
+        while len(dash_separated) > 1:
+            dash_separated = dash_separated[:-1]
+            catalogue = '-'.join(dash_separated).strip()
+            if selection_name in self.database.get(catalogue, {}).get(holder_name, {}):
+                return True
+
+        return False
