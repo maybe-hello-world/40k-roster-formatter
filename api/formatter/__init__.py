@@ -8,8 +8,7 @@ from .formatter import RosterView, FormatterException
 def main(req: azure.functions.HttpRequest) -> azure.functions.HttpResponse:
     logging.debug("HTTP trigger fired")
     try:
-        options = req.params
-        logging.debug(f"Options: {options}")
+        options = req.form.to_dict()
         roster = req.files.get('roster', None)  # Werkzeug.datastructures.FileStorage
         if roster is None:
             raise FormatterException("File is not provided.")

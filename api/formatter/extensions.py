@@ -8,12 +8,12 @@ class BasicSelectorChecker:
         self.database = dict()
 
         # load general selections
-        with open(os.path.join("res", "basic_selections", "general.yml"), "r") as f:
+        with open(os.path.join("formatter", "res", "basic_selections", "general.yml"), "r") as f:
             data = load(f, Loader=FullLoader)
             self.database['general'] = set(data)
 
-        files = glob.glob(os.path.join("res", "basic_selections", "*.yml"))
-        files = set(files) - {os.path.join("res", "basic_selections", "general.yml")}
+        files = glob.glob(os.path.join("formatter", "res", "basic_selections", "*.yml"))
+        files = set(files) - {os.path.join("formatter", "res", "basic_selections", "general.yml")}
         for file in files:
             with open(file, "r") as f:
                 data = load(f, Loader=FullLoader)

@@ -12,7 +12,7 @@ from lxml.objectify import ObjectifiedElement
 from collections import Counter
 from dataclasses import dataclass, fields
 
-import extensions
+from .extensions import BasicSelectorChecker
 
 
 class FormatterException(Exception):
@@ -24,15 +24,17 @@ class FormatterOptions:
     hide_basic_selections: bool = False
 
     def __init__(self, **kwargs):
+        class_fields = {field.name for field in fields(self)}
         for key, value in kwargs.items():
-            if key in {field.name for field in fields(self)}:
+            if key in class_fields:
                 setattr(self, key, value)
 
         self.__post_init__()
 
     def __post_init__(self):
-        if self.hide_basic_selections:
-            self.selector_checker = extensions.BasicSelectorChecker()
+        if self.hide_basic_selections == 'on':
+            self.hide_basic_selections = True
+            self.selector_checker = BasicSelectorChecker()
 
 
 def single_children_by_name(children: list[ObjectifiedElement], name: str) -> Optional[ObjectifiedElement]:
