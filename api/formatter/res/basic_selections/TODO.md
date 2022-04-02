@@ -15,7 +15,7 @@
   - Chaos Daemons
   - Chaos Knights
   - ~~Death Guard~~
-  - Thousand Sons
+  - ~~Thousand Sons~~
 - Aeldari
   - Craftworlds
   - Drukhari
@@ -23,7 +23,7 @@
   - Ynnari
 - Xenos
   - Genestealer Cults
-  - Necrons
+  - ~~Necrons~~
   - Orks
   - ~~T'au~~
   - Tyranids
