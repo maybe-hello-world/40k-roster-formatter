@@ -3,17 +3,36 @@ from __future__ import annotations
 import re
 
 from itertools import chain
-from typing import Optional
+from typing import Optional, Mapping
 from zipfile import ZipFile
 
 from lxml import objectify
 from lxml.objectify import ObjectifiedElement
 
 from collections import Counter
+from dataclasses import dataclass, fields
+
+import extensions
 
 
 class FormatterException(Exception):
     pass
+
+
+@dataclass(repr=True, eq=True, order=True)
+class FormatterOptions:
+    hide_basic_selections: bool = False
+
+    def __init__(self, **kwargs):
+        for key, value in kwargs.items():
+            if key in {field.name for field in fields(self)}:
+                setattr(self, key, value)
+
+        self.__post_init__()
+
+    def __post_init__(self):
+        if self.hide_basic_selections:
+            self.selector_checker = extensions.BasicSelectorChecker()
 
 
 def single_children_by_name(children: list[ObjectifiedElement], name: str) -> Optional[ObjectifiedElement]:
@@ -37,7 +56,8 @@ def remove_suffix(_string: str, _suffix: str) -> str:
 
 
 class ForceView:
-    def __init__(self, force: objectify.ObjectifiedElement):
+    def __init__(self, force: objectify.ObjectifiedElement, options: FormatterOptions):
+        self.options = options
         self.pts = 0
         self.pl = 0
         self.cp_modifiers = []
@@ -196,6 +216,10 @@ class ForceView:
                 name, number = self.__parse_multiplied_unit(name, number)
                 elements_inside = self.__enumerate_all_selections(element, modifier=number * modifier)
 
+                if self.options.hide_basic_selections:
+                    if self.options.selector_checker.is_basic(self.faction, selection.get("name"), name):
+                        continue
+
                 number //= modifier
                 if number > 1:
                     name = f"{number}x{name}"
@@ -301,7 +325,11 @@ class RosterView:
         reinf_points = pts_limit - self.pts_total
         self.reinf_points = str(reinf_points) if reinf_points > 0 else 'none'
 
-    def __init__(self, file, zipped: bool = True):
+    def __init__(self, file, zipped: bool = True, options: Mapping[str, str] = None):
+        if not options:
+            options = {}
+
+        self.options = FormatterOptions(**options)
         roster = self.__read_xml(self.__extract(file, zipped))
         self.name = roster.attrib.get("name", "")
 
@@ -316,5 +344,5 @@ class RosterView:
         self.factions = set(x.attrib.get("catalogueName", "<ERROR: UNPARSED>") for x in roster.forces.iterchildren())
 
         forces = (x for x in roster.forces.iterchildren(tag="{*}force"))
-        self.forces = [ForceView(x) for x in forces]
+        self.forces = [ForceView(x, self.options) for x in forces]
         self.cp_modifiers = sorted(chain.from_iterable(x.cp_modifiers for x in self.forces), reverse=True)
