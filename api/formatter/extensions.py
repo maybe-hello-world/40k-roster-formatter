@@ -19,8 +19,8 @@ class BasicSelectorChecker:
                 data = load(f, Loader=FullLoader)
                 self.database[data['faction']] = data['selections']
 
-    def is_basic(self, faction: str, holder_name: str, selection_name: str):
+    def is_basic(self, catalogue: str, holder_name: str, selection_name: str):
         return (
                 selection_name in self.database.get('general', {}) or
-                selection_name in self.database.get(faction, {}).get(holder_name, {})
+                selection_name in self.database.get(catalogue, {}).get(holder_name, {})
         )
