@@ -71,6 +71,8 @@ class ForceView:
             name, cp = name.rsplit(" ", maxsplit=1)
             cp = cp.lower().strip()
             self.cp = int(remove_suffix(cp, "cp"))
+        else:
+            self.cp = 0
         self.detachment = name
         self.__parse_faction(force)
 
@@ -282,7 +284,10 @@ class ForceView:
 
 class RosterView:
     def __str__(self):
-        cp_modifiers = [str(self.cp_modifiers[0])] + [str(x) if x < 0 else f"+{x}" for x in self.cp_modifiers[1:]]
+        if self.cp_modifiers:
+            cp_modifiers = [str(self.cp_modifiers[0])] + [str(x) if x < 0 else f"+{x}" for x in self.cp_modifiers[1:]]
+        else:
+            cp_modifiers = ['0']
 
         header = '\n'.join([
             f"PLAYER: ",
