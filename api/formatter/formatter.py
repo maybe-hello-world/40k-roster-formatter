@@ -150,7 +150,7 @@ class ForceView:
 
         faction = selections[0]     # if bigger than 1: let's hope chapter would be the first
 
-        if faction.get("selections", None) is None or not (faction := faction.selections.getchildren()):
+        if "selections" not in dir(faction) or not (faction := faction.selections.getchildren()):
             self.faction = "Unparsed Faction"
             return
 
