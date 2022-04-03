@@ -17,10 +17,9 @@
   - ~~Death Guard~~
   - ~~Thousand Sons~~
 - Aeldari
-  - Craftworlds
+  - ~~Craftworlds~~
   - Drukhari
-  - Harlequins
-  - Ynnari
+  - ~~Harlequins~~
 - Xenos
   - ~~Genestealer Cults~~
   - ~~Necrons~~

@@ -1,5 +1,6 @@
 ---
 faction: Aeldari
 selections:
-  None:
-    - None
+  Way Seeker:
+    - Witch Staff
+    - Shuriken Pistol
