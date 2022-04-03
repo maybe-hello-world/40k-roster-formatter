@@ -1,8 +1,8 @@
 ### Factions to add
 - Imperium
   - ~~Adepta Sororitas~~
-  - Adeptus Custodes
-  - Adeptus Mechanicus
+  - ~~Adeptus Custodes~~
+  - ~~Adeptus Mechanicus~~
   - Astra Militarum
   - ~~Astra Cartographica~~
   - Grey Knights
