@@ -82,6 +82,28 @@ selections:
     - Heavy Bolter
     - Servitor
 
+  Land Raider:
+    - Twin Heavy Bolter
+    - Twin Lascannon
+
+  Land Raider Crusader:
+    - Hurricane Bolter
+    - Twin Assault Cannon
+  Land Raider Redeemer:
+    - Twin Assault Cannon
+    - Flamestorm Cannon
+
+  Stormhawk Interceptor:
+    - Assault Cannons
+
+  Stormraven Gunship:
+    - Stormstrike Missile Launcher
+
+  Stormtalon Gunship:
+    - Twin Assault Cannon
+
+  Rhino:
+    - Storm bolter
 
 
 
@@ -94,19 +116,18 @@ selections:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  Twin Heavy Bolter:
+    - Twin heavy bolter
+  Skyhammer missile launcher:
+    - Skyhammer missile launcher
+  Typhoon Missile Launcher:
+    - Typhoon missile launcher
+  Twin Assault Cannon:
+    - Twin assault cannon
+  Two Heavy Bolter:
+    - Heavy bolter
+  Las-Talon:
+    - Las-talon
   Terrax storm bolters:
     - Terrax storm bolter
   Terrax heavy Flamers:

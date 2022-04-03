@@ -3,13 +3,14 @@
   - ~~Adepta Sororitas~~
   - ~~Adeptus Custodes~~
   - ~~Adeptus Mechanicus~~
-  - Astra Militarum
+  - ~~Astra Militarum~~
   - ~~Astra Cartographica~~
-  - Grey Knights
+  - ~~Grey Knights~~
   - ~~Imperial Knights~~
   - ~~Inquisition~~
   - ~~Officio Assassinorum~~
   - Space Marines (all of them ><)
+    - HQ, troops, and elite finished
 - ~~Chaos~~
   - ~~Chaos Space Marines~~
   - ~~Chaos Daemons~~
