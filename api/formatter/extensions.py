@@ -20,6 +20,9 @@ class BasicSelectorChecker:
                 self.database[data['faction']] = data['selections']
 
     def is_basic(self, catalogue: str, holder_name: str, selection_name: str):
+        if "warlord" in selection_name.lower():
+            return False  # 'warlord' is never a basic selection
+
         # check in the general catalogue
         if selection_name in self.database.get('general', set()):
             return True
