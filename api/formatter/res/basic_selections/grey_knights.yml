@@ -1,0 +1,205 @@
+---
+faction: Imperium - Grey Knights
+selections:
+  Brother-Captain:
+    - Brother-Captain
+    - Iron Halo
+
+  Brotherhood Champion:
+    - Iron Halo
+    - Nemesis Force Sword
+    - Storm Bolter
+
+  Brotherhood Chaplain:
+    - Crozius Arcanum
+    - Storm Bolter
+
+  Brotherhood Librarian:
+    - Crux Terminatus
+
+  Castellan Crowe:
+    - Storm bolter
+    - Iron Halo
+    - The Black Blade of Antwyr
+
+  Grand Master:
+    - Iron Halo
+    - Grand Master Chapter
+
+  Grand Master in Nemesis Dreadknight:
+    - Grand Master Chapter
+
+  Kaldor Draigo:
+    - The Titansword
+    - Master-crafted storm bolter
+
+  Grey Knight Terminator Justicar:
+    - Storm Bolter
+  Terminator (Sword):
+    - Nemesis Force Sword
+    - Storm Bolter
+  Terminator (Daemon Hammer):
+    - Nemesis Daemon Hammer
+    - Storm Bolter
+  Terminator (Falchions):
+    - Nemesis Falchion
+    - Storm Bolter
+  Terminator (Halberd):
+    - Nemesis Force Halberd
+    - Storm Bolter
+  Terminator (Warding Stave):
+    - Nemesis Warding Stave
+    - Storm Bolter
+  Terminator (Incinerator):
+    - Incinerator (Terminator)
+  Terminator (Psilencer):
+    - Psilencer (Terminator)
+  Terminator (Psycannon):
+    - Psycannon (Terminator)
+
+  Grey Knight Justicar:
+    - Storm Bolter
+  Grey Knight (Sword):
+    - Storm Bolter
+    - Nemesis Force Sword
+  Grey Knight (Daemon Hammer):
+    - Storm Bolter
+    - Nemesis Daemon Hammer
+  Grey Knight (Falchions):
+    - Storm Bolter
+    - Nemesis Falchion
+  Grey Knight (Halberd):
+    - Storm Bolter
+    - Nemesis Force Halberd
+  Grey Knight (Warding Stave):
+    - Storm Bolter
+    - Nemesis Warding Stave
+  Grey Knight (Incinerator):
+    - Incinerator
+  Grey Knight (Psilencer):
+    - Psilencer
+  Grey Knight (Psycannon):
+    - Psycannon
+
+  Brotherhood Ancient:
+    - Sacred Banner (Aura)
+    - Storm Bolter
+
+  Paragon:
+    - Storm Bolter
+  Paladin (Sword):
+    - Nemesis Force Sword
+    - Storm Bolter
+  Paladin (Daemon Hammer):
+    - Nemesis Daemon Hammer
+    - Storm Bolter
+  Paladin (Falchions):
+    - Nemesis Falchion
+    - Storm Bolter
+  Paladin (Halberd):
+    - Nemesis Force Halberd
+    - Storm Bolter
+  Paladin (Warding Stave):
+    - Nemesis Warding Stave
+    - Storm Bolter
+  Paladin (Incinerator):
+    - Incinerator (Terminator)
+  Paladin (Psilencer):
+    - Psilencer (Terminator)
+  Paladin (Psycannon):
+    - Psycannon (Terminator)
+
+  Knight of the Flame:
+    - Storm Bolter
+  Purifier (Sword):
+    - Storm Bolter
+    - Nemesis Force Sword
+  Purifier (Daemon Hammer):
+    - Storm Bolter
+    - Nemesis Daemon Hammer
+  Purifier (Falchion):
+    - Storm Bolter
+    - Nemesis Falchion
+  Purifier (Halberd):
+    - Storm Bolter
+    - Nemesis Force Halberd
+  Purifier (Warding Stave):
+    - Storm Bolter
+    - Nemesis Warding Stave
+  Purifier (Psilencer):
+    - Psilencer
+  Purifier (Incinerator):
+    - Incinerator
+  Purifier (Psycannon):
+    - Psycannon
+
+  Interceptor Justicar:
+    - Storm Bolter
+  Interceptor (Sword):
+    - Storm Bolter
+    - Nemesis Force Sword
+  Interceptor (Daemon Hammer):
+    - Storm Bolter
+    - Nemesis Daemon Hammer
+  Interceptor (Falchions):
+    - Storm Bolter
+    - Nemesis Falchion
+  Interceptor (Halberd):
+    - Storm Bolter
+    - Nemesis Force Halberd
+  Interceptor (Warding Stave):
+    - Storm Bolter
+    - Nemesis Warding Stave
+
+  Land Raider Banisher:
+    - Twin psycannon
+    - Heavy Incinerator
+
+  Purgator Justicar:
+    - Storm Bolter
+  Purgator (Sword):
+    - Storm Bolter
+    - Nemesis Force Sword
+  Purgator (Daemon Hammer):
+    - Storm Bolter
+    - Nemesis Daemon Hammer
+  Purgator (Falchion):
+    - Storm Bolter
+    - Nemesis Falchion
+  Purgator (Halberd):
+    - Storm Bolter
+    - Nemesis Force Halberd
+  Purgator (Warding Stave):
+    - Storm Bolter
+    - Nemesis Warding Stave
+  Purgator (Incinerator):
+    - Incinerator
+  Purgator (Psilencer):
+    - Psilencer
+  Purgator (Psycannon):
+    - Psycannon
+
+
+
+
+
+  Storm Bolter and Falchion:
+    - Storm Bolter
+    - Nemesis Falchion
+
+  Dreadnought Combat Weapon:
+    - Storm Bolter
+
+  Servo Arms:
+    - Flamer
+    - Plasma cutter
+    - Servo-arm
+
+  Nemesis Force Sword:
+    - Nemesis Force Sword
+
+  Nemesis Warding Stave:
+    - Nemesis Warding Stave
+
+  Nemesis Force Halberd:
+    - Nemesis Force Halberd
