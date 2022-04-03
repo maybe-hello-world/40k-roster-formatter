@@ -1,14 +1,14 @@
 ### Factions to add
 - Imperium
-  - Adepta Sororitas
+  - ~~Adepta Sororitas~~
   - Adeptus Custodes
   - Adeptus Mechanicus
   - Astra Militarum
-  - Astra Cartographica
+  - ~~Astra Cartographica~~
   - Grey Knights
-  - Imperial Knights
-  - Inquisition
-  - Officio Assassinorum
+  - ~~Imperial Knights~~
+  - ~~Inquisition~~
+  - ~~Officio Assassinorum~~
   - Space Marines (all of them ><)
 - ~~Chaos~~
   - ~~Chaos Space Marines~~
