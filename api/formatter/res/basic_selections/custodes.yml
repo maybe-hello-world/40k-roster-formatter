@@ -1,0 +1,163 @@
+---
+faction: Imperium - Adeptus Custodes
+selections:
+  Aleya:
+    - Somnus Blade
+    - Misericordia
+
+  Blade Champion:
+    - Vaultswords
+
+  Shield-Captain in Allarus Terminator Armor:
+    - Balistus Grenade Launcher
+
+  Shield-Captain on Dawneagle Jetbike:
+    - Interceptor Lance
+
+  Trajann Valoris:
+    - Watcher's Axe
+    - Misericordia
+
+  Valerian:
+    - Gnosis
+    - Misericordia
+
+  Custodian w/ Guardian Spear:
+    - Guardian Spear
+
+  Custodian w/ Guardian Spear & Misericordia:
+    - Guardian Spear
+    - Misericordia
+
+  Custodian w/ Sentinel Blade & Praesidium Shield:
+    - Sentinel Blade
+    - Praesidium Shield
+
+  Custodian w/ Adrasite Spear:
+    - Adrasite Spear
+
+  Custodian w/ Adrasite Spear & Misericordia:
+    - Adrasite Spear
+    - Misericordia
+
+  Custodian w/ Pyrithite Spear:
+    - Pyrithite Spear
+
+  Custodian w/ Pyrithite Spear & Misericordia:
+    - Pyrithite Spear
+    - Misericordia
+
+  Prosecutor:
+    - Boltgun
+
+  Prosecutor Sister Superior:
+    - Boltgun
+
+  Sagittarum:
+    - Adrastus Bolt Caliver
+
+  Sagittarum w/ Misericordia:
+    - Adrastus Bolt Caliver
+    - Misericordia
+
+  Allarus w/ Guardian Spear:
+    - Guardian Spear
+    - Balistus Grenade Launcher
+
+  Allarus w/ Castellan Axe & Misericordia:
+    - Castellan Axe
+    - Misericordia
+    - Balistus Grenade Launcher
+
+  Allarus w/ Castellan Axe:
+    - Castellan Axe
+    - Balistus Grenade Launcher
+
+  Allarus w/ Guardian Spear & Misericordia:
+    - Guardian Spear
+    - Misericordia
+    - Balistus Grenade Launcher
+
+  Contemptor-Achillus Dreadnought:
+    - Achillus Dreadspear
+
+  Contemptor-Galatus Dreadnought:
+    - Galatus Warblade
+
+  Warden w/ Guardian Spear:
+    - Guardian Spear
+  Warden w/ Castellan Axe:
+    - Castellan Axe
+  Warden w/ Castellan Axe & Misericordia:
+    - Castellan Axe
+    - Misericordia
+  Warden w/ Guardian Spear & Misericordia:
+    - Guardian Spear
+    - Misericordia
+
+  Venerable Contemptor Dreadnought:
+    - Dreadnought Combat Weapon
+    - Combi-bolter
+
+  Vexilus Praetor in Allarus Terminator Armor:
+    - Balistus Grenade Launcher
+
+  Vigilator:
+    - Executioner Greatblade
+  Vigilator Sister Superior:
+    - Executioner Greatblade
+
+  Agamatus Custodian:
+    - Interceptor Lance
+
+  Pallas Grav-Attack:
+    - Twin Arachnus Blaze Cannon
+
+  Praetor w/ Hurricane Bolter:
+    - Hurricane Bolter
+    - Interceptor Lance
+
+  Praetor w/ Hurricane Bolter & Misericordia:
+    - Hurricane Bolter
+    - Misericordia
+    - Interceptor Lance
+
+  Praetor w/ Salvo Launcher:
+    - Salvo Launcher
+    - Interceptor Lance
+
+  Praetor w/ Salvo Launcher & Misericordia:
+    - Salvo Launcher
+    - Misericordia
+    - Interceptor Lance
+
+  Witchseeker:
+    - Witchseeker Flamer
+  Witchseeker Sister Superior:
+    - Witchseeker Flamer
+
+  Caladius Grav-tank:
+    - Twin Lastrum Bolt Cannon
+
+  Telemon Heavy Dreadnought:
+    - Spiculus Bolt Launcher
+
+  Ares Gunship:
+    - Arachnus Magna-Blaze Cannon
+    - Arachnus Heavy Blaze Cannon
+
+  Orion Assault Dropship:
+    - Arachnus Heavy Blaze Cannon
+    - Twin Lastrum Bolt Cannon
+    - Spiculus Heavy Bolt Launcher
+
+  Anathema Psykana Rhino:
+    - Storm bolter
+
+  Coronus Grav-Carrier:
+    - Twin Arachnus Blaze Cannon
+    - Twin Lastrum Bolt Cannon
+
+  Kinetic Destroyer and Tarsus Buckler:
+    - Kinetic Destroyer
+    - Tarsus Buckler
