@@ -1,0 +1,162 @@
+---
+faction: Imperium - Adeptus Mechanicus
+selections:
+  "Technoarcheologist ":
+    - Eradication pistol
+    - Servo-arc claw
+
+  Skitarii Marshal:
+    - Radium Serpenta
+    - Control Stave
+
+  Tech-Priest Dominus:
+    - Omnissian Axe
+
+  Tech-Priest Enginseer:
+    - Omnissian Axe
+    - Mechanicus Pistol
+    - Servo-arm
+
+  Tech-Priest Manipulus:
+    - Manipulus Mechadendrites
+    - Omnissian Staff
+
+  Skitarii Ranger:
+    - Galvanic Rifle
+
+  Skitarii Ranger (Arc Rifle):
+    - Arc Rifle
+
+  Skitarii Ranger (Plasma caliver):
+    - Plasma Caliver
+
+  Skitarii Ranger (Transuranic Arquebus):
+    - Transuranic Arquebus
+
+  Skitarii Vanguard:
+    - Radium Carbine
+
+  Skitarii Vanguard (Arc Rifle):
+    - Arc Rifle
+
+  Skitarii Vanguard (Plasma Caliver):
+    - Plasma Caliver
+
+  Skitarii Vanguard (Transuranic Arquebus):
+    - Transuranic Arquebus
+
+  Corpuscarii Electro-Priest:
+    - Electrostatic Gauntlets
+
+  Cybernetica Datasmith:
+    - Power fist
+    - Gamma Pistol
+
+  Fulgurite Electro-Priest:
+    - Electroleech Stave
+
+  Secutarii Hoplite:
+    - Arc Lance
+    - Mag-inverter Shield
+
+  Secutarii Peltast:
+    - Galvanic Caster
+
+  Infiltrator Princeps (Stub/Sword):
+    - Stubcarbine
+    - Power Sword
+
+  Infiltrator Princeps (Flechette/Taser):
+    - Flechette Blaster
+    - Taser Goad
+
+  Sicarian Infiltrator (Stub/Sword):
+    - Stubcarbine
+    - Power Sword
+
+  Sicarian Infiltrator (Flechette/Taser):
+    - Flechette Blaster
+    - Taser Goad
+
+  Sicarian Ruststalker (Razor/Chordclaw):
+    - Chordclaw
+    - Transonic Razor
+
+  Sicarian Ruststalker (Blades):
+    - Transonic Blades
+
+  Ruststalker Princeps (Razor):
+    - Chordclaw
+    - Transonic Razor
+
+  Ruststalker Princeps (Blades):
+    - Chordclaw
+    - Transonic Blades
+
+  X-101:
+    - Grav gun
+    - Hydraulic Claw
+
+  Pteraxii Skystalker:
+    - Flechette carbine
+
+  Pteraxii Skystalker Alpha:
+    - Flechette Blaster
+    - Taser Goad
+
+  Pteraxii Sterylizor:
+    - Phosphor torch
+    - Pteraxii Talons
+
+  Pteraxii Sterylizor Alpha:
+    - Flechette Blaster
+    - Taser Goad
+    - Pteraxii Talons
+
+  Serberys Raider:
+    - Galvanic Carbine
+    - Cavalry Sabre
+    - Clawed Limbs
+
+  Serberys Raider Alpha:
+    - Archeo-revolver
+    - Galvanic Carbine
+    - Cavalry Sabre
+    - Clawed Limbs
+
+  Serberys Sulphurhound Alpha:
+    - Phosphor Blast Pistol
+    - Sulphur breath
+    - Clawed Limbs
+    - Arc Maul
+
+  Serberys Sulphurhound (Pistols):
+    - Phosphor Pistol
+    - Sulphur breath
+    - Clawed Limbs
+
+  Serberys Sulphurhound (Carbine):
+    - Phosphor Blast Carbine
+    - Phosphor Pistol
+    - Sulphur breath
+    - Clawed Limbs
+
+  Skorpius Disintegrator:
+    - Cognis Heavy Stubber
+    - Disruptor Missile Launcher
+
+  Archaeopter Fusilave:
+    - Cognis Heavy Stubber
+
+  Archaeopter Stratoraptor:
+    - Cognis Heavy Stubber
+    - Heavy Phosphor Blaster
+    - Twin Cognis Lascannon
+
+  Archaeopter Transvector:
+    - Cognis Heavy Stubber
+    - Twin Cognis Heavy Stubber
+
+  Skorpius Dunerider:
+    - Cognis Heavy Stubber
+    - Twin Cognis Heavy Stubber

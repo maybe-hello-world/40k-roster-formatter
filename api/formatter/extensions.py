@@ -20,12 +20,19 @@ class BasicSelectorChecker:
                 self.database[data['faction']] = data['selections']
 
     def is_basic(self, catalogue: str, holder_name: str, selection_name: str):
+        if "warlord" in selection_name.lower():
+            return False  # 'warlord' is never a basic selection
+
         # check in the general catalogue
         if selection_name in self.database.get('general', set()):
             return True
 
         # check in the exact catalogue
         if selection_name in self.database.get(catalogue, {}).get(holder_name, {}):
+            return True
+
+        # check if everything should be omitted here
+        if "*" in self.database.get(catalogue, {}).get(holder_name, {}):
             return True
 
         # remove last dash-separated word iteratively and check again
@@ -37,7 +44,10 @@ class BasicSelectorChecker:
         while len(dash_separated) > 1:
             dash_separated = dash_separated[:-1]
             catalogue = '-'.join(dash_separated).strip()
-            if selection_name in self.database.get(catalogue, {}).get(holder_name, {}):
+            if (
+                    selection_name in self.database.get(catalogue, {}).get(holder_name, {}) or
+                    "*" in self.database.get(catalogue, {}).get(holder_name, {})
+            ):
                 return True
 
         return False

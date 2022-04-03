@@ -1,0 +1,106 @@
+---
+faction: Imperium
+selections:
+  Callidus Assassin:
+    - "*"
+
+  Culexus Assassin:
+    - "*"
+
+  Eversor Assassin:
+    - "*"
+
+  Vindicare Assassin:
+    - "*"
+
+  Digital Laser Loadout:
+    - "*"
+
+  Heirloom Pistol Loadout:
+    - "*"
+
+  Negotiator Pistol Loadout:
+    - "*"
+
+  Inquisitor Coteaz:
+    - "*"
+
+  Inquisitor Eisenhorn:
+    - "*"
+  Inquisitor Greyfax:
+    - "*"
+  Inquisitor Karamazov:
+    - "*"
+  Inquisitor Solomon Lok:
+    - "*"
+  Lord Inquisitor Hector Rex:
+    - "*"
+  Lord Inquisitor Kyria Draxus:
+    - "*"
+
+  Voidmaster:
+    - "*"
+
+  Voidsman:
+    - "*"
+
+  Voidsman w/ Voidsman Rotor Cannon:
+    - "*"
+
+  Jokaero Weaponsmith:
+    - Jokaero weapons
+
+  Daemonhost:
+    - "*"
+
+  Venerable Land Raider:
+    - Twin Heavy Bolter
+    - Twin Lascannons
+
+  Tech-Priest Enginseer:
+    - Omnissian Axe
+    - Mechanicus Pistol
+    - Servo-arm
+
+  Terrax-Pattern Termite:
+    - Terrax melta cutter
+    - Termite Drill
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Terrax storm bolters:
+    - Terrax storm bolter
+  Terrax heavy Flamers:
+    - Terrax heavy flamer
+  Twin Terrax volkite chargers:
+    - Twin Terrax volkite charger

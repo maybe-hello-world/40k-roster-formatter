@@ -1,22 +1,22 @@
 ### Factions to add
 - Imperium
-  - Adepta Sororitas
-  - Adeptus Custodes
-  - Adeptus Mechanicus
+  - ~~Adepta Sororitas~~
+  - ~~Adeptus Custodes~~
+  - ~~Adeptus Mechanicus~~
   - Astra Militarum
-  - Astra Cartographica
+  - ~~Astra Cartographica~~
   - Grey Knights
-  - Imperial Knights
-  - Inquisition
-  - Officio Assassinorum
+  - ~~Imperial Knights~~
+  - ~~Inquisition~~
+  - ~~Officio Assassinorum~~
   - Space Marines (all of them ><)
-- Chaos
-  - Chaos Space Marines
+- ~~Chaos~~
+  - ~~Chaos Space Marines~~
   - ~~Chaos Daemons~~
   - ~~Chaos Knights~~
   - ~~Death Guard~~
   - ~~Thousand Sons~~
-- Aeldari
+- ~~Aeldari~~
   - ~~Craftworlds~~
   - ~~Drukhari~~
   - ~~Harlequins~~
