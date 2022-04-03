@@ -1,0 +1,175 @@
+---
+faction: Tyranids - Genestealer Cults
+selections:
+  Acolyte Iconward:
+    - Autopistol
+    - Blasting Charges
+    - Cult Claws
+
+  Jackal Alphus:
+    - Autopistol
+    - Blasting Charges
+    - Cult Sniper Rifle
+
+  Magus:
+    - Magus Bio-dagger
+    - Autopistol
+    - Force stave
+
+  Patriarch:
+    - Patriarch's Claws
+
+  Primus:
+    - Toxin Injector Claw
+    - Cult Bonesword
+    - Scoped Needle Pistol
+
+  Acolyte Leader:
+    - Blasting Charges
+
+  Acolyte Hybrid:
+    - Autopistol
+    - Cult Claws and Knife
+    - Blasting Charges
+
+  Acolyte Hybrid (Hand Flamer):
+    - Hand Flamer
+    - Cult Claws and Knife
+    - Blasting Charges
+
+  Acolyte Hybrid (Heavy Weapon):
+    - Blasting Charges
+
+  Acolyte Hybrid (Icon):
+    - Cult Icon
+    - Cult Claws and Knife
+    - Blasting Charges
+
+  Neophyte Leader:
+    - Blasting Charges
+
+  Neophyte Hybrid:
+    - Autogun
+    - Autopistol
+    - Blasting Charges
+
+  Neophyte Hybrid (Flamer):
+    - Autopistol
+    - Blasting Charges
+    - Flamer
+
+  Neophyte Hybrid (Grenade):
+    - Autopistol
+    - Blasting Charges
+    - Grenade Launcher
+
+  Neophyte Hybrid (Webber):
+    - Autopistol
+    - Blasting Charges
+    - Webber
+
+  Neophyte Hybrid (Shotgun):
+    - Cult Shotgun
+    - Autopistol
+    - Blasting Charges
+
+  Neophyte Hybrid (Icon):
+    - Cult Icon
+    - Autopistol
+    - Blasting Charges
+
+  Aberrant:
+    - Heavy Power Weapon
+
+  Aberrant Hypermorph:
+    - Hypermorph Tail
+    - Heavy Power Weapon
+
+  Abominant:
+    - Power Sledgehammer
+    - Familiar's Claws
+
+  Biophagus:
+    - Injector Goad
+    - Chemical Vials
+    - Autopistol
+
+  Clamavus:
+    - Autopistol
+
+  Metamorph Leader:
+    - Blasting Charges
+
+  Hybrid Metamorph (Autopistol):
+    - Blasting Charges
+    - Autopistol
+    - Metamorph Mutations
+
+  Hybrid Metamorph (Hand Flamer):
+    - Blasting Charges
+    - Hand Flamer
+    - Metamorph Mutations
+
+  Hybrid Metamorph (Icon):
+    - Blasting Charges
+    - Metamorph Mutations
+    - Cult Icon
+
+  Kelermorph:
+    - Liberator Autostub
+
+  Locus:
+    - Locus Blades
+    - Hypermorph Tail
+
+  Nexos:
+    - Autopistol
+
+  Purestrain Genestealer:
+    - Cult Claws and Talons
+
+  Reductus Saboteur:
+    - Remote Explosives
+    - Autopistol
+    - Blasting Charges
+    - Demolition Charge
+
+  Sanctus:
+    - Familiar's Claws
+
+  Achilles Ridgerunner:
+    - Heavy Stubber
+
+  Atalan Leader:
+    - Blasting Charges
+
+  Atalan Jackal (Small Arms):
+    - Atalan Small Arms
+    - Blasting Charges
+
+  Atalan Jackal (Grenade Launcher):
+    - Grenade Launcher
+    - Blasting Charges
+
+  Atalan Wolfquad (Incinerator):
+    - Atalan Incinerator
+    - Blasting Charges
+    - Atalan Small Arms
+
+  Atalan Wolfquad (Laser):
+    - Mining Laser
+    - Blasting Charges
+    - Atalan Small Arms
+
+  Atalan Wolfquad (Stubber):
+    - Heavy Stubber
+    - Blasting Charges
+    - Atalan Small Arms
+
+  Goliath Rockgrinder:
+    - Heavy Stubber
+    - Drilldozer Blade
+
+  Goliath Truck:
+    - Heavy Stubber
+    - Twin Autocannon

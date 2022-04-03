@@ -12,18 +12,17 @@
   - Space Marines (all of them ><)
 - Chaos
   - Chaos Space Marines
-  - Chaos Daemons
-  - Chaos Knights
+  - ~~Chaos Daemons~~
+  - ~~Chaos Knights~~
   - ~~Death Guard~~
-  - Thousand Sons
+  - ~~Thousand Sons~~
 - Aeldari
-  - Craftworlds
-  - Drukhari
-  - Harlequins
-  - Ynnari
+  - ~~Craftworlds~~
+  - ~~Drukhari~~
+  - ~~Harlequins~~
 - Xenos
-  - Genestealer Cults
-  - Necrons
-  - Orks
+  - ~~Genestealer Cults~~
+  - ~~Necrons~~
+  - ~~Orks~~
   - ~~T'au~~
   - Tyranids

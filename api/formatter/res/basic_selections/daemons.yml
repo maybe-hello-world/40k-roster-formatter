@@ -1,0 +1,277 @@
+---
+faction: Chaos - Daemons
+selections:
+  Be'lakor:
+    - The Blade of Shadows
+
+  Blood Throne:
+    - Attendants
+    - Blade of Blood
+
+  Bloodmaster:
+    - Blade of Blood
+
+  Bloodthirster of Insensate Rage:
+    - Great axe of Khorne
+
+  Bloodthirster of Unfettered Fury:
+    - Lash of Khorne
+    - Axe of Khorne
+
+  Changecaster:
+    - Ritual dagger
+
+  Contorted Epitome:
+    - Coiled tentacles
+    - Ravaging claws
+
+  Cor'bax Utterblight:
+    - Gaping maw
+
+
+  Daemon Prince of Chaos:
+    - Malefic talon
+    - Hellforged sword
+
+  Epidemius:
+    - Balesword
+    - Nurglings
+
+  Fateskimmer:
+    - Screamers
+    - Ritual dagger
+
+  Fluxmaster:
+    - Disc of Tzeentch
+    - Ritual dagger
+
+  Great Unclean One:
+    - Nurglings
+
+  Herald of Slaanesh:
+    - Ravaging claws
+
+  Herald of Slaanesh on Exalted Seeker Chariot:
+    - Lashing tongues
+    - Ravaging claws
+
+  Herald of Slaanesh on Hellflayer:
+    - Lashing tongues
+    - Bladed Axle
+    - Ravaging claws
+
+  Herald of Slaanesh on Seeker Chariot:
+    - Lashing tongues
+    - Ravaging claws
+
+  Horticulus Slimux:
+    - Lopping Shears
+    - Mulch
+
+  Infernal Enrapturess:
+    - Heartstring Lyre
+    - Ravaging claws
+
+  Kairos Fateweaver:
+    - Staff of Tomorrow
+
+  Karanak:
+    - Soul-rending fangs
+
+  Keeper of Secrets:
+    - Witstealer sword
+    - Snapping claws
+
+  Lord of Change:
+    - Staff of Tzeentch
+
+  Mamon Transfigured:
+    - Contagion spray
+    - Fist of decay
+
+  Poxbringer:
+    - Balesword
+
+  Rotigus:
+    - Streams of brackish filth
+    - Fanged maw
+    - Gnarlrod
+    - Nurglings
+
+  Shalaxi Helbane:
+    - Soulpiercer
+    - Snapping claws
+
+  Skarbrand:
+    - Bellow of endless fury
+    - Slaughter and Carnage
+
+  Skullmaster:
+    - Juggernaut's Bladed horn
+    - Blade of Blood
+
+  Skulltaker:
+    - The Slayer Sword
+
+  Sloppity Bilepiper:
+    - Marotter
+
+  Spoilpox Scrivener:
+    - Disgusting sneezes
+    - Distended maw
+    - Plaguesword
+
+  "Syll'Esske":
+    - "the Vengeful Allegiance: Axe of Dominion"
+    - Scourging whip
+
+  The Blue Scribes:
+    - Sharp quills
+    - Disc of Tzeentch
+
+  The Changeling:
+    - The Trickster's Staff
+
+  The Masque of Slaanesh:
+    - Serrated claws
+
+  Uraka the Warfiend:
+    - Executioner's Axe
+
+  Wrath of Khorne Bloodthirster:
+    - Bloodflail
+    - Hellfire
+    - Axe of Khorne
+
+  Bloodletter:
+    - Hellblade
+
+  Bloodreaper:
+    - Hellblade
+
+  Daemonette:
+    - Piercing claws
+
+  Alluress:
+    - Piercing claws
+
+  Iridescent Horror:
+    - Coruscating flames
+
+  Pink Horror:
+    - Coruscating flames
+
+  Nurgling Swarms:
+    - Diseased claws and teeth
+
+  Plaguebearer:
+    - Plaguesword
+
+  Plagueridden:
+    - Plaguesword
+
+  Beast of Nurgle:
+    - Putrid appendages
+
+  Bloodcrusher:
+    - Hellblade
+    - Juggernaut's Bladed horn
+
+  Bloodhunter:
+    - Hellblade
+    - Juggernaut's Bladed horn
+
+  Exalted Flamer:
+    - Fire of Tzeentch
+    - Tongues of flame
+
+  Fiend:
+    - Dissecting claws
+    - Vicious barbed tail
+
+  Blissbringer:
+    - Dissecting claws
+    - Vicious barbed tail
+
+  Pyrocaster:
+    - Flickering flames
+
+  Flamer:
+    - Flickering flames
+
+  Flesh Hound:
+    - Gore-drenched fangs
+
+  Gore Hound:
+    - Burning Roar
+    - Gore-drenched fangs
+
+  Fury:
+    - Daemonic claws
+
+  Hellflayer:
+    - Bladed axle
+    - Exalted Alluress
+    - 2 Steeds of Slaanesh
+
+  Plague Drone:
+    - Plaguesword
+    - Rot Fly
+    - Death's heads
+
+  Plaguebringer:
+    - Plaguesword
+    - Rot Fly
+    - Death's heads
+
+  Screamer:
+    - Lamprey bite
+
+  Heartseeker:
+    - Piercing claws
+    - Steed of Slaanesh
+
+  Seeker:
+    - Piercing claws
+    - Steed of Slaanesh
+
+  Burning Chariot:
+    - Screamers
+    - Exalted Flamer
+
+  Exalted Seeker Chariot:
+    - Steeds of Slaanesh
+    - Exalted Alluress
+    - Daemonette Charioteers
+
+
+  Seeker Chariot:
+    - Steeds of Slaanesh
+    - Exalted Alluress
+    - Daemonette Charioteer
+
+  Skull Cannon:
+    - Skull cannon
+    - Bloodletter Crew
+
+  Soul Grinder:
+    - Harvester cannon
+    - Iron claw
+    - Phlegm bombardment
+
+  Aetaos'rau'keres:
+    - Staff of Cataclysm
+    - Warpfire talons
+
+  An'ggrath the Unbound:
+    - Axe of Khorne
+    - Bloodlash
+
+  Scabeiathrax the Bloated:
+    - Horrific vomit
+    - Blade of Decay
+    - Nurglings
+
+  Zarakynel:
+    - Slicing claws
+    - The Souleater Blade
