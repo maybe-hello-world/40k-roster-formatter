@@ -18,7 +18,7 @@
   - ~~Thousand Sons~~
 - Aeldari
   - ~~Craftworlds~~
-  - Drukhari
+  - ~~Drukhari~~
   - ~~Harlequins~~
 - Xenos
   - ~~Genestealer Cults~~

@@ -1,6 +1,430 @@
 ---
+# Due to Ynnari easier to keep it in the single place
 faction: Aeldari
 selections:
   Way Seeker:
     - Witch Staff
     - Shuriken Pistol
+
+  Shadowseer:
+    - Hallucinogen Grenade Launcher
+    - Miststave
+
+  Death Jester:
+    - Jester's Blade
+    - Shrieker Cannon
+
+  Solitaire:
+    - Solitaire's Weapons
+
+  Voidweaver:
+    - Shuriken Cannon
+
+  Starweaver:
+    - Shuriken Cannon
+
+  Asurmen:
+    - The Sword of Asur
+    - The Bloody Twins
+
+  Autarch Skyrunner:
+    - Twin Shuriken Catapult
+
+  Avatar of Khaine:
+    - Wailing Doom
+
+  Baharroth:
+    - The Shining Blade
+    - Fury of the Tempest
+
+  Farseer:
+    - Shuriken Pistol
+
+  Farseer Skyrunner:
+    - Twin Shuriken Catapult
+    - Shuriken Pistol
+
+  Fuegan:
+    - The Fire Axe
+    - Searsong
+
+  Illic Nightspear:
+    - Voidbringer
+    - Shuriken Pistol
+    - Aeldari Power Sword
+
+  Irillyth:
+    - Shade of Twilight
+    - Reaper of Souls (Aura)
+    - Spear of Starlight
+    - Shadow Spectres Phoenix Lord
+    - Spectre Holo-field
+    - Shadow of Death (Aura)
+
+  Jain Zar:
+    - Blade of Destruction
+    - Silent Death
+    - Terror's Lament
+
+  Karandras:
+    - Arhra's Bane
+    - Isirmathil
+    - The Scorpion's Bite
+
+  Maugan Ra:
+    - The Maugetar
+
+  Spiritseer:
+    - Shuriken Pistol
+    - Witch Staff
+
+  Warlock:
+    - Shuriken Pistol
+
+  Guardian Defender:
+    - Shuriken Catapult
+
+  Ranger:
+    - Shuriken Pistol
+    - Ranger Long Rifle
+
+  Storm Guardian - Guardian Combat Weapon:
+    - Shuriken Pistol
+    - Guardian Combat Weapon
+
+  Storm Guardian - Aeldari Flamer:
+    - Aeldari Flamer
+
+  Storm Guardian - Aeldari Power Sword:
+    - Aeldari Power Sword
+    - Shuriken Pistol
+
+  Storm Guardian - Guardian Fusion Gun:
+    - Guardian Fusion Gun
+
+  Dire Avengers:
+    - Defence Tactics
+
+  Dire Avenger:
+    Avenger Shuriken Catapult
+
+  Fire Dragon:
+    - Dragon Fusion Gun
+
+  Howling Banshee:
+    - Shuriken Pistol
+    - Banshee Blade
+
+  Shadow Spectres:
+    - Spectre Holo-field
+    - Shade of Twilight
+    - Shadow of Death (Aura)
+
+  Shadow Spectre:
+    - Prism Rifle
+
+  Shadow Spectre Exarch:
+    - Prism Rifle
+
+  Striking Scorpion Exarch:
+    - Mandiblasters
+
+  Striking Scorpion:
+    - Scorpion Chainsword
+    - Shuriken Pistol
+    - Mandiblasters
+
+  Warlock Skyrunner:
+    - Twin Shuriken Catapult
+    - Shuriken Pistol
+
+  Wraithlord:
+    - Wraithbone Fists
+
+  Hornet:
+    - Explodes (Hornet)
+    - Lightning Assault
+
+  Shining Spear:
+    - Twin Shuriken Catapult
+    - Laser Lance
+
+  Shroud Runner:
+    - Ranger Long Rifle
+    - Scatter Laser
+    - Shuriken Pistol
+
+  Swooping Hawk:
+    - Lasblaster
+
+  Vyper:
+    - Twin Shuriken Catapult
+
+  Warp Spider:
+    - Death Spinner
+
+  Windrider - Twin Shuriken Catapults:
+    - Twin Shuriken Catapult
+
+  Windrider - Scatter Laser:
+    - Scatter Laser
+
+  Windrider - Shuriken Cannon:
+    - Shuriken Cannon
+
+  Dark Reaper:
+    - Reaper Launcher
+
+  Falcon:
+    - Pulse Laser
+
+  Fire Prism:
+    - Prism Cannon
+
+  Lynx:
+    - Speed of Vaul
+    - Distortion Field
+
+  Night Spinner:
+    - Doomweaver
+
+  Support Weapon:
+    - Shuriken Catapult
+
+  Warp Hunter:
+    - D-flail
+
+  Wraithseer:
+    - Ghostspear
+
+  Crimson Hunter:
+    - Pulse Laser
+
+  Crimson Hunter Exarch:
+    - Pulse Laser
+
+  Hemlock Wraithfighter:
+    - Heavy D-scythe
+
+  Nightwing:
+    - Extend Wings
+    - Agile Interceptor
+    - Twin Shuriken Cannon
+    - Twin Bright Lance
+    - Wings of Khaine
+    - Hard to Hit
+    - Airborne
+    - Crystal Targeting Matrix
+
+  Cobra:
+    - D-impaler
+    - Distortion Field
+    - Explodes (4+)
+
+  Phantom Titan:
+    - Explodes
+    - War Engine
+    - Voidstorm Missile Launcher
+    - Titanic Stride
+    - Distortion Field
+
+  Revenant Titan:
+    - Titanic
+    - Revenant Jet Pack
+    - Cloudburst Missile Launcher
+    - Titanic Stride
+    - Distortion Field
+    - Explodes (5+)   # damn eldar codex writer, please, write it as a rule of the unit, not wargear selection
+
+  Scorpion:
+    - Explodes
+    - Twin Scorpion Pulsar
+    - Distortion Field
+
+  Skathach Wraithknight:
+    - Webway Rupture
+    - Webway Shunt Generator
+    - Titanic Feet
+    - Titanic Wraithbone Fists
+    - Explodes (6+)
+
+  Wraithknight:
+    - Titanic Feet
+
+  Lhamean:
+    - Shaimeshi blade
+
+  Medusae:
+    - Eyeburst
+
+  Sslyth:
+    - Sslyth battle-blade
+    - Shardcarbine
+    - Splinter Pistol
+
+  Ur-Ghul:
+    - Ur-Ghul Talons
+
+  Drazhar:
+    - "The Executioner's Demiklaives"
+
+  Haemonculus:
+    - Ichor Injector
+    - Scissorhand
+    - Stinger Pistol
+    - Haemonculus Tools
+
+  Lelith Hesperax:
+    - Lelith's Blades
+
+  Urien Rakarth:
+    - Casket of Flensing
+    - Ichor Injector
+    - Haemonculus Tools
+
+  Haemoxyte:
+    - Wrack Blade
+
+  Haemoxyte w/ Special Weapon:
+    - Wrack Blade
+
+  Hekatrix Bloodbride:
+    - Hekatarii Blade
+    - Splinter Pistol
+
+  Hekatrix Bloodbride w/ Hydra Gauntlets:
+    - Hydra Gauntlets
+
+  Hekatrix Bloodbride w/ Razorflails:
+    - Razorflails
+
+  Hekatrix Bloodbride w/ Shardnet and Impaler:
+    - Shardnet and Impaler
+
+  Kabalite Warrior:
+    - Splinter Rifle
+
+  Wracks:
+    - Wrack Blade
+
+  Wrack w/ Special Weapon:
+    - Wrack Blade
+
+  Wych:
+    - Splinter Pistol
+    - Hekatarii Blade
+
+  Wych w/ Hydra Gauntlets:
+    - Hydra Gauntlets
+
+  Wych w/ Razorflails:
+    - Razorflails
+
+  Wych w/ Shardnet and Impaler:
+    - Shardnet and Impaler
+
+  Beastmaster:
+    - Splinter Pods
+
+  Grotesque w/ Monstrous Cleaver:
+    - Monstrous Cleaver
+    - Flesh Gauntlet
+
+  Grotesque w/ Liquifier Gun:
+    - Liquifier Gun
+    - Flesh Gauntlet
+
+  Incubi:
+    - Klaive
+
+  Mandrake:
+    - Glimmersteel Blade
+    - Baleblast
+
+  Nightfiend:
+    - Glimmersteel Blade
+    - Baleblast
+
+  Clawed Fiends:
+    - Beasts of the Arena
+
+  Clawed Fiend:
+    - Clawed fists
+
+  Hellion:
+    - Hellglaive
+    - Splinter Pods
+
+  Helliarch:
+    - Splinter Pods
+
+  Khymerae:
+    - Beasts of the Arena
+    - Claws and talons
+
+  Razorwing Flocks:
+    - Beasts of the Arena
+
+  Razorwing flock:
+    - Razor feathers
+
+  Arena Champion:
+    - Bladevanes
+    - Splinter Pistol
+
+  Reaver:
+    - Bladevanes
+    - Splinter Pistol
+    - Splinter Rifle
+
+  Scourge w/ shardcarbine:
+    - Shardcarbine
+
+  Cronos:
+    - Spirit Syphon
+    - Spirit-Leech Tentacles
+
+  Ravager:
+    - Bladevanes
+
+  Reaper:
+    - Storm Vortex Projector
+    - Prow blade
+    - Night Shield
+    - Bladevanes
+
+  Tantalus:
+    - Pulse disintegrator
+    - Dire scythe blade
+    - Twilight Field
+
+  Razorwing Jetfighter:
+    - Razorwing Missiles
+
+  Voidraven Bomber:
+    - Void mine
+
+  Raider:
+    - Bladevanes
+
+  Venom:
+    - Bladevanes
+
+  Two void lances:
+    - Void lance
+
+  2 Disintegrator Cannons:
+    - Disintegrator Cannon
+
+  Two Drukhari haywire blasters:
+    - Drukhari Haywire Blaster
+
+  Two heat lances:
+    - Heat Lance
+
+  Two splinter cannons:
+    - Splinter Cannon
+
+  Agoniser & Archite Glaive:
+    - Archite Glaive
+    - Agoniser
