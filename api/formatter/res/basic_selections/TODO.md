@@ -13,7 +13,7 @@
 - Chaos
   - Chaos Space Marines
   - Chaos Daemons
-  - Chaos Knights
+  - ~~Chaos Knights~~
   - ~~Death Guard~~
   - ~~Thousand Sons~~
 - Aeldari
@@ -22,7 +22,7 @@
   - Harlequins
   - Ynnari
 - Xenos
-  - Genestealer Cults
+  - ~~Genestealer Cults~~
   - ~~Necrons~~
   - Orks
   - ~~T'au~~
