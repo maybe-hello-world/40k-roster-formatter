@@ -1,0 +1,48 @@
+---
+faction: Imperium
+selections:
+  Callidus Assassin:
+    - "*"
+
+  Culexus Assassin:
+    - "*"
+
+  Eversor Assassin:
+    - "*"
+
+  Vindicare Assassin:
+    - "*"
+
+  Digital Laser Loadout:
+    - "*"
+
+  Heirloom Pistol Loadout:
+    - "*"
+
+  Negotiator Pistol Loadout:
+    - "*"
+
+  Inquisitor Coteaz:
+    - "*"
+
+  Inquisitor Eisenhorn:
+    - "*"
+  Inquisitor Greyfax:
+    - "*"
+  Inquisitor Karamazov:
+    - "*"
+  Inquisitor Solomon Lok:
+    - "*"
+  Lord Inquisitor Hector Rex:
+    - "*"
+  Lord Inquisitor Kyria Draxus:
+    - "*"
+
+  Voidmaster:
+    - "*"
+
+  Voidsman:
+    - "*"
+
+  Voidsman w/ Voidsman Rotor Cannon:
+    - "*"

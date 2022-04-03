@@ -10,13 +10,13 @@
   - Inquisition
   - Officio Assassinorum
   - Space Marines (all of them ><)
-- Chaos
-  - Chaos Space Marines
+- ~~Chaos~~
+  - ~~Chaos Space Marines~~
   - ~~Chaos Daemons~~
   - ~~Chaos Knights~~
   - ~~Death Guard~~
   - ~~Thousand Sons~~
-- Aeldari
+- ~~Aeldari~~
   - ~~Craftworlds~~
   - ~~Drukhari~~
   - ~~Harlequins~~
