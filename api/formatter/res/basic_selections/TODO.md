@@ -10,6 +10,7 @@
   - ~~Inquisition~~
   - ~~Officio Assassinorum~~
   - Space Marines (all of them ><)
+    - HQ, troops, and elite finished
 - ~~Chaos~~
   - ~~Chaos Space Marines~~
   - ~~Chaos Daemons~~
