@@ -12,7 +12,7 @@
   - Space Marines (all of them ><)
 - Chaos
   - Chaos Space Marines
-  - Chaos Daemons
+  - ~~Chaos Daemons~~
   - ~~Chaos Knights~~
   - ~~Death Guard~~
   - ~~Thousand Sons~~
@@ -24,6 +24,6 @@
 - Xenos
   - ~~Genestealer Cults~~
   - ~~Necrons~~
-  - Orks
+  - ~~Orks~~
   - ~~T'au~~
   - Tyranids
