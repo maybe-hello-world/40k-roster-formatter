@@ -66,12 +66,21 @@ selections:
     - Terrax melta cutter
     - Termite Drill
 
+  Servitor (Servo-arm):
+    - Servo-arm
+    - Servitor
 
+  Servitor (Plasma Cannon):
+    - Plasma Cannon
+    - Servitor
 
+  Servitor (Multi-melta):
+    - Multi-melta
+    - Servitor
 
-
-
-
+  Servitor (Heavy Bolter):
+    - Heavy Bolter
+    - Servitor
 
 
 

@@ -1,0 +1,235 @@
+---
+faction: Imperium - Astra Militarum
+selections:
+  Aradia Madellan:
+    - "*"
+
+  Colonel 'Iron Hand' Straken:
+    - "*"
+
+  Commissar Yarrick:
+    - "*"
+
+  Lord Castellan Creed:
+    - "*"
+
+  Gaunt's Ghosts:
+    - "*"
+
+  Primaris Psyker:
+    - Force Stave
+    - Laspistol
+
+  Tank Commander:
+    - Stat Damage (Leman Russ Commander)
+
+  Conscript:
+    - Lasgun
+
+  Guardsman:
+    - Lasgun
+
+  Guardsman w/ Vox-caster:
+    - Lasgun
+    - Vox-caster
+
+  Heavy Weapon Team:
+    - Lasgun
+
+  Scion:
+    - Hot-shot Lasgun
+
+  Colour Sergeant Kell:
+    - "*"
+
+  Veteran w/ Heavy Flamer:
+    - Heavy flamer
+
+  Veteran w/ Medi-pack:
+    - Medi-pack
+
+  Veteran w/ Regimental Standard:
+    - Regimental Standard
+
+  Veteran w/ Vox-caster:
+    - Vox-caster
+
+  Commissar Severina Raine:
+    - "*"
+
+  Crusader:
+    - Power Sword
+
+  Gotfret de Montbard:
+    - "*"
+
+  Master of Ordnance:
+    - Laspistol
+
+  Tempestus Scion w/ Medi-pack:
+    - Medi-pack
+    - Hot-shot Laspistol
+
+  Tempestus Scion w/ Platoon Standard:
+    - Platoon Standard
+    - Hot-Shot Lasgun
+
+  Tempestus Scion w/ Vox-caster:
+    - Vox-caster
+    - Hot-shot Laspistol
+
+  Ministorum Priest:
+    - Laspistol
+
+  Nork Deddog:
+    - "*"
+
+  Officer of the Fleet:
+    - Laspistol
+
+  Ogryn:
+    - Ripper Gun
+
+  Ogryn Bone 'ead:
+    - Ripper Gun
+
+  Ratling:
+    - Sniper Rifle
+
+  Rein and Raus:
+    - "*"
+
+  Sergeant Harker:
+    - "*"
+
+  Sly Marbo:
+    - "*"
+
+  Tech-Priest Enginseer:
+    - Laspistol
+    - Omnissan Axe
+
+  Veteran w/ Lasgun:
+    - Lasgun
+
+  Veteran w/ Autogun:
+    - Autogun
+  Veteran w/ Shotgun:
+    - Shotgun
+  Veteran Weapon Team:
+    - Lasgun
+
+  Wyrdvane Psyker:
+    - Laspistol
+    - Wyrdvane Stave
+
+  Bane Wolf:
+    - Chem Cannon
+
+  Devil Dog:
+    - Melta Cannon
+
+  Armageddon-pattern Basilisk:
+    - Earthshaker Cannon
+
+  Armageddon-pattern Medusa:
+    - Medusa Siege Cannon
+
+  Basilisk:
+    - Earthshaker Cannon
+
+  Colossus Bombard:
+    - Colossus Siege Mortar
+
+  Cyclops Demolition Vehicle:
+    - Cyclops Demolition Charge
+
+  Deathstrike:
+    - Deathstrike Missile
+
+  Earthshaker Carriage:
+    - Earthshaker Cannon
+    - Guardsmen Crew
+
+  Heavy Mortar:
+    - "*"
+
+  Heavy Quad Launcher Battery:
+    - Heavy Quad launcher
+    - Guardsmen Crew
+
+  Hydra:
+    - Hydra Quad Autocannon
+
+  Malcador:
+    - Battle cannon
+
+  Malcador Annihilator:
+    - Malcador Twin Lascannon
+    - Demolisher cannon
+
+  Malcador Defender:
+    - Demolisher cannon
+    - Heavy bolter
+
+  Malcador Infernus:
+    - Inferno Gun
+
+  Manticore:
+    - Storm Eagle Rockets
+
+  Medusa Carriage:
+    - "*"
+
+  Rapier Laser Destroyer:
+    - Laser Destroyer
+    - Guardsmen Crew
+
+  Thunderer:
+    - Demolisher cannon
+
+  Valdor Tank Hunter:
+    - Valdor Neutron Laser
+
+  Wyvern:
+    - Wyvern Quad Stormshard Mortar
+
+  Avenger Strike Fighter:
+    - "*"
+
+  Thunderbolt:
+    - Thunderbolt Nose Autocannons
+    - Thunderbolt Twin Lascannon
+
+  Valkyrie:
+    - Stat Damage (Gunships)
+
+  Vendetta Gunship:
+    - Vendetta Twin Lascannon
+
+  Voss-pattern Lightning:
+    - Lascannon
+
+  Vulture Gunship:
+    - Heavy bolter
+
+  Chimera:
+    - Lasgun Arrays
+    - Stat Damage (Chimera)
+
+  Hades Breaching Drill:
+    - Melta-cutter Drill
+
+  Taurox:
+    - Stat Damage (Taurox)
+    - Autocannon
+
+  Taurox Prime:
+    - Stat Damage (Taurox Prime)
+
+  Multiple Rocket Pods & Hellstrike Rack:
+    - Vulture Hellstrike Rack
+    - Multiple Rocket Pods
+
+  2x Vendetta Twin Lascannons:
+    - Vendetta Twin Lascannon
