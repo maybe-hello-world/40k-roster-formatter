@@ -1,5 +1,5 @@
 ### Factions to add
-- Imperium
+- ~~Imperium~~
   - ~~Adepta Sororitas~~
   - ~~Adeptus Custodes~~
   - ~~Adeptus Mechanicus~~
@@ -9,8 +9,7 @@
   - ~~Imperial Knights~~
   - ~~Inquisition~~
   - ~~Officio Assassinorum~~
-  - Space Marines (all of them ><)
-    - HQ, troops, and elite finished
+  - ~~Space Marines (all of them ><)~~
 - ~~Chaos~~
   - ~~Chaos Space Marines~~
   - ~~Chaos Daemons~~
