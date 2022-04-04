@@ -85,7 +85,10 @@ selections:
   Land Raider:
     - Twin Heavy Bolter
     - Twin Lascannon
-
+  Land Raider Achilles:
+    - Quad launcher
+  Land Raider Proteus:
+    - Twin lascannon
   Land Raider Crusader:
     - Hurricane Bolter
     - Twin Assault Cannon
