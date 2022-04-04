@@ -1,0 +1,28 @@
+### Factions to add
+- ~~Imperium~~
+  - ~~Adepta Sororitas~~
+  - ~~Adeptus Custodes~~
+  - ~~Adeptus Mechanicus~~
+  - ~~Astra Militarum~~
+  - ~~Astra Cartographica~~
+  - ~~Grey Knights~~
+  - ~~Imperial Knights~~
+  - ~~Inquisition~~
+  - ~~Officio Assassinorum~~
+  - ~~Space Marines (all of them ><)~~
+- ~~Chaos~~
+  - ~~Chaos Space Marines~~
+  - ~~Chaos Daemons~~
+  - ~~Chaos Knights~~
+  - ~~Death Guard~~
+  - ~~Thousand Sons~~
+- ~~Aeldari~~
+  - ~~Craftworlds~~
+  - ~~Drukhari~~
+  - ~~Harlequins~~
+- Xenos
+  - ~~Genestealer Cults~~
+  - ~~Necrons~~
+  - ~~Orks~~
+  - ~~T'au~~
+  - Tyranids

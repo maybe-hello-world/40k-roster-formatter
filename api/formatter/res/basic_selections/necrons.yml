@@ -1,0 +1,212 @@
+---
+faction: Necrons
+selections:
+  Cryptothralls:
+    - Cryptothrall
+
+  Technomancer:
+    - Staff of Light
+
+  Canoptek Plasmacyte:
+    - Monomolecular Proboscis
+
+  Anrakyr the Traveller:
+    - Warscythe
+    - Tachyon Arrow
+
+  Chronomancer:
+    - Chronotendrils
+
+  Illuminor Szeras:
+    - Impaling Legs
+    - Eldritch Lance
+
+  Orikan the Diviner:
+    - Staff of Tomorrow
+
+  Plasmancer:
+    - Plasmic Lance
+
+  Psychomancer:
+    - Abyssal Lance
+
+  Royal Warden:
+    - Relic Gauss Blaster
+
+  Skorpekh Lord:
+    - Flensing Claw
+    - Enmitic Annihilator
+    - Hyperphase Harvester
+
+  Trazyn the Infinite:
+    - Empathic Obliterator
+
+  Necron Warrior (Gauss Flayer):
+    - Gauss Flayer
+
+  Necron Warrior (Gauss Reaper):
+    - Gauss Reaper
+
+  C'tan Shard of the Deceiver:
+    - Golden Fists
+
+  C'tan Shard of the Nightbringer:
+    - Scythe of the Nightbringer
+
+  C'tan Shard of the Void Dragon:
+    - Spear of the Void Dragon
+    - Canoptek Tail Blades
+
+  Canoptek Reanimator:
+    - Atomiser Beam
+    - Reanimator's Claws
+
+  Canoptek Spyder:
+    - Automaton Claws
+
+  Canoptek Tombstalker:
+    - Tomb Stalker Claws
+    - Gauss Slicer
+    - Gloom Prism
+
+  Deathmark:
+    - Synaptic Disintegrator
+
+  Flayed One:
+    - Flayer Claws
+
+  Hexmark Destroyer:
+    - Enmitic Disintegrator Pistol
+
+  Skorpekh Destroyer (Thresher):
+    - Hyperphase Threshers
+
+  Skorpekh Destroyer (Reap-Blade):
+    - Hyperphase Reap-Blade
+
+  Transcendent C'tan:
+    - Crackling Tendrils
+
+  Triarch Stalker:
+    - Stalker's Forelimbs
+
+  Canoptek Acanthrite:
+    - Voidblade
+    - Cutting Beam
+
+  Canoptek Scarab Swarm:
+    - Feeder Mandibles
+
+  Canoptek Tomb Sentinel:
+    - Tomb Sentinel Claws
+    - Exile Cannon
+    - Gloom Prism
+
+  Canoptek Wraith (Claws):
+    - Vicious Claws
+
+  Canoptek Wraith (Claws/Particle Caster):
+    - Vicious Claws
+    - Particle Caster
+
+  Canoptek Wraith (Claws/Transdimensional Beamer):
+    - Vicious Claws
+    - Transdimensional Beamer
+
+  Canoptek Wraith (Whip Coils):
+    - Whip Coils
+
+  Canoptek Wraith (Whip Coils/Particle Caster):
+    - Whip Coils
+    - Particle Caster
+
+  Canoptek Wraith (Whip Coils/Transdimensional Beamer):
+    - Whip Coils
+    - Transdimensional Beamer
+
+  Ophydian Destroyer (Thresher):
+    - Hyperphase Threshers
+    - Ophydian Claws
+
+  Ophydian Destroyer (Reap-Blade):
+    - Two Hyperphase Reap-Blades
+    - Ophydian Claws
+
+  Annihilation Barge:
+    - Twin Tesla Destructor
+
+  Canoptek Doomstalker:
+    - Twin Gauss Flayer
+    - Doomsday Blaster
+
+  Doomsday Ark:
+    - Gauss Flayer Array
+    - Doomsday Cannon
+
+  Lokhust Heavy Destroyer (Enmitic Exterminator):
+    - Enmitic Exterminators
+
+  Lokhust Heavy Destroyer (Gauss Destructor):
+    - Gauss Destructor
+
+  Tesseract Ark:
+    - Tesseract Singularity Chamber
+
+  Doom Scythe:
+    - Heavy Death Ray
+    - Twin Tesla Destructor
+
+  Night Scythe:
+    - Twin Tesla Destructor
+
+  Night Shroud:
+    - Twin Tesla Destructor
+
+  Ghost Ark:
+    - Gauss Flayer Array
+
+  Gauss Pylon:
+    - Tesla Arc
+    - Gauss Annihilator
+    - Teleportation Matrix
+
+  Monolith:
+    - Particle Whip
+    - Portal of Exile
+
+  Obelisk:
+    - Tesla Sphere
+
+  Tesseract Vault:
+    - Tesla Sphere
+
+  Seraptek Heavy Construct:
+    - Titanic Forelimbs
+
+  The Silent King:
+    - Szarekh
+    - Triarchal Menhir
+
+  Two Singularity Generators:
+    - Singularity Generator
+
+  Two Synaptic Obliterators and Two Transdimensional Projectors:
+    - Synaptic Obliterator
+    - Transdimensional Projector
+
+  4 Death Rays:
+    - Death Ray
+
+  4 Gauss Flux Arcs:
+    - Gauss Flux Arc
+
+  Particle Caster and Voidblade:
+    - Particle Caster
+    - Voidblade
+
+  Tachyon Arrow and Hyperphase Glaive:
+    - Tachyon Arrow
+    - Hyperphase Glaive
+
+  Two Tesla Cannons:
+    - Tesla Cannon

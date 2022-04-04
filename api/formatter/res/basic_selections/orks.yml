@@ -1,0 +1,308 @@
+---
+faction: Orks
+selections:
+  Makari:
+    - Makari's Stabba
+
+  Runtherd:
+    - Slugga
+
+  Beastboss:
+    - Shoota
+    - Beastchoppa
+    - Beast Snagga Klaw
+
+  Beastboss on Squigosaur:
+    - Squigosaur's Jaws
+    - Slugga
+    - Beastchoppa
+
+  Big Mek in Mega Armour:
+    - Power Klaw
+
+  Big Mek w/ Kustom Force Field:
+    - Choppa
+    - Kustom Force Field
+    - Slugga
+
+  Big Mek w/ Shokk Attack Gun:
+    - Shokk Attack Gun
+
+  Deffkilla Wartrike:
+    - Killa Jet
+    - Snagga Klaw
+    - Twin Boomstick
+
+  Ghazghkull Thraka:
+    - Gork's Klaw
+    - Mork's Roar
+
+  Kaptin Badrukk:
+    - Da Rippa
+    - Slugga
+    - Choppa
+
+  Warboss:
+    - Slugga
+
+  Warboss in Mega Armour:
+    - "'Uge Choppa"
+    - Big Shoota
+
+  Warboss on Warbike:
+    - Dakkagun
+
+  Weirdboy:
+    - Weirdboy Staff
+
+  Wurrboy:
+    - Eyez of Mork
+
+  Zodgrod Wortsnagga:
+    - Da Grabzappa
+    - Slugga
+
+  Beast Snagga Nob:
+    - Power Snappa
+    - Slugga
+
+  Beast Snagga Boy:
+    - Choppa
+    - Slugga
+  Beast Snagga Boy w/ Thump Gun:
+    - Thump Gun
+
+
+  Ork Boy w/ Slugga & Choppa:
+    - Choppa
+    - Slugga
+
+  Ork Boy W/ Shoota:
+    - Shoota
+
+  Gretchin:
+    - Grot Blaster
+
+  Burna Boy:
+    - Burna
+
+  Kommando:
+    - Choppa
+    - Slugga
+
+  Kommando w/ Big Shoota:
+    - Big Shoota
+  Kommando w/ Breacha Ram:
+    - Breacha Ram
+  Kommando w/ Burna:
+    - Burna
+  Kommando w/ Kustom Shoota:
+    - Kustom Shoota
+  Kommando w/ Rokkit Launcha:
+    - Rokkit Launcha
+  Kommando w/ Choppa & Shokka Pistol:
+    - Choppa
+    - Shokka Pistol
+
+  Mad Dok Grotsnik:
+    - "'Urty Syringe"
+    - Power Klaw
+    - Slugga
+
+  Nob with Waaagh! Banner:
+    - Waaagh! Banner
+    - Kustom Shoota
+
+  Painboy:
+    - "'Urty Syringe"
+    - Power Klaw
+
+  Tankbusta w/ Hammer:
+    - Tankhammer
+
+  Tankbusta w/ Pistols:
+    - Pair of Rokkit Pistols
+
+  Boomdakka Snazzwagon:
+    - Mek Speshul
+    - Burna Bottles
+    - Big Shoota
+    - Grot Blasta
+
+  DeffKopta:
+    - Spinnin' Blades
+    - Kopta Rokkits
+    - Slugga
+
+  DeffKopta w/ KMB and Big Bomb:
+    - Spinnin' Blades
+    - Big Bomb
+    - Slugga
+    - Kustom Mega-Blasta
+
+  Grot Mega-tank:
+    - Shoota
+
+
+  Grot Tank (Shoota):
+    - Big Shoota
+
+  Kustom Boosta Blastas:
+    - Rivet Cannon
+    - Burna Exhaust
+    - Grot Blasta
+
+  Megatrakk Scrapjet:
+    - Rokkit Cannon
+    - Nose Drill
+    - Twin Big Shoota
+    - Wing Missiles
+
+  Nob on Smasha Squig:
+    - Slugga
+    - Big Choppa
+    - Smasha Squig Jaws
+
+  Boss Nob on Warbike:
+    - Dakkagun
+  Nob on Warbike:
+    - Dakkagun
+
+  Rukkatrukk Squigbuggy:
+    - Saw Blades
+    - Squig Mine
+    - Heavy Squig Launcha
+    - Squig Launcha
+    - Sawn-off Shotgun
+
+  Shokkjump Dragstas:
+    - Kustom Shokk Rifle
+    - Saw Blades
+    - Rokkit Launcha
+
+  Squighog Boy:
+    - Saddlegit Weapons
+    - Squighog Jaws
+    - Stikka
+
+  Stormboy:
+    - Choppa
+    - Slugga
+
+  Warbiker:
+    - Dakkagun
+
+  Warbiker w/ Choppa:
+    - Choppa
+    - Dakkagun
+
+  Warbiker w/ Slugga:
+    - Slugga
+    - Dakkagun
+
+  Big Trakk:
+    - Big Shoota
+
+  Bonebreaka:
+    - Bonebreaker Ram
+    - Deff Rolla
+
+  Kaptin:
+    - Snazzgun
+
+  Flash Git:
+    - Snazzgun
+
+  Hunta Rig:
+    - "'Eavy Lobba"
+    - Stikka Kannon
+    - Butcha Boyz
+    - Savage Horns and Hooves
+    - Saw Blades
+
+  Kannonwagon:
+    - Supa-Kannon
+
+  Kill Rig:
+    - "'Eavy Lobba"
+    - Stikka Kannon
+    - Butcha Boyz
+    - Savage Horns and Hooves
+    - Saw Blades
+    - Wurrtower
+
+  Killa Kan:
+    - Kan Klaw
+
+  Loota:
+    - Deffgun
+
+  Mega Dread:
+    - Boombits
+
+  Squiggoth:
+    - Gorin' Horns
+
+  Blitza-bommer:
+    - Boom Bomb
+    - Supa Shoota
+    - Big Shoota
+
+  Burna-bommer:
+    - Burna Bomb
+    - Supa Shoota
+    - Twin Big Shoota
+
+  Dakkajet:
+    - Supa Shoota
+
+  Wazbom Blastajet:
+    - Smasha Gun
+
+  Trukk:
+    - Big Shoota
+
+  Gargantuan Squiggoth:
+    - Huge Tusks
+
+  Gorkanaut:
+    - Deffstorm Mega-Shoota
+    - Twin Big Shoota
+    - Rokkit Launcha
+    - Klaw of Gork (Or possibly Mork)
+    - Skorcha
+
+  Kill Tank:
+    - Twin Big Shoota
+    - Reinforced Ram
+    - Skorcha
+
+  Kustom Stompa:
+    - Gaze of Mork
+    - Big Shoota
+    - Skorcha
+
+  Morkanaut:
+    - Kustom Mega-Zappa
+    - Kustom Mega-Blasta
+    - Twin Big Shoota
+    - Rokkit Launcha
+    - Klaw of Gork (Or possibly Mork)
+
+  Stompa:
+    - Supa-Rokkits
+    - Twin Big Shoota
+    - Big Shoota
+    - Skorcha
+    - Mega-Choppa
+    - Deffkannon
+    - Supa-Gatler
+
+  Mega-Choppa & Twin Big Shoota:
+    - Mega-Choppa
+    - Twin Big Shoota
+
+  Deffkannon, Supa-Gatler & Supa-Rokkits:
+    - Kustom Supa-Rokkits
+    - Deffkannon
+    - Supa-Gatler

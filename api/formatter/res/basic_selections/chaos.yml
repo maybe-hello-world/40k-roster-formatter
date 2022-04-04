@@ -1,0 +1,164 @@
+---
+faction: Chaos
+selections:
+  Cultist w/ autogun:
+    - Autogun
+
+  Cultist w/ autopistol and brutal assault weapon:
+    - Autopistol
+    - Brutal assault weapon
+
+  Chaos Spawn:
+    - Hideous mutations
+
+  Chaos Land Raider:
+    - Twin heavy bolter
+    - Twin lascannon
+
+  Chaos Land Raider Achilles:
+    - Quad launcher
+
+  Chaos Land Raider Proteus:
+    - Twin lascannon
+
+  Chaos Predator Annihilator:
+    - Twin lascannon
+
+  Chaos Predator Destructor:
+    - Predator autocannon
+
+  Chaos Rapier Carrier:
+    - Boltgun
+
+  Chaos Sicaran Battle Tank:
+    - Heavy bolter
+    - Herakles-pattern autocannon
+
+  Chaos Sicaran Punisher:
+    - Punisher rotary cannon
+
+  Chaos Sicaran Venator:
+    - Sicaran laser cannon
+    - Heavy bolter
+
+  Chaos Vindicator Laser Destroyer:
+    - Laser volley cannon
+    - Storm bolter
+
+  Chaos Whirlwind Scorpius:
+    - Scorpius multi-launcher
+
+  Defiler:
+    - Defiler claws
+    - Defiler cannon
+
+  Chaos Fire Raptor Gunship:
+    - Twin avenger bolt cannon
+
+  Chaos Storm Eagle Gunship:
+    - Vengeance launcher
+
+  Chaos Xiphon Interceptor:
+    - Xiphon missile battery
+    - Twin lascannon
+
+  Hell Talon:
+    - Infernal bomb
+    - Twin lascannon
+
+  Chaos Terrax-Pattern Termite:
+    - Terrax melta cutter
+    - Termite drill
+
+  Chaos Cerberus:
+    - Cerberus neutron pulse array
+    - Crushing tracks
+
+  Chaos Falchion:
+    - Twin Falchion volcano cannon
+    - Crushing tracks
+
+  Chaos Fellblade:
+    - Fellblade accelerator cannon
+    - Demolisher cannon
+    - Crushing tracks
+
+  Chaos Mastodon:
+    - Siege melta array
+    - Skyreaper battery
+    - Crushing tracks
+    - Heavy flamer
+    - Lascannon
+
+  Chaos Spartan:
+    - Crushing tracks
+
+  Chaos Thunderhawk Gunship:
+    - Twin heavy bolter
+    - Lascannon
+
+  Chaos Typhon:
+    - Dreadhammer siege cannon
+    - Crushing tracks
+
+  Kharybdis Assault Claw:
+    - Thermal jet array
+    - Kharybdis storm launcher
+    - Melta array
+    - Blade struts
+
+  Dreadclaw Drop Pod:
+    - Thermal jets
+    - Blade struts
+
+  Possessed:
+    - Horrifying Mutations
+
+  Maulerfiend:
+    - Maulerfiend fists
+
+
+  2x Quad lascannons:
+    - Quad lascannon
+
+  2 Terrax combi-bolters:
+    - Terrax combi-bolter
+
+  2 Terrax heavy flamers:
+    - Terrax heavy flamer
+
+  2 Twin Terrax volkite chargers:
+    - Twin Terrax volkite Charger
+
+  2x twin autocannons:
+    - Twin autocannon
+
+  Two quad lascannons:
+    - Quad lascannon
+
+  Two quad heavy bolters:
+    - Quad heavy bolter
+
+  Two heavy flamers:
+    - Heavy flamer
+
+  Two twin hellforged multi-meltas:
+    - Twin hellforged multi-melta
+
+  Two hellforged autocannons:
+    - Twin hellforged autocannon
+
+  Two twin hellstrike launchers:
+    - Twin hellstrike launcher
+
+  Two twin lascannons:
+    - Twin lascannon
+
+  2 heavy bolters:
+    - Heavy bolter
+
+  2 lascannons:
+    - Lascannon
+
+  2x lascannons:
+    - Lascannon
