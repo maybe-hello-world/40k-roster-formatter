@@ -190,37 +190,186 @@ selections:
     - Storm bolter
     - Chainfist
 
+  Space Marine w/Eviscerator:
+    - Eviscerator
 
+  Attack Bike:
+    - Bolt pistol
+    - Twin boltgun
 
+  Biker Sergeant:
+    - Twin boltgun
 
+  Space Marine Biker w/Bolt Pistol:
+    - Twin boltgun
+    - Bolt pistol
 
+  Space Marine Biker w/Chainsword:
+    - Twin boltgun
+    - Astartes Chainsword
 
+  Space Marine Biker w/Special Weapon:
+    - Twin boltgun
 
+  Invader ATV:
+    - Twin auto bolt rifle
+    - Bolt pistol
 
+  Land Speeder Tempest:
+    - Assault cannon
+    - Tempest salvo launcher
 
+  Land Speeder Typhoon:
+    - Typhoon missile launcher
 
+  Outrider:
+    - Twin Bolt rifle
+    - Astartes Chainsword
+    - Heavy Bolt Pistol
 
+  Outrider Sgt:
+    - Twin Bolt rifle
+    - Astartes Chainsword
+    - Heavy Bolt Pistol
 
+  Scout Biker Sergeant:
+    - Astartes shotgun
+    - Combat knife
 
+  Scout Biker:
+    - Bolt pistol
+    - Astartes shotgun
+    - Combat knife
+    - Twin boltgun
 
+  Scout Biker w/Grenade Launcher:
+    - Bolt pistol
+    - Astartes shotgun
+    - Combat knife
+    - Astartes grenade launcher
 
+  Storm Speeder Hailstrike:
+    - Fragstorm Grenade Launchers
+    - Onslaught Gatling Cannon
+    - Twin ironhail heavy stubber
+  "Storm Speeder Hammerstrike ":
+    - Melta destroyer
+    - Hammerstrike missile launcher
+    - Krakstorm Grenade Launcher
+  Storm Speeder Thunderstrike:
+    - Stormfury missiles
+    - Thunderstrike las-talon
+    - Twin Icarus rocket pod
 
+  Suppressor Sergeant:
+    - Accelerator autocannon
+    - Bolt pistol
+  Suppressor:
+    - Accelerator autocannon
+    - Bolt pistol
 
+  Devastator Marine w/Heavy Weapon:
+    - Bolt pistol
 
+  Eliminator Sergeant:
+    - Bolt pistol
+    - Camo cloak
 
+  Eliminators:
+    - Bolt pistol
+    - Camo cloak
 
+  Eradicator:
+    - Bolt pistol
+  Eradicator Sgt:
+    - Bolt pistol
+  Eradicator with MM:
+    - Bolt pistol
+    - Multi-melta
 
+  Gladiator Lancer:
+    - Lancer laser destroyer
+  Gladiator Reaper:
+    - Tempest bolter
+    - Twin heavy onslaught gatling cannon
+  "Gladiator Valiant ":
+    - Twin las-talon
+    - Multi-melta
 
+  Hellblaster:
+    - Bolt pistol
 
+  Hunter:
+    - Skyspear missile launcher
 
+  Predator Annihilator:
+    - Twin lascannon
+  Predator Destructor:
+    - Predator autocannon
 
+  Repulsor:
+    - Krakstorm Grenade Launcher
+    - Hunter-slayer missile
+  Repulsor Executioner:
+    - Twin Icarus Ironhail Heavy Stubber
+    - Twin Heavy Bolter
+    - Fragstorm Grenade Launcher
+    - Storm bolter
+    - Heavy Onslaught Gatling Cannon
+    - Auto Launchers
 
+  Sicaran Arcus:
+    - Arcus multi-launcher
+  Sicaran Battle Tank:
+    - Herakles-pattern autocannon
 
+  Sicaran Omega:
+    - Omega plasma array
+  Sicaran Punisher:
+    - Punisher rotary cannon
+  Sicaran Venator:
+    - Venator neutron laser
 
+  Stalker:
+    - Icarus stormcannon
 
+  Techmarine Gunner:
+    - Servo-harness
+    - Bolt pistol
+  Vindicator:
+    - Demolisher cannon
 
+  Vindicator Laser Destroyer:
+    - Laser volley cannon
+    - Storm bolter
 
+  Whirlwind Scorpius:
+    - Scorpius multi-launcher
 
+  Fire Raptor Gunship:
+    - Twin avenger bolt cannon
+
+  Storm Eagle Gunship:
+    - Vengeance launcher
+
+  Stormhawk Interceptor:
+    - Assault cannon
+
+  Stormraven Gunship:
+    - Two Stormstrike Missile Launchers
+
+  Xiphon Interceptor:
+    - Twin lascannon
+    - Xiphon missile battery
+
+  Land Speeder Storm:
+    - Cerberus launcher
+    - Heavy bolter
+
+  Two twin hellstrike launchers:
+    - Twin hellstrike launcher
+  Two twin autocannons:
+    - Twin autocannon
 
   Thunder Hammer & Storm Shield:
     - Thunder hammer

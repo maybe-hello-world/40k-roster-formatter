@@ -24,11 +24,11 @@ class BasicSelectorChecker:
             return False  # 'warlord' is never a basic selection
 
         # check in the general catalogue
-        if selection_name in self.database.get('general', set()):
+        if selection_name.lower() in {x.lower() for x in self.database.get('general', set())}:
             return True
 
         # check in the exact catalogue
-        if selection_name in self.database.get(catalogue, {}).get(holder_name, {}):
+        if selection_name.lower() in {x.lower() for x in self.database.get(catalogue, {}).get(holder_name, {})}:
             return True
 
         # check if everything should be omitted here
@@ -45,7 +45,7 @@ class BasicSelectorChecker:
             dash_separated = dash_separated[:-1]
             catalogue = '-'.join(dash_separated).strip()
             if (
-                    selection_name in self.database.get(catalogue, {}).get(holder_name, {}) or
+                    selection_name.lower() in {x.lower() for x in self.database.get(catalogue, {}).get(holder_name, {})} or
                     "*" in self.database.get(catalogue, {}).get(holder_name, {})
             ):
                 return True
