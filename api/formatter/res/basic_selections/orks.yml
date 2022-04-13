@@ -117,6 +117,9 @@ selections:
     - "'Urty Syringe"
     - Power Klaw
 
+  Tankbusta:
+    - Rokkit Launcha
+
   Tankbusta w/ Hammer:
     - Tankhammer
 
@@ -306,3 +309,22 @@ selections:
     - Kustom Supa-Rokkits
     - Deffkannon
     - Supa-Gatler
+
+  Boss Snikrot:
+    - Mork's Teeth
+
+  Boss Zagstruk:
+    - Da Vulcha's Klaws
+    - Blitz Missiles
+    - Slugga
+    - Choppa
+
+  Mek Boss Buzzgob:
+    - Mek arms
+    - Big Choppa
+    - Slugga
+
+  Mozrog Skragbad:
+    - Gutrippa
+    - Big Chompa's Jaws
+    - Thump Gun
