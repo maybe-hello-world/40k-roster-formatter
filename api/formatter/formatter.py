@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 
 from itertools import chain
-from typing import Optional, Mapping
+from typing import Optional, Mapping, List
 from zipfile import ZipFile
 
 from lxml import objectify
@@ -77,6 +77,7 @@ class ForceView:
         self.__parse_faction(force)
 
         force = force.selections.getchildren()
+        self.army_of_renown = self.__parse_army_of_renown(force)
 
         self.non_enumerated_units = {
             "Stratagems": [],
@@ -288,6 +289,12 @@ class ForceView:
             *enumerated,
         ])
 
+    def __parse_army_of_renown(self, force: List[objectify.ObjectifiedElement]) -> Optional[str]:
+        selections = self.__get_selections_of_category(force, "Configuration", primary=True)
+        selections = [x for x in selections if x.get("name", "").lower().strip().startswith("army of renown")]
+        if selections:
+            return selections[0].get('name', 'Unparsed Army of Renown')
+
 
 class RosterView:
     def __str__(self):
@@ -300,6 +307,7 @@ class RosterView:
             f"PLAYER: ",
             f"Army name: {self.name}",
             f"Factions used: {', '.join(self.factions)}",
+            "" if self.army_of_renown is None else f"Army of Renown: {self.army_of_renown}",
             f"Command Points: {''.join(cp_modifiers)}={self.cp_total}",
             f"Total cost: {self.pts_total} pts, {self.pl_total} PL",
             f"Reinforcement Points: {self.reinf_points} pts",
@@ -361,3 +369,7 @@ class RosterView:
         forces = (x for x in roster.forces.iterchildren(tag="{*}force"))
         self.forces = [ForceView(x, self.options) for x in forces]
         self.cp_modifiers = sorted(chain.from_iterable(x.cp_modifiers for x in self.forces), reverse=True)
+        army_of_renown = [x.army_of_renown for x in self.forces if x.army_of_renown is not None]
+        self.army_of_renown = army_of_renown[0] if army_of_renown else None
+        if self.army_of_renown:
+            self.army_of_renown = remove_prefix(self.army_of_renown, "Army of Renown - ")
