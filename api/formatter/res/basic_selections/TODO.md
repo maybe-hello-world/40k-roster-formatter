@@ -25,4 +25,4 @@
   - ~~Necrons~~
   - ~~Orks~~
   - ~~T'au~~
-  - Tyranids
+  - ~~Tyranids~~
