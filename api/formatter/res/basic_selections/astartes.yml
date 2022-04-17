@@ -413,3 +413,44 @@ selections:
     - Master-crafted power sword
     - Relic Shield
 
+  Storm Bolter & Power Fist:
+    - Storm bolter
+    - Power fist
+  Storm Bolter & Chainfist:
+    - Storm bolter
+    - Chainfist
+  Assault cannon, Chainfist:
+    - Assault cannon
+    - Chainfist
+  Cyclone Missile Launcher, Lightning Claws (Pair):
+    - Cyclone missile launcher
+    - Lightning Claw (Pair)
+  Cyclone Missile Launcher, Storm Bolter, Chainfist:
+    - Cyclone missile launcher
+    - Storm bolter
+    - Chainfist
+  Cyclone Missile Launcher, Storm Bolter, Power Fist:
+    - Cyclone missile launcher
+    - Storm bolter
+    - Power fist
+  Cyclone Missile Launcher, Thunder Hammer, Storm Shield:
+    - Cyclone missile launcher
+    - Thunder Hammer & Storm Shield
+  Heavy Flamer, Chainfist:
+    - Heavy flamer
+    - Chainfist
+  Heavy Flamer, Power Fist:
+    - Heavy flamer
+    - Power fist
+  Plasma Cannon, Chainfist:
+    - Plasma cannon
+    - Chainfist
+  Plasma Cannon, Power Fist:
+    - Plasma cannon
+    - Power fist
+  Two Twin Heavy Bolters:
+    - Twin heavy bolter
+  2 Melta Arrays:
+    - Melta Array
+  Two Lascannons:
+    - Lascannon
