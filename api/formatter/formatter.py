@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 
 from itertools import chain
-from typing import Optional, Mapping
+from typing import Optional, Mapping, List
 from zipfile import ZipFile
 
 from lxml import objectify
@@ -62,6 +62,7 @@ class ForceView:
         self.options = options
         self.pts = 0
         self.pl = 0
+        self.cabal_points = 0
         self.cp_modifiers = []
         self.catalogue = force.get("catalogueName", "")
         self.__collect_cp_modifiers(force)
@@ -77,6 +78,7 @@ class ForceView:
         self.__parse_faction(force)
 
         force = force.selections.getchildren()
+        self.army_of_renown = self.__parse_army_of_renown(force)
 
         self.non_enumerated_units = {
             "Stratagems": [],
@@ -90,11 +92,16 @@ class ForceView:
             in self.__get_selections_of_category(force, "Stratagems")
         ])
 
-        for key in ["No Force Org Slot", "Agent of the Imperium"]:
+        for key in ["No Force Org Slot"]:
             self.non_enumerated_units[key].extend([
                 self.__parse_units(unit) for unit
                 in self.__get_selections_of_category(force, key)
             ])
+
+        self.non_enumerated_units['Agent of the Imperium'].extend([
+            self.__parse_units(unit) for unit
+            in self.__get_selections_of_category(force, "Agent of the Imperium", primary=True)
+        ])
 
         self.enumerated_units = {
             "HQ": ["HQ", []],
@@ -169,6 +176,7 @@ class ForceView:
         total_cost_pts = 0
         total_cost_pl = 0
         total_cost_cp = 0
+        total_cabal_points = 0
         for cost in unit.iter(tag="{*}cost"):
             name = cost.get("name", "").lower().strip()
             if name == "pts":
@@ -177,16 +185,20 @@ class ForceView:
                 total_cost_pl += int(float(cost.get("value", 0)))
             elif name == "cp":
                 total_cost_cp += int(float(cost.get("value", 0)))
+            elif name == "cabal points":
+                total_cabal_points += int(float(cost.get("value", 0)))
 
-        return total_cost_pts, total_cost_pl, total_cost_cp
+        return total_cost_pts, total_cost_pl, total_cost_cp, total_cabal_points
 
     def __get_unit_cost(self, unit: objectify.ObjectifiedElement) -> str:
-        cost_pts, cost_pl, cost_cp = self.__recursive_cost_search(unit)
+        cost_pts, cost_pl, cost_cp, cost_cabal_points = self.__recursive_cost_search(unit)
         self.pts += cost_pts
         self.pl += cost_pl
+        self.cabal_points += cost_cabal_points
 
         total_cost = f"[{cost_pts} pts, {cost_pl} PL"
         total_cost += f", {cost_cp} CP" if cost_cp else ""
+        total_cost += f", {cost_cabal_points} Cabal Points" if cost_cabal_points else ""
         total_cost += "]"
         return total_cost
 
@@ -250,7 +262,7 @@ class ForceView:
     def __parse_stratagem(stratagem: objectify.ObjectifiedElement) -> str:
         name = stratagem.get("name", "Unparsed Stratagem")
         name = "- " + remove_prefix(name, "Stratagem: ")
-        _, _, cost = ForceView.__recursive_cost_search(stratagem)
+        _, _, cost, _ = ForceView.__recursive_cost_search(stratagem)
         return f"{name} ({cost} CP)"
 
     def __collect_cp_modifiers(self, force: objectify.ObjectifiedElement):
@@ -263,6 +275,8 @@ class ForceView:
 
     def __str__(self):
         header = f"== {self.faction} {self.detachment} == {self.cp} CP, {self.pts} pts, {self.pl} PL"
+        if self.cabal_points > 0:
+            header += f", {self.cabal_points} Cabal Points"
 
         for key, value in self.non_enumerated_units.items():
             if value:
@@ -283,6 +297,17 @@ class ForceView:
             *enumerated,
         ])
 
+    def __parse_army_of_renown(self, force: List[objectify.ObjectifiedElement]) -> Optional[str]:
+        selections = self.__get_selections_of_category(force, "Configuration", primary=True)
+        selections = [
+            x
+            for x in selections
+            if x.get("name", "").lower().strip().startswith("army of renown")
+            or x.get("name", "") in {"Terminus Est Assault Force"}
+        ]
+        if selections:
+            return selections[0].get('name', 'Unparsed Army of Renown')
+
 
 class RosterView:
     def __str__(self):
@@ -291,13 +316,15 @@ class RosterView:
         else:
             cp_modifiers = ['0']
 
-        header = '\n'.join([
-            f"PLAYER: ",
-            f"Army name: {self.name}",
-            f"Factions used: {', '.join(self.factions)}",
-            f"Command Points: {''.join(cp_modifiers)}={self.cp_total}",
-            f"Total cost: {self.pts_total} pts, {self.pl_total} PL",
-            f"Reinforcement Points: {self.reinf_points} pts",
+        header = ''.join([
+            f"PLAYER: \n",
+            f"Army name: {self.name}\n",
+            f"Factions used: {', '.join(self.factions)}\n",
+            "" if self.army_of_renown is None else f"Army of Renown: {self.army_of_renown}\n",
+            f"Command Points: {''.join(cp_modifiers)}={self.cp_total}\n",
+            f"Total cost: {self.pts_total} pts, {self.pl_total} PL\n",
+            "" if self.cabal_points is None else f"Cabal Points: {self.cabal_points}\n",
+            f"Reinforcement Points: {self.reinf_points} pts\n",
             "-" * 10,
             "",
         ])
@@ -350,9 +377,14 @@ class RosterView:
         self.cp_total = total_cost.get("CP", 0)
         self.pl_total = total_cost.get("PL", 0)
         self.pts_total = total_cost.get("pts", 0)
+        self.cabal_points = total_cost.get("Cabal Points", None)
         self.__set_reinf_points(roster)
         self.factions = set(x.attrib.get("catalogueName", "<ERROR: UNPARSED>") for x in roster.forces.iterchildren())
 
         forces = (x for x in roster.forces.iterchildren(tag="{*}force"))
         self.forces = [ForceView(x, self.options) for x in forces]
         self.cp_modifiers = sorted(chain.from_iterable(x.cp_modifiers for x in self.forces), reverse=True)
+        army_of_renown = [x.army_of_renown for x in self.forces if x.army_of_renown is not None]
+        self.army_of_renown = army_of_renown[0] if army_of_renown else None
+        if self.army_of_renown:
+            self.army_of_renown = remove_prefix(self.army_of_renown, "Army of Renown - ")
