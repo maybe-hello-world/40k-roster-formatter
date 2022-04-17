@@ -90,11 +90,16 @@ class ForceView:
             in self.__get_selections_of_category(force, "Stratagems")
         ])
 
-        for key in ["No Force Org Slot", "Agent of the Imperium"]:
+        for key in ["No Force Org Slot"]:
             self.non_enumerated_units[key].extend([
                 self.__parse_units(unit) for unit
                 in self.__get_selections_of_category(force, key)
             ])
+
+        self.non_enumerated_units['Agent of the Imperium'].extend([
+            self.__parse_units(unit) for unit
+            in self.__get_selections_of_category(force, "Agent of the Imperium", primary=True)
+        ])
 
         self.enumerated_units = {
             "HQ": ["HQ", []],
