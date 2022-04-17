@@ -62,6 +62,7 @@ class ForceView:
         self.options = options
         self.pts = 0
         self.pl = 0
+        self.cabal_points = 0
         self.cp_modifiers = []
         self.catalogue = force.get("catalogueName", "")
         self.__collect_cp_modifiers(force)
@@ -175,6 +176,7 @@ class ForceView:
         total_cost_pts = 0
         total_cost_pl = 0
         total_cost_cp = 0
+        total_cabal_points = 0
         for cost in unit.iter(tag="{*}cost"):
             name = cost.get("name", "").lower().strip()
             if name == "pts":
@@ -183,16 +185,20 @@ class ForceView:
                 total_cost_pl += int(float(cost.get("value", 0)))
             elif name == "cp":
                 total_cost_cp += int(float(cost.get("value", 0)))
+            elif name == "cabal points":
+                total_cabal_points += int(float(cost.get("value", 0)))
 
-        return total_cost_pts, total_cost_pl, total_cost_cp
+        return total_cost_pts, total_cost_pl, total_cost_cp, total_cabal_points
 
     def __get_unit_cost(self, unit: objectify.ObjectifiedElement) -> str:
-        cost_pts, cost_pl, cost_cp = self.__recursive_cost_search(unit)
+        cost_pts, cost_pl, cost_cp, cost_cabal_points = self.__recursive_cost_search(unit)
         self.pts += cost_pts
         self.pl += cost_pl
+        self.cabal_points += cost_cabal_points
 
         total_cost = f"[{cost_pts} pts, {cost_pl} PL"
         total_cost += f", {cost_cp} CP" if cost_cp else ""
+        total_cost += f", {cost_cabal_points} Cabal Points" if cost_cabal_points else ""
         total_cost += "]"
         return total_cost
 
@@ -256,7 +262,7 @@ class ForceView:
     def __parse_stratagem(stratagem: objectify.ObjectifiedElement) -> str:
         name = stratagem.get("name", "Unparsed Stratagem")
         name = "- " + remove_prefix(name, "Stratagem: ")
-        _, _, cost = ForceView.__recursive_cost_search(stratagem)
+        _, _, cost, _ = ForceView.__recursive_cost_search(stratagem)
         return f"{name} ({cost} CP)"
 
     def __collect_cp_modifiers(self, force: objectify.ObjectifiedElement):
@@ -269,6 +275,8 @@ class ForceView:
 
     def __str__(self):
         header = f"== {self.faction} {self.detachment} == {self.cp} CP, {self.pts} pts, {self.pl} PL"
+        if self.cabal_points > 0:
+            header += f", {self.cabal_points} Cabal Points"
 
         for key, value in self.non_enumerated_units.items():
             if value:
