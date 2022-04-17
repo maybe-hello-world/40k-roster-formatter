@@ -1,5 +1,104 @@
 ---
 faction: Tyranids
 selections:
-  someone:
-    - a
+  Broodlord:
+    - Broodlord Claws and Talons
+  Malanthrope:
+    - Grasping Tail
+  Old One Eye:
+    - Monstrous Crushing Claw
+    - Monstrous Scything Talon
+    - Thresher Scythe
+  Tervigon:
+    - Stinger Salvoes
+  The Swarmlord:
+    - Bone Sabres
+  Trygon Prime:
+    - Bio-electric Pulse with Containment Spines
+    - Trygon Scything Talons
+  Winged Hive Tyrant:
+    - Tyrant Talons
+    - Prehensile Pincer Tail
+  Gargoyle:
+    - Fleshborer
+  Hormagaunt:
+    - Hormagaunt Talons
+  Deathleaper:
+    - Flesh Hooks
+    - Lictor Claws and Talons
+  Genestealer:
+    - Genestealer Claws and Talons
+  Haruspex:
+    - Grasping Tongue
+    - Ravenous Maw
+    - Shovelling Claws
+  Lictor:
+    - Flesh Hooks
+    - Lictor Claws and Talons
+  Maleceptor:
+    - Massive Scything Talons
+  Pyrovore:
+    - Bludgeoning Fists
+    - Acid Maw
+    - Flamespurt
+  Toxicrene:
+    - Massive Toxic Lashes
+  Tyrant Guard (Scything):
+    - Two Rending Claws
+    - Two Scything Talons
+  Tyrant Guard (Lash/Sword):
+    - Two Rending Claws
+    - Lash Whip and Bonecleaver
+  Tyrant Guard (Crushing):
+    - Two Rending Claws
+    - Two Crushing Claws
+  Venomthrope:
+    - Toxic Lashes
+  Dimachaeron:
+    - Massive Scything Sickle-talons
+    - Scything Tail
+  Mawloc:
+    - Mawloc Scything Talons
+  Parasite of Mortrex:
+    - Clawed Limbs
+    - Barbed Ovipositor
+  Sky-slasher Swarm:
+    - Claws and Teeth
+  Trygon:
+    - Bio-electric Pulse
+    - Trygon Scything Talons
+  Barbed Hierodule:
+    - Bio-cannon
+    - Hierodule Scything Talons
+  Biovore:
+    - Spore Mine Launcher
+    - Chitin-barbed Fists
+  Exocrine:
+    - Bio-plasmic Cannon
+    - Powerful Limbs
+  Screamer-Killer:
+    - Bio-plasmic Scream
+    - Screamer-killer Talons
+  Scythed Hierodule:
+    - Bio-acid Spray
+    - Hierodule Scything Talons
+  Hive Guard (Shock):
+    - Shockcannon
+  Hive Guard (Impaler):
+    - Impaler Cannon
+  Stone-crusher Carnifex:
+    - Thresher Scythe
+  Tyrannofex:
+    - Powerful Limbs
+    - Stinger Salvoes
+  Harpy:
+    - Scything Wings
+    - Stinger Salvoes
+  Hive Crone:
+    - Drool Cannon
+    - Scything Wings
+    - Tentaclids
+    - Thorax Spur
+    - Stinger Salvoes
+  Tyrannocyte:
+    - Flensing Whips

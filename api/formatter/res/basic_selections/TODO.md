@@ -10,17 +10,6 @@
   - ~~Inquisition~~
   - ~~Officio Assassinorum~~
   - ~~Space Marines (all of them ><)~~
-    - ~~ultra~~
-    - ~~dark angels~~
-    - ~~black templars~~
-    - ~~blood angels~~
-    - deathwatch
-    - imperial fists
-    - iron hands
-    - raven guard
-    - salamanders
-    - space wolves
-    - white scars
 - ~~Chaos~~
   - ~~Chaos Space Marines~~
   - ~~Chaos Daemons~~
@@ -36,4 +25,4 @@
   - ~~Necrons~~
   - ~~Orks~~
   - ~~T'au~~
-  - Tyranids
+  - ~~Tyranids~~
