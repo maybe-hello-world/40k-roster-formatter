@@ -291,7 +291,12 @@ class ForceView:
 
     def __parse_army_of_renown(self, force: List[objectify.ObjectifiedElement]) -> Optional[str]:
         selections = self.__get_selections_of_category(force, "Configuration", primary=True)
-        selections = [x for x in selections if x.get("name", "").lower().strip().startswith("army of renown")]
+        selections = [
+            x
+            for x in selections
+            if x.get("name", "").lower().strip().startswith("army of renown")
+            or x.get("name", "") in {"Terminus Est Assault Force"}
+        ]
         if selections:
             return selections[0].get('name', 'Unparsed Army of Renown')
 
