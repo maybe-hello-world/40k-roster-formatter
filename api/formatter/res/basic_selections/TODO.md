@@ -15,12 +15,12 @@
     - ~~black templars~~
     - ~~blood angels~~
     - deathwatch
-    - imperial fists
-    - iron hands
-    - raven guard
-    - salamanders
-    - space wolves
-    - white scars
+    - ~~imperial fists~~
+    - ~~iron hands~~
+    - ~~raven guard~~
+    - ~~salamanders~~
+    - ~~space wolves~~
+    - ~~white scars~~
 - ~~Chaos~~
   - ~~Chaos Space Marines~~
   - ~~Chaos Daemons~~
