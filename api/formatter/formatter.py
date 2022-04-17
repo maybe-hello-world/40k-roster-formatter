@@ -316,13 +316,15 @@ class RosterView:
         else:
             cp_modifiers = ['0']
 
-        header = '\n'.join([
-            f"PLAYER: ",
-            f"Army name: {self.name}",
-            f"Factions used: {', '.join(self.factions)}" + ("" if self.army_of_renown is None else f"\nArmy of Renown: {self.army_of_renown}"),
-            f"Command Points: {''.join(cp_modifiers)}={self.cp_total}",
-            f"Total cost: {self.pts_total} pts, {self.pl_total} PL",
-            f"Reinforcement Points: {self.reinf_points} pts",
+        header = ''.join([
+            f"PLAYER: \n",
+            f"Army name: {self.name}\n",
+            f"Factions used: {', '.join(self.factions)}\n",
+            "" if self.army_of_renown is None else f"Army of Renown: {self.army_of_renown}\n",
+            f"Command Points: {''.join(cp_modifiers)}={self.cp_total}\n",
+            f"Total cost: {self.pts_total} pts, {self.pl_total} PL\n",
+            "" if self.cabal_points is None else f"Cabal Points: {self.cabal_points}\n",
+            f"Reinforcement Points: {self.reinf_points} pts\n",
             "-" * 10,
             "",
         ])
@@ -375,6 +377,7 @@ class RosterView:
         self.cp_total = total_cost.get("CP", 0)
         self.pl_total = total_cost.get("PL", 0)
         self.pts_total = total_cost.get("pts", 0)
+        self.cabal_points = total_cost.get("Cabal Points", None)
         self.__set_reinf_points(roster)
         self.factions = set(x.attrib.get("catalogueName", "<ERROR: UNPARSED>") for x in roster.forces.iterchildren())
 
