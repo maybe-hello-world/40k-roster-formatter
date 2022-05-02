@@ -355,7 +355,7 @@ class RosterView:
         pts_limit = [
             x.costLimit.get("value")
             for x in roster.iter(tag='{*}costLimits')
-            if x.find("costLimit") is not None
+            if (x.find("costLimit") is not None or hasattr(x, "costLimit"))
             and x.costLimit.get("name", "") == "pts"
         ]
         pts_limit = int(float(pts_limit[0])) if pts_limit else 0
