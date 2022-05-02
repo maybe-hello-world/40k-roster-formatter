@@ -83,7 +83,8 @@ class ForceView:
         self.non_enumerated_units = {
             "Stratagems": [],
             "No Force Org Slot": [],
-            "Agent of the Imperium": []
+            "Agent of the Imperium": [],
+            'Supreme Commander': [],
         }
 
         # parse stratagems
@@ -101,6 +102,11 @@ class ForceView:
         self.non_enumerated_units['Agent of the Imperium'].extend([
             self.__parse_units(unit) for unit
             in self.__get_selections_of_category(force, "Agent of the Imperium", primary=True)
+        ])
+
+        self.non_enumerated_units['Supreme Commander'].extend([
+            self.__parse_units(unit) for unit
+            in self.__get_selections_of_category(force, 'Primarch | Daemon Primarch | Supreme Commander', primary=True)
         ])
 
         self.enumerated_units = {
