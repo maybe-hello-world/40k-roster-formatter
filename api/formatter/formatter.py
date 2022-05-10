@@ -158,14 +158,14 @@ class ForceView:
         selections = [x for x in selections if "Reference" not in x.get("name", "")]
 
         if len(selections) == 0:
-            self.faction = "Unparsed Faction"
+            self.faction = ""
             return
 
         faction = selections[0]     # if bigger than 1: let's hope chapter would be the first
 
         if "selections" not in dir(faction) or not (faction := faction.selections.getchildren()):
-            # backup solution
-            self.faction = faction.get("name", "Unparsed Faction")
+            # Leave it empty - usually that means that army has only one faction (black templars, deathwatch, etc)
+            self.faction = ""
             return
 
         faction_name = faction[0].get("name", "Unparsed Faction")
@@ -281,7 +281,8 @@ class ForceView:
                     self.cp_modifiers.append(cp_cost)
 
     def __str__(self):
-        header = f"== {self.faction} {self.detachment} == {self.cp} CP, {self.pts} pts, {self.pl} PL"
+        faction = self.faction + " " if self.faction else ""
+        header = f"== {faction}{self.detachment} == {self.cp} CP, {self.pts} pts, {self.pl} PL"
         if self.cabal_points > 0:
             header += f", {self.cabal_points} Cabal Points"
 
