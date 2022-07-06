@@ -51,3 +51,7 @@ class BasicSelectorChecker:
                 return True
 
         return False
+
+
+def add_double_whitespaces(formatted_roster: str) -> str:
+    return '\n'.join(x + '  ' for x in formatted_roster.split('\n'))

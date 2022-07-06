@@ -12,7 +12,7 @@ from lxml.objectify import ObjectifiedElement
 from collections import Counter
 from dataclasses import dataclass, fields
 
-from .extensions import BasicSelectorChecker
+from .extensions import BasicSelectorChecker, add_double_whitespaces
 
 
 class FormatterException(Exception):
@@ -333,13 +333,14 @@ class RosterView:
             f"Total cost: {self.pts_total} pts, {self.pl_total} PL\n",
             "" if self.cabal_points is None else f"Cabal Points: {self.cabal_points}\n",
             f"Reinforcement Points: {self.reinf_points} pts\n",
-            "-" * 10,
+            "+" * 20,
             "",
         ])
 
         footer = ""
 
-        return '\n'.join(str(x) for x in [header, *self.forces, footer])
+        result = '\n'.join(str(x) for x in [header, *self.forces, footer])
+        return add_double_whitespaces(result)
 
     @staticmethod
     def __extract(input_file, zipped: bool = True) -> dict:
