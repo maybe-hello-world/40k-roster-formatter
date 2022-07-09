@@ -39,3 +39,32 @@ document.getElementById("roster").onchange = async (e) => {
     document.getElementById("copyBtn").disabled = false;
     document.getElementById("copyBtn").textContent = "Copy to clipboard";
 };
+
+document.getElementById('formats').onchange = async (e) => {
+    "use strict";
+    let minimize = document.getElementById('hide_basic_selections');
+    let secondaries = document.getElementById('show_secondaries');
+    let costs = document.getElementById('remove_costs');
+    let model_count = document.getElementById('show_model_count');
+
+    switch (e.target.value) {
+        case 'default':
+            minimize.checked = true;
+            secondaries.checked = true;
+            costs.checked = false;
+            model_count.checked = false;
+            break;
+        case 'wtc':
+            minimize.checked = true;
+            secondaries.checked = true;
+            costs.checked = false;
+            model_count.checked = true;
+            break;
+        case 'rus':
+            minimize.checked = true;
+            secondaries.checked = true;
+            costs.checked = false;
+            model_count.checked = false;
+            break;
+    }
+};

@@ -19,8 +19,26 @@
         <label class="form-label">Select options:</label><br>
         <div class="form-check-inline my-2"
              style="border-radius: .25rem; border: 1px solid #ced4da; background-color: #e9ecef; width: 100%;">
-            <input class="form-check-input" type="checkbox" id="hide_basic_selections" name="hide_basic_selections" checked>
+
+            <label for="formats">Select a format:</label>
+            <select name="formats" id="formats">
+                <option value="default">Default</option>
+                <option value="wtc">WTC Format</option>
+                <option value="rus">Russian Tournament Format</option>
+            </select>
+            <br>
+            <input class="form-check-input" type="checkbox" id="hide_basic_selections" name="hide_basic_selections"
+                   checked>
             <label class="form-check-label" for="hide_basic_selections">Minimize output</label>
+            <br>
+            <input class="form-check-input" type="checkbox" id="show_secondaries" name="show_secondaries" checked>
+            <label class="form-check-label" for="show_secondaries">Show secondaries</label>
+            <br>
+            <input class="form-check-input" type="checkbox" id="remove_costs" name="remove_costs">
+            <label class="form-check-label" for="remove_costs">Remove unit cost</label>
+            <br>
+            <input class="form-check-input" type="checkbox" id="show_model_count" name="show_model_count">
+            <label class="form-check-label" for="show_model_count">Show total model count</label>
         </div>
 
 
