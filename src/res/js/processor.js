@@ -10,16 +10,14 @@ function copyToClipboard() {
     });
 }
 
-document.getElementById("bsdataform").onsubmit = async (e) => {
+document.getElementById("roster").onchange = async (e) => {
     "use strict";
     // UI
     document.getElementById("copyBtn").disabled = true;
-    document.getElementById("uploadBtn").disabled = true;
-    document.getElementById("uploadSpan").style.display = 'inline-block';
-    document.getElementById("submitText").textContent = "Uploading...";
+    document.getElementById("copyBtn").textContent = "Uploading...";
 
     e.preventDefault();
-    const form = e.currentTarget;
+    const form = document.getElementById("bsdataform");
 
     let result;
     const url = "/api/formatter";
@@ -39,7 +37,5 @@ document.getElementById("bsdataform").onsubmit = async (e) => {
     out.textContent = result;
 
     document.getElementById("copyBtn").disabled = false;
-    document.getElementById('uploadBtn').disabled = false;
-    document.getElementById("uploadSpan").style.display = 'none';
-    document.getElementById("submitText").textContent = "Upload";
+    document.getElementById("copyBtn").textContent = "Copy to clipboard";
 };
