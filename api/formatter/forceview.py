@@ -2,59 +2,14 @@ from __future__ import annotations
 
 import re
 
-from itertools import chain
-from typing import Optional, Mapping, List
-from zipfile import ZipFile
+from typing import Optional, List
 
 from lxml import objectify
 from lxml.objectify import ObjectifiedElement
 
 from collections import Counter
-from dataclasses import dataclass, fields
 
-from .extensions import BasicSelectorChecker, add_double_whitespaces
-
-
-class FormatterException(Exception):
-    pass
-
-
-@dataclass(repr=True, eq=True, order=True)
-class FormatterOptions:
-    hide_basic_selections: bool = False
-
-    def __init__(self, **kwargs):
-        class_fields = {field.name for field in fields(self)}
-        for key, value in kwargs.items():
-            if key in class_fields:
-                setattr(self, key, value)
-
-        self.__post_init__()
-
-    def __post_init__(self):
-        if self.hide_basic_selections == 'on':
-            self.hide_basic_selections = True
-            self.selector_checker = BasicSelectorChecker()
-
-
-def single_children_by_name(children: list[ObjectifiedElement], name: str) -> Optional[ObjectifiedElement]:
-    children = [x for x in children if x.get("name", None) == name]
-    if len(children) == 1:
-        return children[0]
-    else:
-        return None
-
-
-def remove_prefix(_string: str, _prefix: str) -> str:
-    if _string.startswith(_prefix):
-        return _string[len(_prefix):]
-    return _string
-
-
-def remove_suffix(_string: str, _suffix: str) -> str:
-    if _suffix and _string.endswith(_suffix):
-        return _string[:-len(_suffix)]
-    return _string
+from .utils import remove_prefix, remove_suffix, FormatterOptions
 
 
 class ForceView:
@@ -161,7 +116,7 @@ class ForceView:
             self.faction = ""
             return
 
-        faction = selections[0]     # if bigger than 1: let's hope chapter would be the first
+        faction = selections[0]  # if bigger than 1: let's hope chapter would be the first
 
         if "selections" not in dir(faction) or not (faction := faction.selections.getchildren()):
             # Leave it empty - usually that means that army has only one faction (black templars, deathwatch, etc)
@@ -311,89 +266,7 @@ class ForceView:
             x
             for x in selections
             if x.get("name", "").lower().strip().startswith("army of renown")
-            or x.get("name", "") in {"Terminus Est Assault Force"}
+               or x.get("name", "") in {"Terminus Est Assault Force"}
         ]
         if selections:
             return selections[0].get('name', 'Unparsed Army of Renown')
-
-
-class RosterView:
-    def __str__(self):
-        if self.cp_modifiers:
-            cp_modifiers = [str(self.cp_modifiers[0])] + [str(x) if x < 0 else f"+{x}" for x in self.cp_modifiers[1:]]
-        else:
-            cp_modifiers = ['0']
-
-        header = ''.join([
-            f"PLAYER: \n",
-            f"Army name: {self.name}\n",
-            f"Factions used: {', '.join(self.factions)}\n",
-            "" if self.army_of_renown is None else f"Army of Renown: {self.army_of_renown}\n",
-            f"Command Points: {''.join(cp_modifiers)}={self.cp_total}\n",
-            f"Total cost: {self.pts_total} pts, {self.pl_total} PL\n",
-            "" if self.cabal_points is None else f"Cabal Points: {self.cabal_points}\n",
-            f"Reinforcement Points: {self.reinf_points} pts\n",
-            "+" * 20,
-            "",
-        ])
-
-        footer = ""
-
-        result = '\n'.join(str(x) for x in [header, *self.forces, footer])
-        return add_double_whitespaces(result)
-
-    @staticmethod
-    def __extract(input_file, zipped: bool = True) -> dict:
-        if zipped:
-            input_file = ZipFile(input_file)
-            return {name: input_file.read(name) for name in input_file.namelist()}
-        else:
-            return {"default": input_file.encode('utf-8')}
-
-    @staticmethod
-    def __read_xml(content: dict) -> objectify.ObjectifiedElement:
-        if len(content) != 1:
-            raise FormatterException(f"Unknown structure of provided rosz archive. Content: {content.keys()}")
-
-        name: str = next(iter(content))
-        roster: objectify.ObjectifiedElement = objectify.fromstring(content[name])
-
-        return roster
-
-    def __set_reinf_points(self, roster: objectify.ObjectifiedElement):
-        pts_limit = [
-            x.costLimit.get("value")
-            for x in roster.iter(tag='{*}costLimits')
-            if (x.find("costLimit") is not None or hasattr(x, "costLimit"))
-            and x.costLimit.get("name", "") == "pts"
-        ]
-        pts_limit = int(float(pts_limit[0])) if pts_limit else 0
-        reinf_points = pts_limit - self.pts_total
-        self.reinf_points = str(reinf_points) if reinf_points > 0 else 'none'
-
-    def __init__(self, file, zipped: bool = True, options: Mapping[str, str] = None):
-        if not options:
-            options = {}
-
-        self.options = FormatterOptions(**options)
-        roster = self.__read_xml(self.__extract(file, zipped))
-        self.name = roster.attrib.get("name", "")
-
-        total_cost = {
-            x.attrib['name'].strip(): int(float(x.attrib['value']))
-            for x in roster.costs.iterchildren()
-        }
-        self.cp_total = total_cost.get("CP", 0)
-        self.pl_total = total_cost.get("PL", 0)
-        self.pts_total = total_cost.get("pts", 0)
-        self.cabal_points = total_cost.get("Cabal Points", None)
-        self.__set_reinf_points(roster)
-        self.factions = set(x.attrib.get("catalogueName", "<ERROR: UNPARSED>") for x in roster.forces.iterchildren())
-
-        forces = (x for x in roster.forces.iterchildren(tag="{*}force"))
-        self.forces = [ForceView(x, self.options) for x in forces]
-        self.cp_modifiers = sorted(chain.from_iterable(x.cp_modifiers for x in self.forces), reverse=True)
-        army_of_renown = [x.army_of_renown for x in self.forces if x.army_of_renown is not None]
-        self.army_of_renown = army_of_renown[0] if army_of_renown else None
-        if self.army_of_renown:
-            self.army_of_renown = remove_prefix(self.army_of_renown, "Army of Renown - ")
