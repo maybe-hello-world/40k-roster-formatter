@@ -20,9 +20,12 @@ class RussianTournamentsPrinter(DefaultPrinter):
             f"+ Command Points: {expand_cps(roster.cp_modifiers)}={roster.cp_total}\n",
             "" if roster.cabal_points is None else f"+ Cabal Points: {roster.cabal_points}\n",
             f"+ Reinforcement Points: {roster.reinf_points} pts\n",
-            "+" * 50 + '\n',
-            "\n",
         ])
+
+        if roster.options.show_secondaries:
+            header += self._format_secondaries(roster, "+ ")
+
+        header += "+" * 50 + "\n\n"
 
         forces = '\n'.join(self._print_force(x) for x in roster.forces)
         forces = forces.strip('\n')

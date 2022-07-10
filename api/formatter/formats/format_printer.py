@@ -2,13 +2,27 @@ from collections import Counter
 
 from ..rosterview import RosterView
 from ..forceview import ForceView
-from ..extensions import add_double_whitespaces
+from ..extensions import add_double_whitespaces, number_of_units, count_secondaries
 from ..utils import expand_cps, FormatterOptions
 
 
 class DefaultPrinter:
     force_header = "=="
     unit_model_wrapper = "({0})"
+
+
+
+    @staticmethod
+    def _format_secondaries(roster: RosterView, prefix: str = "") -> str:
+        secondaries = count_secondaries(roster)
+        header = ""
+        header += f"{prefix}\n"
+        header += f"{prefix}Number of Units: {number_of_units(roster)}\n"
+        header += f"{prefix}Assassination: {secondaries['assassination']} points\n"
+        header += f"{prefix}Bring it Down: {secondaries['bring it down']} points\n"
+        header += f"{prefix}No Prisoners: {secondaries['no prisoners']} points\n"
+        header += f"{prefix}Abhor the Witch: {secondaries['abhor the witch']} points\n"
+        return header
 
     def print(self, roster: RosterView) -> str:
         header = ''.join([
@@ -19,9 +33,12 @@ class DefaultPrinter:
             f"Total cost: {roster.pts_total} pts, {roster.pl_total} PL\n",
             "" if roster.cabal_points is None else f"Cabal Points: {roster.cabal_points}\n",
             f"Reinforcement Points: {roster.reinf_points} pts\n",
-            "+" * 20 + '\n',
-            "\n",
         ])
+
+        if roster.options.show_secondaries:
+            header += self._format_secondaries(roster)
+
+        header += "+" * 50 + '\n\n'
 
         forces = ''.join(self._print_force(x) for x in roster.forces)
         forces = forces.strip('\n')
@@ -29,7 +46,23 @@ class DefaultPrinter:
         result = header + forces
         return add_double_whitespaces(result)
 
+    @staticmethod
+    def _clean_obligatory_selections(force: ForceView) -> ForceView:
+        force.no_force_org = [force.options.selector_checker.clean_obligatory_selections(force, x) for x in force.no_force_org]
+        force.supreme_commander = [force.options.selector_checker.clean_obligatory_selections(force, x) for x in force.supreme_commander]
+        force.agents_of_imperium = [force.options.selector_checker.clean_obligatory_selections(force, x) for x in force.agents_of_imperium]
+        for key, value in force.enumerated_unit_categories.items():
+            force.enumerated_unit_categories[key] = [
+                value[0],
+                [force.options.selector_checker.clean_obligatory_selections(force, x) for x in value[1]]
+            ]
+
+        return force
+
     def _print_force(self, force: ForceView):
+        if force.options.hide_basic_selections:
+            force = self._clean_obligatory_selections(force)
+
         output = ""
 
         faction = force.faction + " " if force.faction else ""
@@ -99,11 +132,11 @@ class DefaultPrinter:
         output += unit.get('name', '<Unparsed Unit Name>')
         if selections := unit.get('children', []):
             output += ": "
-            output += DefaultPrinter._print_unit_selections(selections)
+            output += self._print_unit_selections(selections)
         output += " "
 
         if not options.remove_costs:
-            output += DefaultPrinter._format_costs(unit.get('cost', {}))
+            output += self._format_costs(unit.get('cost', {}))
 
         return output
 

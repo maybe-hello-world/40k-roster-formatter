@@ -78,7 +78,7 @@ class ForceView:
 
     @staticmethod
     def __get_selections_of_category(
-            selections: list[ObjectifiedElement],
+            selections: List[ObjectifiedElement],
             category_name: str,
             primary: Optional[bool] = None
     ):
@@ -207,13 +207,6 @@ class ForceView:
 
         return output
 
-    def __clean_obligatory_selections(self, result: dict) -> dict:
-        result['children'] = [
-            self.__clean_obligatory_selections(child) for child in result['children']
-            if not self.options.selector_checker.is_basic(self.catalogue, result['name'], child.get("name"))
-        ]
-        return result
-
     def __parse_unit(self, unit: objectify.ObjectifiedElement) -> dict:
         result = {
             'name': unit.get("name", "Unparsed Model Name"),
@@ -222,9 +215,6 @@ class ForceView:
             'link': unit
         }
         result['models'] = self.__get_models_amount(result)
-
-        if self.options.hide_basic_selections:
-            result = self.__clean_obligatory_selections(result)
 
         return result
 
