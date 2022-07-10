@@ -145,25 +145,40 @@ def __count_bring_it_down(roster: 'RosterView') -> int:
         ]
         for category in categories:
             for unit in category:
-                targets = []
-
-                if unit['link'].get('type', None) == 'model':
-                    targets.append(unit)
-                if unit['link'].get('type', None) == 'unit':
-                    targets.extend([
-                        x for x in unit['children']
-                        if x['link'].get('type', None) == 'model'
-                    ])
-
                 if __check_unit_category(unit['link'], 'Monster') or __check_unit_category(unit['link'], 'Vehicle'):
-                    for target in targets:
-                        profiles = [x for x in target['link'].profiles.getchildren() if
+                    if unit['link'].get('type', None) == 'model':
+                        profiles = [x for x in unit['link'].profiles.getchildren() if
                                     x.get("typeName", None) == 'Unit']
                         if not profiles:
                             continue
                         wounds = profiles[0].characteristics.getchildren()[5]  # wounds is 6th
                         points += wounds_to_points(wounds)
 
+                    if unit['link'].get('type', None) == 'unit':
+                        # 2 variants:
+                        # either unit has profiles
+                        # or each selection in the unit
+
+                        # variant 1
+                        if hasattr(unit['link'], 'profiles'):
+                            profiles = [x for x in unit['link'].profiles.getchildren() if
+                                        x.get("typeName", None) == 'Unit']
+                            if not profiles:
+                                continue
+                            wounds = profiles[0].characteristics.getchildren()[5]  # wounds is 6th
+                            wtp = wounds_to_points(wounds)
+                            wtp *= unit['models']
+                            points += wtp
+
+                        # variant 2
+                        else:
+                            for target in [x for x in unit['children'] if x['link'].get('type', None) == 'model']:
+                                profiles = [x for x in target['link'].profiles.getchildren() if
+                                            x.get("typeName", None) == 'Unit']
+                                if not profiles:
+                                    continue
+                                wounds = profiles[0].characteristics.getchildren()[5]  # wounds is 6th
+                                points += wounds_to_points(wounds)
         return min(points, MAX_SECONDARY_POINTS)
 
 
@@ -194,6 +209,8 @@ def __count_no_prisoners(roster: 'RosterView') -> int:
                                      __check_unit_category(child['link'], 'Vehicle') or
                                      __check_unit_category(child['link'], 'Character'))
                         ):
+                            if not hasattr(child['link'], 'profiles'):
+                                continue
                             profiles = [
                                 x for x in child['link'].profiles.getchildren() if
                                 x.get('typeName', None) == 'Unit'
