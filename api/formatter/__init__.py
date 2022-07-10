@@ -33,11 +33,11 @@ def main(req: azure.functions.HttpRequest) -> azure.functions.HttpResponse:
         print_format = options.get('formats', 'default')
 
         if print_format == 'rus':
-            representation = RussianTournamentsPrinter.print(result)
+            representation = RussianTournamentsPrinter().print(result)
         elif print_format == 'wtc':
-            representation = WTCPrinter.print(result)
+            representation = WTCPrinter().print(result)
         else:
-            representation = DefaultPrinter.print(result)
+            representation = DefaultPrinter().print(result)
 
         return azure.functions.HttpResponse(representation, status_code=200)
 

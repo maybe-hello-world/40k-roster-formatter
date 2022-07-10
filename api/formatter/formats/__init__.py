@@ -1,4 +1,3 @@
-from .format_printer import FormatPrinter
+from .format_printer import DefaultPrinter
 from .rus import RussianTournamentsPrinter
-from .default_printer import DefaultPrinter
 from .wtc_printer import WTCPrinter

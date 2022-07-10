@@ -1,13 +1,13 @@
-from .format_printer import FormatPrinter
+from .format_printer import DefaultPrinter
 from ..rosterview import RosterView
-from ..forceview import ForceView
 from ..extensions import add_double_whitespaces
 from ..utils import expand_cps
 
 
-class RussianTournamentsPrinter(FormatPrinter):
-    @staticmethod
-    def print(roster: RosterView) -> str:
+class RussianTournamentsPrinter(DefaultPrinter):
+    force_header = "++"
+
+    def print(self, roster: RosterView) -> str:
         header = ''.join([
             '+' * 50 + '\n',
             '+ Team: \n',
@@ -24,10 +24,7 @@ class RussianTournamentsPrinter(FormatPrinter):
             "\n",
         ])
 
-        forces = '\n'.join(RussianTournamentsPrinter.print_force(x) for x in roster.forces)
-        result = header + forces
+        forces = '\n'.join(self._print_force(x) for x in roster.forces)
+        forces = forces.strip('\n')
+        result = header + forces + '\n' + '+' * 50
         return add_double_whitespaces(result)
-
-    @staticmethod
-    def print_force(force: ForceView) -> str:
-        return str(force)

@@ -52,15 +52,10 @@ class FormatterOptions:
         self.__post_init__()
 
     def __post_init__(self):
-        if self.hide_basic_selections == 'on':
-            self.hide_basic_selections = True
+        self.hide_basic_selections = self.hide_basic_selections == 'on'
+        self.show_secondaries = self.show_secondaries == 'on'
+        self.remove_costs = self.remove_costs == 'on'
+        self.show_model_count = self.show_model_count == 'on'
+
+        if self.hide_basic_selections:
             self.selector_checker = BasicSelectorChecker()
-
-        if self.show_secondaries == 'on':
-            self.show_secondaries = True
-
-        if self.remove_costs == 'on':
-            self.remove_costs = True
-
-        if self.show_model_count == 'on':
-            self.show_model_count = True

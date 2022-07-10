@@ -7,8 +7,6 @@ from typing import Optional, List
 from lxml import objectify
 from lxml.objectify import ObjectifiedElement
 
-from collections import Counter
-
 from .utils import remove_prefix, remove_suffix, FormatterOptions
 
 
@@ -35,36 +33,32 @@ class ForceView:
         force = force.selections.getchildren()
         self.army_of_renown = self.__parse_army_of_renown(force)
 
-        self.non_enumerated_units = {
-            "Stratagems": [],
-            "No Force Org Slot": [],
-            "Agent of the Imperium": [],
-            'Supreme Commander': [],
-        }
+        self.stratagems = []
+        self.no_force_org = []
+        self.agents_of_imperium = []
+        self.supreme_commander = []
 
-        # parse stratagems
-        self.non_enumerated_units['Stratagems'].extend([
+        self.stratagems.extend([
             self.__parse_stratagem(x) for x
             in self.__get_selections_of_category(force, "Stratagems")
         ])
 
-        for key in ["No Force Org Slot"]:
-            self.non_enumerated_units[key].extend([
-                self.__parse_units(unit) for unit
-                in self.__get_selections_of_category(force, key)
-            ])
+        self.no_force_org.extend([
+            self.__parse_unit(unit) for unit
+            in self.__get_selections_of_category(force, "No Force Org Slot")
+        ])
 
-        self.non_enumerated_units['Agent of the Imperium'].extend([
-            self.__parse_units(unit) for unit
+        self.agents_of_imperium.extend([
+            self.__parse_unit(unit) for unit
             in self.__get_selections_of_category(force, "Agent of the Imperium", primary=True)
         ])
 
-        self.non_enumerated_units['Supreme Commander'].extend([
-            self.__parse_units(unit) for unit
+        self.supreme_commander.extend([
+            self.__parse_unit(unit) for unit
             in self.__get_selections_of_category(force, 'Primarch | Daemon Primarch | Supreme Commander', primary=True)
         ])
 
-        self.enumerated_units = {
+        self.enumerated_unit_categories = {
             "HQ": ["HQ", []],
             "Troops": ["TR", []],
             "Elites": ["EL", []],
@@ -76,9 +70,9 @@ class ForceView:
             "Fortification": ["FT", []],
         }
 
-        for key, (_, storage) in self.enumerated_units.items():
+        for key, (_, storage) in self.enumerated_unit_categories.items():
             storage.extend([
-                self.__parse_units(unit) for unit
+                self.__parse_unit(unit) for unit
                 in self.__get_selections_of_category(force, key)
             ])
 
@@ -152,17 +146,18 @@ class ForceView:
 
         return total_cost_pts, total_cost_pl, total_cost_cp, total_cabal_points
 
-    def __get_unit_cost(self, unit: objectify.ObjectifiedElement) -> str:
+    def __get_unit_cost(self, unit: objectify.ObjectifiedElement) -> dict:
         cost_pts, cost_pl, cost_cp, cost_cabal_points = self.__recursive_cost_search(unit)
         self.pts += cost_pts
         self.pl += cost_pl
         self.cabal_points += cost_cabal_points
 
-        total_cost = f"[{cost_pts} pts, {cost_pl} PL"
-        total_cost += f", {cost_cp} CP" if cost_cp else ""
-        total_cost += f", {cost_cabal_points} Cabal Points" if cost_cabal_points else ""
-        total_cost += "]"
-        return total_cost
+        return {
+            'pts': cost_pts,
+            'pl': cost_pl,
+            'cp': cost_cp,
+            'cabal': cost_cabal_points
+        }
 
     @staticmethod
     def __parse_multiplied_unit(name: str, number: int) -> (str, int):
@@ -183,11 +178,9 @@ class ForceView:
         if match := pattern.match(name):
             number *= int(match.group('multiplier'))
             name = match.group('unitname')
-            return name, number
-
         return name, number
 
-    def __enumerate_all_selections(self, selection: objectify.ObjectifiedElement, modifier: int = 1) -> str:
+    def __enumerate_all_selections(self, selection: objectify.ObjectifiedElement, modifier: int = 1) -> List[dict]:
         children = selection.iterchildren(tag="{*}selections")
         output = []
         for child in children:
@@ -197,33 +190,63 @@ class ForceView:
                 name, number = self.__parse_multiplied_unit(name, number)
                 elements_inside = self.__enumerate_all_selections(element, modifier=number * modifier)
 
-                if self.options.hide_basic_selections:
-                    if self.options.selector_checker.is_basic(self.catalogue, selection.get("name"), name):
-                        continue
+                # if self.options.hide_basic_selections:
+                #     if self.options.selector_checker.is_basic(self.catalogue, selection.get("name"), name):
+                #         continue
 
                 number //= modifier
-                if number > 1:
-                    name = f"{number}x{name}"
 
-                if elements_inside:
-                    name = f"{name} ({elements_inside})"
+                output.append(
+                    {
+                        'name': name,
+                        'number': number,
+                        'children': elements_inside,
+                        'link': element,
+                    }
+                )
 
-                output.append(name)
+        return output
 
-        counter = Counter(output)
-        output = [f"{'' if value == 1 else str(value) + 'x'}{key}" for key, value in counter.items()]
-        return ', '.join(output)
+    def __clean_obligatory_selections(self, result: dict) -> dict:
+        result['children'] = [
+            self.__clean_obligatory_selections(child) for child in result['children']
+            if not self.options.selector_checker.is_basic(self.catalogue, result['name'], child.get("name"))
+        ]
+        return result
 
-    def __parse_units(self, unit: objectify.ObjectifiedElement) -> str:
-        name = unit.get("name", "Unparsed Model Name")
-        selections = self.__enumerate_all_selections(unit)
-        cost = self.__get_unit_cost(unit)
-        return f"{name}: {selections} {cost}" if selections else f"{name} {cost}"
+    def __parse_unit(self, unit: objectify.ObjectifiedElement) -> dict:
+        result = {
+            'name': unit.get("name", "Unparsed Model Name"),
+            'children': self.__enumerate_all_selections(unit),
+            'cost': self.__get_unit_cost(unit),
+            'link': unit
+        }
+        result['models'] = self.__get_models_amount(result)
+
+        if self.options.hide_basic_selections:
+            result = self.__clean_obligatory_selections(result)
+
+        return result
+
+    def __get_models_amount(self, unit: dict) -> int:
+        utype = unit['link'].get('type', 'model')
+        if utype == 'model':
+            if hasattr(unit, 'selection'):
+                number = int(unit.selection.get('number', 1))
+            else:
+                number = int(unit.get('number', 1))
+            if unit.get('children', None):
+                number += sum(self.__get_models_amount(x) for x in unit['children'])
+            return number
+        elif utype == 'unit':
+            return sum(self.__get_models_amount(x) for x in unit['children'])
+        else:
+            return 0
 
     @staticmethod
     def __parse_stratagem(stratagem: objectify.ObjectifiedElement) -> str:
         name = stratagem.get("name", "Unparsed Stratagem")
-        name = "- " + remove_prefix(name, "Stratagem: ")
+        name = remove_prefix(name, "Stratagem: ")
         _, _, cost, _ = ForceView.__recursive_cost_search(stratagem)
         return f"{name} ({cost} CP)"
 
@@ -235,38 +258,13 @@ class ForceView:
                 if cp_cost != 0:
                     self.cp_modifiers.append(cp_cost)
 
-    def __str__(self):
-        faction = self.faction + " " if self.faction else ""
-        header = f"== {faction}{self.detachment} == {self.cp} CP, {self.pts} pts, {self.pl} PL"
-        if self.cabal_points > 0:
-            header += f", {self.cabal_points} Cabal Points"
-
-        for key, value in self.non_enumerated_units.items():
-            if value:
-                value.insert(0, f"{key}:")
-                value.append("")
-
-        for key, value in self.enumerated_units.items():
-            if value[1]:
-                self.enumerated_units[key][1] = [f"{value[0]}{i + 1}: {v}" for i, v in enumerate(value[1])] + [""]
-
-        non_enumerated = ['\n'.join(x) for x in self.non_enumerated_units.values() if x]
-        enumerated = ['\n'.join(x[1]) for x in self.enumerated_units.values() if x[1]]
-
-        return '\n'.join([
-            header,
-            "",
-            *non_enumerated,
-            *enumerated,
-        ])
-
     def __parse_army_of_renown(self, force: List[objectify.ObjectifiedElement]) -> Optional[str]:
         selections = self.__get_selections_of_category(force, "Configuration", primary=True)
         selections = [
             x
             for x in selections
             if x.get("name", "").lower().strip().startswith("army of renown")
-               or x.get("name", "") in {"Terminus Est Assault Force"}
+            or x.get("name", "") in {"Terminus Est Assault Force"}
         ]
         if selections:
             return selections[0].get('name', 'Unparsed Army of Renown')
