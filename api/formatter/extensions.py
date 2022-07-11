@@ -101,7 +101,8 @@ def __check_unit_category(
     # check categories of all selections
     if hasattr(selection, 'selections'):
         for children in selection.selections.getchildren():
-            return __check_unit_category(children, category_name)
+            if __check_unit_category(children, category_name):
+                return True
 
     return False
 
