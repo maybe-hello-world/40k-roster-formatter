@@ -164,22 +164,22 @@ def __count_bring_it_down(roster: 'RosterView') -> int:
                         if hasattr(unit['link'], 'profiles'):
                             profiles = [x for x in unit['link'].profiles.getchildren() if
                                         x.get("typeName", None) == 'Unit']
+                            if profiles:
+                                wounds = profiles[0].characteristics.getchildren()[5]  # wounds is 6th
+                                wtp = wounds_to_points(wounds)
+                                wtp *= unit['models']
+                                points += wtp
+                                continue
+
+                        # variant 2
+
+                        for target in [x for x in unit['children'] if x['link'].get('type', None) == 'model']:
+                            profiles = [x for x in target['link'].profiles.getchildren() if
+                                        x.get("typeName", None) == 'Unit']
                             if not profiles:
                                 continue
                             wounds = profiles[0].characteristics.getchildren()[5]  # wounds is 6th
-                            wtp = wounds_to_points(wounds)
-                            wtp *= unit['models']
-                            points += wtp
-
-                        # variant 2
-                        else:
-                            for target in [x for x in unit['children'] if x['link'].get('type', None) == 'model']:
-                                profiles = [x for x in target['link'].profiles.getchildren() if
-                                            x.get("typeName", None) == 'Unit']
-                                if not profiles:
-                                    continue
-                                wounds = profiles[0].characteristics.getchildren()[5]  # wounds is 6th
-                                points += wounds_to_points(wounds)
+                            points += wounds_to_points(wounds)
         return min(points, MAX_SECONDARY_POINTS)
 
 
