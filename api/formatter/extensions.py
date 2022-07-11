@@ -222,12 +222,21 @@ def __count_no_prisoners(roster: 'RosterView') -> int:
                             print(f'unit: {child["number"]}x{child["name"]}, wounds: {wounds}, tally: {tally}')
 
                 else:
-                    for model in (x for x in unit['children'] if x['link'].get('type', None) == 'model'):
-                        profiles = [x for x in model['link'].profiles.getchildren() if
-                                    x.get('typeName', None) == 'Unit']
+                    if (hasattr(unit['link'], 'profiles') and
+                            (profiles := [
+                                x for x in unit['link'].profiles.getchildren()
+                                if x.get('typeName', None) == 'Unit'
+                            ])):
                         wounds = profiles[0].characteristics.getchildren()[5]
-                        tally += wounds * model['number']
-                        print(f'unit: {model["number"]}x{model["name"]}, wounds: {wounds}, tally: {tally}')
+                        tally += wounds * unit['models']
+                        print(f'unit: {unit["models"]}x{unit["name"]}, wounds: {wounds}, tally: {tally}')
+                    else:
+                        for model in (x for x in unit['children'] if x['link'].get('type', None) == 'model'):
+                            profiles = [x for x in model['link'].profiles.getchildren() if
+                                        x.get('typeName', None) == 'Unit']
+                            wounds = profiles[0].characteristics.getchildren()[5]
+                            tally += wounds * model['number']
+                            print(f'unit: {model["number"]}x{model["name"]}, wounds: {wounds}, tally: {tally}')
     if 50 <= tally <= 99:
         points = 1
     if tally >= 100:
