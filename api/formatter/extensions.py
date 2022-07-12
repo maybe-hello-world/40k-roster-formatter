@@ -228,7 +228,7 @@ def __count_bring_it_down(roster: 'RosterView') -> int:
                         wounds = profiles[0].characteristics.getchildren()[5]  # wounds is 6th
                         logger.debug(f'Bring It Down: {unit["name"]} - 1 models - {wounds} wounds')
                         points += wounds_to_points(wounds)
-        return min(points, MAX_SECONDARY_POINTS)
+    return min(points, MAX_SECONDARY_POINTS)
 
 
 def __count_no_prisoners(roster: 'RosterView') -> int:
