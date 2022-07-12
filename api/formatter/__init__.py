@@ -1,6 +1,7 @@
 import azure.functions
 import logging
 import io
+import json
 
 from .rosterview import RosterView
 from .utils import FormatterException
@@ -41,8 +42,13 @@ def main(req: azure.functions.HttpRequest) -> azure.functions.HttpResponse:
         else:
             representation = DefaultPrinter().print(result)
 
-        return azure.functions.HttpResponse(representation, status_code=200)
+        answer = {
+            'info': representation,
+            'debug': result.debug_info
+        }
+
+        return azure.functions.HttpResponse(json.dumps(answer), status_code=200, mimetype='application/json')
 
     except Exception as e:
         logging.exception(e)
-        return azure.functions.HttpResponse(str(e), status_code=400)
+        return azure.functions.HttpResponse(json.dumps({'info': str(e), 'debug': ''}), status_code=400, mimetype='application/json')

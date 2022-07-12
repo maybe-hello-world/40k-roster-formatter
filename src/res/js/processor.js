@@ -19,7 +19,7 @@ document.getElementById("roster").onchange = async (e) => {
     e.preventDefault();
     const form = document.getElementById("bsdataform");
 
-    let result;
+    let info, debug_text;
     const url = "/api/formatter";
 
     try {
@@ -29,12 +29,19 @@ document.getElementById("roster").onchange = async (e) => {
             body: formData
         });
 
-        result = await response.text();
+        let result = await response.json();
+        info = result.info;
+        debug_text = result.debug;
     } catch (error) {
-        result = await error.text();
+        info = await error.text();
+        debug_text = "";
     }
     let out = document.getElementById("output");
-    out.textContent = result;
+    out.textContent = info;
+    debug_text.split(/\r?\n/).forEach(function (line) {
+        console.log(line);
+    });
+
 
     document.getElementById("copyBtn").disabled = false;
     document.getElementById("copyBtn").textContent = "Copy to clipboard";
