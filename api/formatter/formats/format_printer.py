@@ -10,11 +10,9 @@ class DefaultPrinter:
     force_header = "=="
     unit_model_wrapper = "({0})"
 
-
-
     @staticmethod
     def _format_secondaries(roster: RosterView, prefix: str = "") -> str:
-        secondaries = count_secondaries(roster)
+        secondaries = roster.secondaries
         header = ""
         header += f"{prefix}\n"
         header += f"{prefix}Number of Units: {number_of_units(roster)}\n"

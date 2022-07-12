@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from .forceview import ForceView
 from .utils import remove_prefix, FormatterException
-from .extensions import FormatterOptions
+from .extensions import FormatterOptions, count_secondaries
 
 from lxml import objectify
 from itertools import chain
@@ -66,3 +66,6 @@ class RosterView:
         self.army_of_renown = army_of_renown[0] if army_of_renown else None
         if self.army_of_renown:
             self.army_of_renown = remove_prefix(self.army_of_renown, "Army of Renown - ")
+
+        self.debug_info = ""
+        self.secondaries = count_secondaries(self)

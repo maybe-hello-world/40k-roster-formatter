@@ -1,7 +1,6 @@
 import logging
 import os
 import glob
-import sys
 from dataclasses import dataclass, fields
 
 from yaml import load, FullLoader
@@ -155,7 +154,9 @@ def __count_assasination(roster: 'RosterView') -> int:
         for category in categories:
             for unit in category:
                 if __check_unit_category(unit['link'], 'Character'):
-                    logger.debug(f'Assassination: {unit["name"]} - Character')
+                    debug_string = f'Assassination: {unit["name"]} - Character'
+                    logger.debug(debug_string)
+                    roster.debug_info += debug_string + "\n"
                     points += 1
 
     points *= 3
@@ -196,7 +197,9 @@ def __count_bring_it_down(roster: 'RosterView') -> int:
                         if not profiles:
                             continue
                         wounds = profiles[0].characteristics.getchildren()[5]  # wounds is 6th
-                        logger.debug(f'Bring It Down: {unit["name"]} - 1 models - {wounds} wounds')
+                        debug_string = f'Bring It Down: {unit["name"]} - 1 models - {wounds} wounds'
+                        logger.debug(debug_string)
+                        roster.debug_info += debug_string + '\n'
                         points += wounds_to_points(wounds)
                         continue
 
@@ -213,7 +216,9 @@ def __count_bring_it_down(roster: 'RosterView') -> int:
                                     x.get("typeName", None) == 'Unit']
                         if profiles:
                             wounds = profiles[0].characteristics.getchildren()[5]  # wounds is 6th
-                            logger.debug(f'Bring It Down: {unit["name"]} - {unit["models"]} models - {wounds} wounds')
+                            debug_string = f'Bring It Down: {unit["name"]} - {unit["models"]} models - {wounds} wounds'
+                            logger.debug(debug_string)
+                            roster.debug_info += debug_string + '\n'
                             wtp = wounds_to_points(wounds)
                             wtp *= unit['models']
                             points += wtp
@@ -226,7 +231,9 @@ def __count_bring_it_down(roster: 'RosterView') -> int:
                         if not profiles:
                             continue
                         wounds = profiles[0].characteristics.getchildren()[5]  # wounds is 6th
-                        logger.debug(f'Bring It Down: {unit["name"]} - 1 models - {wounds} wounds')
+                        debug_string = f'Bring It Down: {unit["name"]} - 1 models - {wounds} wounds'
+                        logger.debug(debug_string)
+                        roster.debug_info += debug_string + '\n'
                         points += wounds_to_points(wounds)
     return min(points, MAX_SECONDARY_POINTS)
 
@@ -266,8 +273,9 @@ def __count_no_prisoners(roster: 'RosterView') -> int:
                             ]
                             wounds = profiles[0].characteristics.getchildren()[5]
                             tally += wounds * child['number']
-
-                            logger.debug(f'No Prisoners: {child["number"]}x{child["name"]} - {wounds} wounds - current tally: {tally}')
+                            debug_string = f'No Prisoners: {child["number"]}x{child["name"]} - {wounds} wounds - current tally: {tally}'
+                            logger.debug(debug_string)
+                            roster.debug_info += debug_string + '\n'
 
                 else:
                     profiles = []
@@ -284,7 +292,9 @@ def __count_no_prisoners(roster: 'RosterView') -> int:
                                         x.get('typeName', None) == 'Unit']
                             wounds = profiles[0].characteristics.getchildren()[5]
                             tally += wounds * model['number']
-                            logger.debug(f'No Prisoners: {model["number"]}x{model["name"]} - {wounds} wounds - current tally: {tally}')
+                            debug_string = f'No Prisoners: {model["number"]}x{model["name"]} - {wounds} wounds - current tally: {tally}'
+                            logger.debug(debug_string)
+                            roster.debug_info += debug_string + '\n'
                     else:
                         children_with_profiles = []
                         for child in unit['children']:
@@ -298,14 +308,18 @@ def __count_no_prisoners(roster: 'RosterView') -> int:
                         models = unit['models'] - len(children_with_profiles)
                         wounds = profiles[0].characteristics.getchildren()[5]
                         tally += wounds * models
-                        logger.debug(f'No Prisoners: {models}x{unit["name"]} - {wounds} wounds - current tally: {tally}')
+                        debug_string = f'No Prisoners: {models}x{unit["name"]} - {wounds} wounds - current tally: {tally}'
+                        logger.debug(debug_string)
+                        roster.debug_info += debug_string + '\n'
 
                         for child in children_with_profiles:
                             # add them separately
                             children_profile = [x for x in child['link'].profiles.getchildren() if x.get('typeName', None) == 'Unit']
                             wounds = children_profile[0].characteristics.getchildren()[5]
                             tally += wounds * child['number']
-                            logger.debug(f'No Prisoners: {child["number"]}x{child["name"]} - {wounds} wounds - current tally: {tally}')
+                            debug_string = f'No Prisoners: {child["number"]}x{child["name"]} - {wounds} wounds - current tally: {tally}'
+                            logger.debug(debug_string)
+                            roster.debug_info += debug_string + '\n'
 
     if 50 <= tally <= 99:
         points = 1
@@ -329,9 +343,13 @@ def __count_abhor_the_witch(roster: 'RosterView') -> int:
             for unit in category:
                 if __check_unit_category(unit['link'], 'Psyker'):
                     if __check_unit_category(unit['link'], 'Character'):
-                        logger.debug(f'Abhor The Witch: {unit["name"]} - Psyker & Character')
+                        debug_string = f'Abhor The Witch: {unit["name"]} - Psyker & Character'
+                        logger.debug(debug_string)
+                        roster.debug_info += debug_string + "\n"
                         points += 3
                     else:
-                        logger.debug(f'Abhor The Witch: {unit["name"]} - Psyker')
+                        debug_string = f'Abhor The Witch: {unit["name"]} - Psyker'
+                        logger.debug(debug_string)
+                        roster.debug_info += debug_string + "\n"
                         points += 2
     return min(points, MAX_SECONDARY_POINTS)

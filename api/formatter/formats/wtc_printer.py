@@ -10,7 +10,7 @@ class WTCPrinter(DefaultPrinter):
 
     def print(self, roster: RosterView) -> str:
 
-        secondaries = count_secondaries(roster)
+        secondaries = roster.secondaries
         stratagems = []
         for force in roster.forces:
             stratagems.extend(force.stratagems)
