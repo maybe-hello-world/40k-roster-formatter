@@ -153,7 +153,10 @@ def __count_assasination(roster: 'RosterView') -> int:
         ]
 
         for category in categories:
-            points += sum(__check_unit_category(x['link'], 'Character') for x in category)
+            for unit in category:
+                if __check_unit_category(unit['link'], 'Character'):
+                    logger.debug(f'Assassination: {unit["name"]} - Character')
+                    points += 1
 
     points *= 3
     points += 1  # Warlord
