@@ -271,6 +271,7 @@ def __count_no_prisoners(roster: 'RosterView') -> int:
                         if (
                                 child['link'].get('type', None) == 'model' and
                                 hasattr(child['link'], 'categories') and
+                                len(child['link'].categories.getchildren()) > 0 and
                                 not (__check_unit_category(child['link'], 'Monster') or
                                      __check_unit_category(child['link'], 'Vehicle') or
                                      __check_unit_category(child['link'], 'Character'))
