@@ -6,6 +6,8 @@ from .rosterview import RosterView
 from .utils import FormatterException
 from .formats import RussianTournamentsPrinter, WTCPrinter, DefaultPrinter
 
+logging.basicConfig()
+
 
 def main(req: azure.functions.HttpRequest) -> azure.functions.HttpResponse:
     logging.debug("HTTP trigger fired")
