@@ -38,7 +38,15 @@ def is_upgrade(_object: ObjectifiedElement) -> bool:
     """
     Because 'type'=='upgrade' not always mean that it's upgrade
     https://github.com/bsdata/wh40k/issues/11182
+
+    New round of problems: some models in units are marked as 'upgrade' and do not have profiles.
+    Let's keep the list of such units here as there no other way to fix this (except fixing BS data, of course)
     """
+    damn_dirty_hacks = [
+        "Biker Sergeant",
+        "Space Marine Biker",
+    ]
+
     if _object.get('type', None) == 'model':
         return False
     if _object.get('type', None) == 'unit':
@@ -49,6 +57,10 @@ def is_upgrade(_object: ObjectifiedElement) -> bool:
             if profile.get('typeName', None) == 'Unit':
                 logging.info(f"{_object.get('name', 'Unknown object')} is model/unit despite being marked as upgrade")
                 return False
+
+    for hack in damn_dirty_hacks:
+        if _object.get('name', '').startswith(hack):
+            return False
 
     return True
 
