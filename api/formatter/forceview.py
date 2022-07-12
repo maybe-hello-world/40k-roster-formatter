@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import re
 
 from typing import Optional, List
@@ -7,7 +8,10 @@ from typing import Optional, List
 from lxml import objectify
 from lxml.objectify import ObjectifiedElement
 
-from .utils import remove_prefix, remove_suffix, FormatterOptions
+from .utils import remove_prefix, remove_suffix, is_upgrade
+from .extensions import FormatterOptions
+
+logging.basicConfig()
 
 
 class ForceView:
@@ -29,6 +33,8 @@ class ForceView:
             self.cp = 0
         self.detachment = name
         self.__parse_faction(force)
+        self.logger = logging.getLogger(f'ForceView - {self.detachment}')
+        self.logger.setLevel(logging.DEBUG)
 
         force = force.selections.getchildren()
         self.army_of_renown = self.__parse_army_of_renown(force)
@@ -220,18 +226,22 @@ class ForceView:
 
     def __get_models_amount(self, unit: dict) -> int:
         utype = unit['link'].get('type', 'model')
-        if utype == 'model':
-            if hasattr(unit, 'selection'):
-                number = int(unit.selection.get('number', 1))
-            else:
-                number = int(unit.get('number', 1))
-            if unit.get('children', None):
-                number += sum(self.__get_models_amount(x) for x in unit['children'])
-            return number
-        elif utype == 'unit':
-            return sum(self.__get_models_amount(x) for x in unit['children'])
-        else:
+        if is_upgrade(unit['link']):
             return 0
+
+        if utype == 'unit':
+            number = sum(self.__get_models_amount(x) for x in unit['children'])
+            self.logger.debug(f'get_models_amount: {unit["name"]}: {number}')
+            return number
+
+        if hasattr(unit, 'selection'):
+            number = int(unit.selection.get('number', 1))
+        else:
+            number = int(unit.get('number', 1))
+        if unit.get('children', None):
+            number += sum(self.__get_models_amount(x) for x in unit['children'])
+        self.logger.debug(f'get_models_amount: {unit["name"]}: {number}')
+        return number
 
     @staticmethod
     def __parse_stratagem(stratagem: objectify.ObjectifiedElement) -> str:
@@ -254,7 +264,7 @@ class ForceView:
             x
             for x in selections
             if x.get("name", "").lower().strip().startswith("army of renown")
-            or x.get("name", "") in {"Terminus Est Assault Force"}
+               or x.get("name", "") in {"Terminus Est Assault Force"}
         ]
         if selections:
             return selections[0].get('name', 'Unparsed Army of Renown')

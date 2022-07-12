@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 from .forceview import ForceView
-from .utils import remove_prefix, FormatterException, FormatterOptions
+from .utils import remove_prefix, FormatterException
+from .extensions import FormatterOptions
 
 from lxml import objectify
 from itertools import chain

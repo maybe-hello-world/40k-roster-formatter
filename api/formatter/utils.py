@@ -1,9 +1,7 @@
-from dataclasses import dataclass, fields
+import logging
 from typing import Optional, List
 
 from lxml.objectify import ObjectifiedElement
-
-from .extensions import BasicSelectorChecker
 
 
 class FormatterException(Exception):
@@ -36,26 +34,21 @@ def expand_cps(cps: List[int]) -> str:
     return ''.join([str(cps[0])] + [str(x) if x < 0 else f"+{x}" for x in cps[1:]])
 
 
-@dataclass(repr=True, eq=True, order=True)
-class FormatterOptions:
-    hide_basic_selections: bool = False
-    show_secondaries: bool = False
-    remove_costs: bool = False
-    show_model_count: bool = False
+def is_upgrade(_object: ObjectifiedElement) -> bool:
+    """
+    Because 'type'=='upgrade' not always mean that it's upgrade
+    https://github.com/bsdata/wh40k/issues/11182
+    """
+    if _object.get('type', None) == 'model':
+        return False
+    if _object.get('type', None) == 'unit':
+        return False
 
-    def __init__(self, **kwargs):
-        class_fields = {field.name for field in fields(self)}
-        for key, value in kwargs.items():
-            if key in class_fields:
-                setattr(self, key, value)
+    if hasattr(_object, 'profiles'):
+        for profile in _object.profiles.getchildren():
+            if profile.get('typeName', None) == 'Unit':
+                logging.info(f"{_object.get('name', 'Unknown object')} is model/unit despite being marked as upgrade")
+                return False
 
-        self.__post_init__()
+    return True
 
-    def __post_init__(self):
-        self.hide_basic_selections = self.hide_basic_selections == 'on'
-        self.show_secondaries = self.show_secondaries == 'on'
-        self.remove_costs = self.remove_costs == 'on'
-        self.show_model_count = self.show_model_count == 'on'
-
-        if self.hide_basic_selections:
-            self.selector_checker = BasicSelectorChecker()

@@ -1,9 +1,44 @@
+import logging
 import os
 import glob
+import sys
+from dataclasses import dataclass, fields
+
 from yaml import load, FullLoader
 from lxml.objectify import ObjectifiedElement
 
+from .utils import is_upgrade
+
+logging.basicConfig()
+logger = logging.getLogger("Extensions")
+logger.setLevel(logging.DEBUG)
+
 MAX_SECONDARY_POINTS = 15
+
+
+@dataclass(repr=True, eq=True, order=True)
+class FormatterOptions:
+    hide_basic_selections: bool = False
+    show_secondaries: bool = False
+    remove_costs: bool = False
+    show_model_count: bool = False
+
+    def __init__(self, **kwargs):
+        class_fields = {field.name for field in fields(self)}
+        for key, value in kwargs.items():
+            if key in class_fields:
+                setattr(self, key, value)
+
+        self.__post_init__()
+
+    def __post_init__(self):
+        self.hide_basic_selections = self.hide_basic_selections == 'on'
+        self.show_secondaries = self.show_secondaries == 'on'
+        self.remove_costs = self.remove_costs == 'on'
+        self.show_model_count = self.show_model_count == 'on'
+
+        if self.hide_basic_selections:
+            self.selector_checker = BasicSelectorChecker()
 
 
 class BasicSelectorChecker:
@@ -147,39 +182,49 @@ def __count_bring_it_down(roster: 'RosterView') -> int:
         for category in categories:
             for unit in category:
                 if __check_unit_category(unit['link'], 'Monster') or __check_unit_category(unit['link'], 'Vehicle'):
+                    if is_upgrade(unit['link']):
+                        continue
+
+                    # if object have profile with Unit type
+
                     if unit['link'].get('type', None) == 'model':
                         profiles = [x for x in unit['link'].profiles.getchildren() if
                                     x.get("typeName", None) == 'Unit']
                         if not profiles:
                             continue
                         wounds = profiles[0].characteristics.getchildren()[5]  # wounds is 6th
+                        logger.debug(f'Bring It Down: {unit["name"]} - 1 models - {wounds} wounds')
                         points += wounds_to_points(wounds)
+                        continue
 
-                    if unit['link'].get('type', None) == 'unit':
-                        # 2 variants:
-                        # either unit has profiles
-                        # or each selection in the unit
+                    # otherwise - let's count it as a unit
+                    # thanks to mistakes in BS database and people not prioritizing fixing them
 
-                        # variant 1
-                        if hasattr(unit['link'], 'profiles'):
-                            profiles = [x for x in unit['link'].profiles.getchildren() if
-                                        x.get("typeName", None) == 'Unit']
-                            if profiles:
-                                wounds = profiles[0].characteristics.getchildren()[5]  # wounds is 6th
-                                wtp = wounds_to_points(wounds)
-                                wtp *= unit['models']
-                                points += wtp
-                                continue
+                    # 2 variants:
+                    # either unit has profiles
+                    # or each selection in the unit
 
-                        # variant 2
-
-                        for target in [x for x in unit['children'] if x['link'].get('type', None) == 'model']:
-                            profiles = [x for x in target['link'].profiles.getchildren() if
-                                        x.get("typeName", None) == 'Unit']
-                            if not profiles:
-                                continue
+                    # variant 1
+                    if hasattr(unit['link'], 'profiles'):
+                        profiles = [x for x in unit['link'].profiles.getchildren() if
+                                    x.get("typeName", None) == 'Unit']
+                        if profiles:
                             wounds = profiles[0].characteristics.getchildren()[5]  # wounds is 6th
-                            points += wounds_to_points(wounds)
+                            logger.debug(f'Bring It Down: {unit["name"]} - {unit["models"]} models - {wounds} wounds')
+                            wtp = wounds_to_points(wounds)
+                            wtp *= unit['models']
+                            points += wtp
+                            continue
+
+                    # variant 2
+                    for target in [x for x in unit['children'] if not is_upgrade(x['link'])]:
+                        profiles = [x for x in target['link'].profiles.getchildren() if
+                                    x.get("typeName", None) == 'Unit']
+                        if not profiles:
+                            continue
+                        wounds = profiles[0].characteristics.getchildren()[5]  # wounds is 6th
+                        logger.debug(f'Bring It Down: {unit["name"]} - 1 models - {wounds} wounds')
+                        points += wounds_to_points(wounds)
         return min(points, MAX_SECONDARY_POINTS)
 
 
@@ -219,24 +264,46 @@ def __count_no_prisoners(roster: 'RosterView') -> int:
                             wounds = profiles[0].characteristics.getchildren()[5]
                             tally += wounds * child['number']
 
-                            print(f'unit: {child["number"]}x{child["name"]}, wounds: {wounds}, tally: {tally}')
+                            logger.debug(f'No Prisoners: {child["number"]}x{child["name"]} - {wounds} wounds - current tally: {tally}')
 
                 else:
-                    if (hasattr(unit['link'], 'profiles') and
-                            (profiles := [
-                                x for x in unit['link'].profiles.getchildren()
-                                if x.get('typeName', None) == 'Unit'
-                            ])):
-                        wounds = profiles[0].characteristics.getchildren()[5]
-                        tally += wounds * unit['models']
-                        print(f'unit: {unit["models"]}x{unit["name"]}, wounds: {wounds}, tally: {tally}')
-                    else:
-                        for model in (x for x in unit['children'] if x['link'].get('type', None) == 'model'):
+                    profiles = []
+                    if hasattr(unit['link'], 'profiles'):
+                        profiles = [
+                            x for x in unit['link'].profiles.getchildren()
+                            if x.get('typeName', None) == 'Unit'
+                        ]
+
+                    if not profiles:
+                        # then each selection in the unit has own profile and just count them
+                        for model in (x for x in unit['children'] if not is_upgrade(x['link'])):
                             profiles = [x for x in model['link'].profiles.getchildren() if
                                         x.get('typeName', None) == 'Unit']
                             wounds = profiles[0].characteristics.getchildren()[5]
                             tally += wounds * model['number']
-                            print(f'unit: {model["number"]}x{model["name"]}, wounds: {wounds}, tally: {tally}')
+                            logger.debug(f'No Prisoners: {model["number"]}x{model["name"]} - {wounds} wounds - current tally: {tally}')
+                    else:
+                        children_with_profiles = []
+                        for child in unit['children']:
+                            if (
+                                    hasattr(child['link'], 'profiles') and
+                                    len([x for x in child['link'].profiles.getchildren() if x.get('typeName', None) == 'Unit'])
+                            ):
+                                children_with_profiles.append(child)
+
+                        # if no children has their own Unit profiles - just number of models * wounds in profiles
+                        models = unit['models'] - len(children_with_profiles)
+                        wounds = profiles[0].characteristics.getchildren()[5]
+                        tally += wounds * models
+                        logger.debug(f'No Prisoners: {models}x{unit["name"]} - {wounds} wounds - current tally: {tally}')
+
+                        for child in children_with_profiles:
+                            # add them separately
+                            children_profile = [x for x in child['link'].profiles.getchildren() if x.get('typeName', None) == 'Unit']
+                            wounds = children_profile[0].characteristics.getchildren()[5]
+                            tally += wounds * child['number']
+                            logger.debug(f'No Prisoners: {child["number"]}x{child["name"]} - {wounds} wounds - current tally: {tally}')
+
     if 50 <= tally <= 99:
         points = 1
     if tally >= 100:
@@ -258,8 +325,10 @@ def __count_abhor_the_witch(roster: 'RosterView') -> int:
         for category in categories:
             for unit in category:
                 if __check_unit_category(unit['link'], 'Psyker'):
-                    points += 2
                     if __check_unit_category(unit['link'], 'Character'):
-                        points += 1
-
+                        logger.debug(f'Abhor The Witch: {unit["name"]} - Psyker & Character')
+                        points += 3
+                    else:
+                        logger.debug(f'Abhor The Witch: {unit["name"]} - Psyker')
+                        points += 2
     return min(points, MAX_SECONDARY_POINTS)

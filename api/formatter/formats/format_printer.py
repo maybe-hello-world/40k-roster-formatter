@@ -2,8 +2,8 @@ from collections import Counter
 
 from ..rosterview import RosterView
 from ..forceview import ForceView
-from ..extensions import add_double_whitespaces, number_of_units, count_secondaries
-from ..utils import expand_cps, FormatterOptions
+from ..extensions import add_double_whitespaces, number_of_units, count_secondaries, FormatterOptions
+from ..utils import expand_cps
 
 
 class DefaultPrinter:

@@ -1,8 +1,7 @@
 from .format_printer import DefaultPrinter
 from ..forceview import ForceView
 from ..rosterview import RosterView
-from ..extensions import add_double_whitespaces, count_secondaries, number_of_units
-from ..utils import FormatterOptions
+from ..extensions import add_double_whitespaces, count_secondaries, number_of_units, FormatterOptions
 
 
 class WTCPrinter(DefaultPrinter):
