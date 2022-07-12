@@ -1,4 +1,4 @@
-## Version 1.01
+## Version 1.1.0
 - Partially resolved bug with pasting text to reddit comments (issue #40). Adapted output to Reddit markdown editor.
 - Updated UI: simplified a bit, then added more complexity :D
 - Fixed copy-pasting of results to reddit (Working in Markdown editor only, sorry, but fancyeditor is a mess)
