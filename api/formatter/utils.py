@@ -52,3 +52,9 @@ def is_upgrade(_object: ObjectifiedElement) -> bool:
 
     return True
 
+
+def try_parse_int(_obj) -> Optional[int]:
+    try:
+        return int(_obj)
+    except Exception:
+        return None

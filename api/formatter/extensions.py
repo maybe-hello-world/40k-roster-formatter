@@ -2,11 +2,12 @@ import logging
 import os
 import glob
 from dataclasses import dataclass, fields
+from typing import Optional
 
 from yaml import load, FullLoader
 from lxml.objectify import ObjectifiedElement
 
-from .utils import is_upgrade
+from .utils import is_upgrade, try_parse_int
 
 logging.basicConfig()
 logger = logging.getLogger("Extensions")
@@ -165,6 +166,21 @@ def __count_assasination(roster: 'RosterView') -> int:
 
 
 def __count_bring_it_down(roster: 'RosterView') -> int:
+    def get_wounds_from_profiles(unit: ObjectifiedElement) -> Optional[int]:
+        profiles = [
+            x for x in unit['link'].profiles.getchildren() if
+            x.get("typeName", None) == 'Unit' and
+            hasattr(x, 'characteristics') and
+            try_parse_int(x.characteristics.getchildren()[5]) is not None
+        ]
+
+        if not profiles:
+            return None
+
+        return int(profiles[0].characteristics.getchildren()[5])
+
+
+
     def wounds_to_points(_wounds: int) -> int:
         if _wounds <= 9:
             return 1
@@ -192,11 +208,9 @@ def __count_bring_it_down(roster: 'RosterView') -> int:
                     # if object have profile with Unit type
 
                     if unit['link'].get('type', None) == 'model':
-                        profiles = [x for x in unit['link'].profiles.getchildren() if
-                                    x.get("typeName", None) == 'Unit']
-                        if not profiles:
+                        wounds = get_wounds_from_profiles(unit)
+                        if not wounds:
                             continue
-                        wounds = profiles[0].characteristics.getchildren()[5]  # wounds is 6th
                         debug_string = f'Bring It Down: {unit["name"]} - 1 models - {wounds} wounds'
                         logger.debug(debug_string)
                         roster.debug_info += debug_string + '\n'
@@ -212,10 +226,8 @@ def __count_bring_it_down(roster: 'RosterView') -> int:
 
                     # variant 1
                     if hasattr(unit['link'], 'profiles'):
-                        profiles = [x for x in unit['link'].profiles.getchildren() if
-                                    x.get("typeName", None) == 'Unit']
-                        if profiles:
-                            wounds = profiles[0].characteristics.getchildren()[5]  # wounds is 6th
+                        wounds = get_wounds_from_profiles(unit)
+                        if wounds:
                             debug_string = f'Bring It Down: {unit["name"]} - {unit["models"]} models - {wounds} wounds'
                             logger.debug(debug_string)
                             roster.debug_info += debug_string + '\n'
@@ -226,11 +238,9 @@ def __count_bring_it_down(roster: 'RosterView') -> int:
 
                     # variant 2
                     for target in [x for x in unit['children'] if not is_upgrade(x['link'])]:
-                        profiles = [x for x in target['link'].profiles.getchildren() if
-                                    x.get("typeName", None) == 'Unit']
-                        if not profiles:
+                        wounds = get_wounds_from_profiles(target)
+                        if not wounds:
                             continue
-                        wounds = profiles[0].characteristics.getchildren()[5]  # wounds is 6th
                         debug_string = f'Bring It Down: {unit["name"]} - 1 models - {wounds} wounds'
                         logger.debug(debug_string)
                         roster.debug_info += debug_string + '\n'
