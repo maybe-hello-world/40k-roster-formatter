@@ -10,18 +10,16 @@ function copyToClipboard() {
     });
 }
 
-document.getElementById("bsdataform").onsubmit = async (e) => {
+document.getElementById("roster").onchange = async (e) => {
     "use strict";
     // UI
     document.getElementById("copyBtn").disabled = true;
-    document.getElementById("uploadBtn").disabled = true;
-    document.getElementById("uploadSpan").style.display = 'inline-block';
-    document.getElementById("submitText").textContent = "Uploading...";
+    document.getElementById("copyBtn").textContent = "Uploading...";
 
     e.preventDefault();
-    const form = e.currentTarget;
+    const form = document.getElementById("bsdataform");
 
-    let result;
+    let info, debug_text;
     const url = "/api/formatter";
 
     try {
@@ -31,15 +29,49 @@ document.getElementById("bsdataform").onsubmit = async (e) => {
             body: formData
         });
 
-        result = await response.text();
+        let result = await response.json();
+        info = result.info;
+        debug_text = result.debug;
     } catch (error) {
-        result = await error.text();
+        info = await error.text();
+        debug_text = "";
     }
     let out = document.getElementById("output");
-    out.textContent = result;
+    out.textContent = info;
+    debug_text.split(/\r?\n/).forEach(function (line) {
+        console.log(line);
+    });
+
 
     document.getElementById("copyBtn").disabled = false;
-    document.getElementById('uploadBtn').disabled = false;
-    document.getElementById("uploadSpan").style.display = 'none';
-    document.getElementById("submitText").textContent = "Upload";
+    document.getElementById("copyBtn").textContent = "Copy to clipboard";
+};
+
+document.getElementById('formats').onchange = async (e) => {
+    "use strict";
+    let minimize = document.getElementById('hide_basic_selections');
+    let secondaries = document.getElementById('show_secondaries');
+    let costs = document.getElementById('remove_costs');
+    let model_count = document.getElementById('show_model_count');
+
+    switch (e.target.value) {
+        case 'default':
+            minimize.checked = true;
+            secondaries.checked = true;
+            costs.checked = false;
+            model_count.checked = false;
+            break;
+        case 'wtc':
+            minimize.checked = true;
+            secondaries.checked = true;
+            costs.checked = false;
+            model_count.checked = true;
+            break;
+        case 'rus':
+            minimize.checked = true;
+            secondaries.checked = true;
+            costs.checked = false;
+            model_count.checked = false;
+            break;
+    }
 };

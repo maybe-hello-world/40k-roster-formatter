@@ -1,8 +1,13 @@
 import azure.functions
 import logging
 import io
+import json
 
-from .formatter import RosterView, FormatterException
+from .rosterview import RosterView
+from .utils import FormatterException
+from .formats import RussianTournamentsPrinter, WTCPrinter, DefaultPrinter
+
+logging.basicConfig()
 
 
 def main(req: azure.functions.HttpRequest) -> azure.functions.HttpResponse:
@@ -27,8 +32,23 @@ def main(req: azure.functions.HttpRequest) -> azure.functions.HttpResponse:
                 "couldn't be parsed as valid BattleScribe file."
             )
         logging.debug("Roster successfully parsed.")
-        return azure.functions.HttpResponse(str(result), status_code=200)
+
+        print_format = options.get('formats', 'default')
+
+        if print_format == 'rus':
+            representation = RussianTournamentsPrinter().print(result)
+        elif print_format == 'wtc':
+            representation = WTCPrinter().print(result)
+        else:
+            representation = DefaultPrinter().print(result)
+
+        answer = {
+            'info': representation,
+            'debug': result.debug_info
+        }
+
+        return azure.functions.HttpResponse(json.dumps(answer), status_code=200, mimetype='application/json')
 
     except Exception as e:
         logging.exception(e)
-        return azure.functions.HttpResponse(str(e), status_code=400)
+        return azure.functions.HttpResponse(json.dumps({'info': str(e), 'debug': ''}), status_code=400, mimetype='application/json')

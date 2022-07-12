@@ -19,6 +19,10 @@ selections:
     - Shade
     - Markerlight
 
+  Aun'Va:
+    - Aun'Va
+    - Ethereal Guard
+
   Ethereal:
     - Honour Blade
 
@@ -197,6 +201,9 @@ selections:
 
   # technical record :)
   2x Gun Drones:
+    - Gun Drone
+
+  Gun Drones:
     - Gun Drone
 
   Marker Drone:
