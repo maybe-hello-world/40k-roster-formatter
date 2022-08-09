@@ -301,11 +301,25 @@ def __count_no_prisoners(roster: 'RosterView') -> int:
                         for model in (x for x in unit['children'] if not is_upgrade(x['link'])):
                             profiles = [x for x in model['link'].profiles.getchildren() if
                                         x.get('typeName', None) == 'Unit']
-                            wounds = profiles[0].characteristics.getchildren()[5]
-                            tally += wounds * model['number']
-                            debug_string = f'No Prisoners: {model["number"]}x{model["name"]} - {wounds} wounds - current tally: {tally}'
-                            logger.debug(debug_string)
-                            roster.debug_info += debug_string + '\n'
+                            if not profiles:
+                                # then it's damn unit of units of models (hello, seer council)
+                                for submodel in (x for x in model['children'] if not is_upgrade(x['link'])):
+                                    profiles = [x for x in submodel['link'].profiles.getchildren() if
+                                                x.get('typeName', None) == 'Unit']
+                                    if not profiles:
+                                        continue
+                                    wounds = profiles[0].characteristics.getchildren()[5]
+                                    tally += wounds * model['number']
+                                    debug_string = f'No Prisoners: {model["number"]}x{model["name"]} - {wounds} wounds - current tally: {tally}'
+                                    logger.debug(debug_string)
+                                    roster.debug_info += debug_string + '\n'
+                                pass
+                            else:
+                                wounds = profiles[0].characteristics.getchildren()[5]
+                                tally += wounds * model['number']
+                                debug_string = f'No Prisoners: {model["number"]}x{model["name"]} - {wounds} wounds - current tally: {tally}'
+                                logger.debug(debug_string)
+                                roster.debug_info += debug_string + '\n'
                     else:
                         children_with_profiles = []
                         for child in unit['children']:
