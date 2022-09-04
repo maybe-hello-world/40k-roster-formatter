@@ -241,10 +241,11 @@ def __count_bring_it_down(roster: 'RosterView') -> int:
                         wounds = get_wounds_from_profiles(target)
                         if not wounds:
                             continue
-                        debug_string = f'Bring It Down: {unit["name"]} - 1 models - {wounds} wounds'
+                        models_count = target.get('number', 1)
+                        debug_string = f'Bring It Down: {unit["name"]} - {models_count} models - {wounds} wounds'
                         logger.debug(debug_string)
                         roster.debug_info += debug_string + '\n'
-                        points += wounds_to_points(wounds)
+                        points += wounds_to_points(wounds) * models_count
     return min(points, MAX_SECONDARY_POINTS)
 
 
