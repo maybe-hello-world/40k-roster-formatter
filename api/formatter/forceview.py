@@ -32,92 +32,91 @@ class ForceView:
         else:
             self.cp = 0
         self.detachment = name
-        self.__parse_faction(force)
         self.logger = logging.getLogger(f'ForceView - {self.detachment}')
         self.logger.setLevel(logging.DEBUG)
 
         force = force.selections.getchildren()
-        self.army_of_renown = self.__parse_army_of_renown(force)
+        self.army_of_renown = None
+        self.faction = ""
 
         self.stratagems = []
         self.no_force_org = []
         self.agents_of_imperium = []
         self.supreme_commander = []
 
-        self.stratagems.extend([
-            self.__parse_stratagem(x) for x
-            in self.__get_selections_of_category(force, "Stratagems")
-        ])
-
-        self.no_force_org.extend([
-            self.__parse_unit(unit) for unit
-            in self.__get_selections_of_category(force, "No Force Org Slot")
-        ])
-
-        self.agents_of_imperium.extend([
-            self.__parse_unit(unit) for unit
-            in self.__get_selections_of_category(force, "Agent of the Imperium", primary=True)
-        ])
-
-        self.supreme_commander.extend([
-            self.__parse_unit(unit) for unit
-            in self.__get_selections_of_category(force, 'Primarch | Daemon Primarch | Supreme Commander', primary=True)
-        ])
-
         self.enumerated_unit_categories = {
-            "HQ": ["HQ", []],
-            "Troops": ["TR", []],
-            "Elites": ["EL", []],
-            "Fast Attack": ["FA", []],
-            "Heavy Support": ["HS", []],
-            "Flyer": ["FL", []],
-            "Dedicated Transport": ["DT", []],
-            "Lord of War": ["LOW", []],
-            "Fortification": ["FT", []],
+            "HQ": ("HQ", []),
+            "Troops": ("TR", []),
+            "Elites": ("EL", []),
+            "Fast Attack": ("FA", []),
+            "Heavy Support": ("HS", []),
+            "Flyer": ("FL", []),
+            "Dedicated Transport": ("DT", []),
+            "Lord of War": ("LOW", []),
+            "Fortification": ("FT", []),
         }
 
-        for key, (_, storage) in self.enumerated_unit_categories.items():
-            storage.extend([
-                self.__parse_unit(unit) for unit
-                in self.__get_selections_of_category(force, key)
-            ])
+        self.__dispatch_selections(force)
+
+    def __dispatch_selections(self, force: List[ObjectifiedElement]) -> None:
+        for selection in force:
+            if self.__is_of_type(selection, "Stratagems"):
+                self.stratagems.append(self.__parse_stratagem(selection))
+            elif self.__is_of_type(selection, "No Force Org Slot"):
+                self.no_force_org.append(self.__parse_unit(selection))
+            elif self.__is_of_type(selection, "Agent of the Imperium", primary=True):
+                self.agents_of_imperium.append(self.__parse_unit(selection))
+            elif self.__is_of_type(selection, 'Primarch | Daemon Primarch | Supreme Commander', primary=True):
+                self.supreme_commander.append(self.__parse_unit(selection))
+            elif self.__is_of_type(selection, "Configuration", primary=True):
+                self.__dispatch_configuration(selection)
+            else:
+                for key, (_, storage) in self.enumerated_unit_categories.items():
+                    if self.__is_of_type(selection, key):
+                        storage.append(self.__parse_unit(selection))
+                        break
 
     @staticmethod
-    def __get_selections_of_category(
-            selections: List[ObjectifiedElement],
-            category_name: str,
-            primary: Optional[bool] = None
-    ):
+    def __is_of_type(selection: ObjectifiedElement, category_name: str, primary: Optional[bool] = None) -> bool:
         primary = str(primary).lower()
+        return any(
+            category.get("name", "") == category_name and
+            (primary == 'none' or category.get("primary", "") == primary)
+            for category in selection.categories.getchildren()
+        )
 
-        return [
-            x for x in selections
-            if any(
-                category.get("name", "") == category_name and
-                (primary == 'none' or category.get("primary", "") == primary)
-                for category in x.categories.getchildren()
-            )
-        ]
-
-    def __parse_faction(self, force: objectify.ObjectifiedElement):
-        selections = force.selections.getchildren()
-        selections = self.__get_selections_of_category(selections, "Configuration", primary=True)
-
-        # TODO: temporary solution, think how to get faction name more reliable
-        selections = [
-            x for x in selections
-            if x.get("name", "") not in {
-                "Battle Size", "Detachment Command Cost", "Gametype", "Unit Filter", "Use Beta Rules"
-            }
-        ]
-        selections = [x for x in selections if "Reference" not in x.get("name", "")]
-
-        if len(selections) == 0:
-            self.faction = ""
+    def __dispatch_configuration(self, selection: ObjectifiedElement):
+        if selection.get("name", "") in {
+            "Battle Size",
+            "Detachment Command Cost",
+            "Gametype",
+            "Game Type",
+            "Unit Filter",
+            "Use Beta Rules"
+        }:
+            # not interesting
             return
 
-        faction = selections[0]  # if bigger than 1: let's hope chapter would be the first
+        if (
+                selection.get("name", "").lower().strip().startswith("army of renown") or
+                selection.get("name", "") in
+                {
+                    "Terminus Est Assault Force",
+                }
+        ):
+            self.army_of_renown = selection.get('name', 'Unparsed Army of Renown')
+            return
 
+        if "Reference" in selection.get("name", ""):
+            return
+
+        if not self.faction:
+            self.__parse_faction(selection)
+            return
+
+        self.logger.debug(f"Unknown unparsed item: {selection.get('name', 'Unknown')}")
+
+    def __parse_faction(self, faction: ObjectifiedElement):
         if "selections" not in dir(faction) or not (faction := faction.selections.getchildren()):
             # Leave it empty - usually that means that army has only one faction (black templars, deathwatch, etc)
             self.faction = ""
@@ -196,10 +195,6 @@ class ForceView:
                 name, number = self.__parse_multiplied_unit(name, number)
                 elements_inside = self.__enumerate_all_selections(element, modifier=number * modifier)
 
-                # if self.options.hide_basic_selections:
-                #     if self.options.selector_checker.is_basic(self.catalogue, selection.get("name"), name):
-                #         continue
-
                 number //= modifier
 
                 output.append(
@@ -257,14 +252,3 @@ class ForceView:
                 cp_cost = int(float(cost.get("value", 0)))
                 if cp_cost != 0:
                     self.cp_modifiers.append(cp_cost)
-
-    def __parse_army_of_renown(self, force: List[objectify.ObjectifiedElement]) -> Optional[str]:
-        selections = self.__get_selections_of_category(force, "Configuration", primary=True)
-        selections = [
-            x
-            for x in selections
-            if x.get("name", "").lower().strip().startswith("army of renown")
-               or x.get("name", "") in {"Terminus Est Assault Force"}
-        ]
-        if selections:
-            return selections[0].get('name', 'Unparsed Army of Renown')
