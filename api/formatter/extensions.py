@@ -299,9 +299,14 @@ def __count_no_prisoners(roster: 'RosterView') -> int:
 
                     if not profiles:
                         # then each selection in the unit has own profile and just count them
+                        profiles = []
                         for model in (x for x in unit['children'] if not is_upgrade(x['link'])):
-                            profiles = [x for x in model['link'].profiles.getchildren() if
+                            old_profiles = profiles
+                            try:
+                                profiles = [x for x in model['link'].profiles.getchildren() if
                                         x.get('typeName', None) == 'Unit']
+                            except AttributeError:
+                                profiles = old_profiles
                             if not profiles:
                                 # then it's damn unit of units of models (hello, seer council)
                                 for submodel in (x for x in model['children'] if not is_upgrade(x['link'])):
