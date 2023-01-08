@@ -25,12 +25,14 @@ class ForceView:
         self.__collect_cp_modifiers(force)
 
         name: str = force.get("name", "Unparsed Detachment ?CP")
+        self.cp = 0
         if "Detachment" in name:
             name, cp = name.rsplit(" ", maxsplit=1)
             cp = cp.lower().strip()
-            self.cp = int(remove_suffix(cp, "cp"))
-        else:
-            self.cp = 0
+            try:
+                self.cp = int(remove_suffix(cp, "cp"))
+            except ValueError:
+                self.cp = 0
         self.detachment = name
         self.logger = logging.getLogger(f'ForceView - {self.detachment}')
         self.logger.setLevel(logging.DEBUG)
