@@ -2,8 +2,8 @@ from collections import Counter
 
 from ..rosterview import RosterView
 from ..forceview import ForceView
-from ..extensions import add_double_whitespaces, number_of_units, count_secondaries, FormatterOptions
-from ..utils import expand_cps
+from ..extensions import add_double_whitespaces, number_of_units, FormatterOptions
+from ..utils import expand_cps, secondaries_suffix
 
 
 class DefaultPrinter:
@@ -13,13 +13,19 @@ class DefaultPrinter:
     @staticmethod
     def _format_secondaries(roster: RosterView, prefix: str = "") -> str:
         secondaries = roster.secondaries
+        ass = secondaries['assassination']
+        bid = secondaries['bring it down']
+        nop = secondaries['no prisoners']
+        atw = secondaries['abhor the witch']
+        suffix = secondaries_suffix(roster.options.cap_secondaries)
+
         header = ""
         header += f"{prefix}\n"
         header += f"{prefix}Number of Units: {number_of_units(roster)}\n"
-        header += f"{prefix}Assassination: {secondaries['assassination']} points\n"
-        header += f"{prefix}Bring it Down: {secondaries['bring it down']} points\n"
-        header += f"{prefix}No Prisoners: {secondaries['no prisoners']} points\n"
-        header += f"{prefix}Abhor the Witch: {secondaries['abhor the witch']} points\n"
+        header += f"{prefix}Assassination: {ass} points" + suffix(ass)
+        header += f"{prefix}Bring it Down: {bid} points" + suffix(bid)
+        header += f"{prefix}No Prisoners: {nop} points" + suffix(nop)
+        header += f"{prefix}Abhor the Witch: {atw} points" + suffix(atw)
         return header
 
     def print(self, roster: RosterView) -> str:
