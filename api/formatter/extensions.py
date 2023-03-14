@@ -13,8 +13,6 @@ logging.basicConfig()
 logger = logging.getLogger("Extensions")
 logger.setLevel(logging.DEBUG)
 
-MAX_SECONDARY_POINTS = 15
-
 
 @dataclass(repr=True, eq=True, order=True)
 class FormatterOptions:
@@ -22,6 +20,7 @@ class FormatterOptions:
     show_secondaries: bool = False
     remove_costs: bool = False
     show_model_count: bool = False
+    cap_secondaries: bool = False
 
     def __init__(self, **kwargs):
         class_fields = {field.name for field in fields(self)}
@@ -36,6 +35,7 @@ class FormatterOptions:
         self.show_secondaries = self.show_secondaries == 'on'
         self.remove_costs = self.remove_costs == 'on'
         self.show_model_count = self.show_model_count == 'on'
+        self.cap_secondaries = self.cap_secondaries == 'on'
 
         if self.hide_basic_selections:
             self.selector_checker = BasicSelectorChecker()
@@ -162,7 +162,7 @@ def __count_assasination(roster: 'RosterView') -> int:
 
     points *= 3
     points += 1  # Warlord
-    return min(points, MAX_SECONDARY_POINTS)
+    return points
 
 
 def __count_bring_it_down(roster: 'RosterView') -> int:
@@ -178,8 +178,6 @@ def __count_bring_it_down(roster: 'RosterView') -> int:
             return None
 
         return int(profiles[0].characteristics.getchildren()[5])
-
-
 
     def wounds_to_points(_wounds: int) -> int:
         if _wounds <= 9:
@@ -246,7 +244,7 @@ def __count_bring_it_down(roster: 'RosterView') -> int:
                         logger.debug(debug_string)
                         roster.debug_info += debug_string + '\n'
                         points += wounds_to_points(wounds) * models_count
-    return min(points, MAX_SECONDARY_POINTS)
+    return points
 
 
 def __count_no_prisoners(roster: 'RosterView') -> int:
@@ -357,7 +355,7 @@ def __count_no_prisoners(roster: 'RosterView') -> int:
     if tally >= 100:
         points = 2
     tally = tally // 10
-    return min(points + tally, MAX_SECONDARY_POINTS)
+    return points + tally
 
 
 def __count_abhor_the_witch(roster: 'RosterView') -> int:
@@ -383,4 +381,4 @@ def __count_abhor_the_witch(roster: 'RosterView') -> int:
                         logger.debug(debug_string)
                         roster.debug_info += debug_string + "\n"
                         points += 2
-    return min(points, MAX_SECONDARY_POINTS)
+    return points

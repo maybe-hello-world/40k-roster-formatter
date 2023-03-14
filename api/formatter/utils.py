@@ -1,7 +1,9 @@
 import logging
-from typing import Optional, List
+from typing import Optional, List, Callable
 
 from lxml.objectify import ObjectifiedElement
+
+MAX_SECONDARY_POINTS = 15
 
 
 class FormatterException(Exception):
@@ -70,3 +72,10 @@ def try_parse_int(_obj) -> Optional[int]:
         return int(_obj)
     except Exception:
         return None
+
+
+def secondaries_suffix(cap_secondaries: bool) -> Callable[[int], str]:
+    if cap_secondaries:
+        return lambda score: f" ({MAX_SECONDARY_POINTS} max)\n" if score > MAX_SECONDARY_POINTS else "\n"
+    else:
+        return lambda score: "\n"

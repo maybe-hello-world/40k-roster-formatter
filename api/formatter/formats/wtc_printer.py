@@ -1,7 +1,8 @@
 from .format_printer import DefaultPrinter
 from ..forceview import ForceView
 from ..rosterview import RosterView
-from ..extensions import add_double_whitespaces, count_secondaries, number_of_units, FormatterOptions
+from ..extensions import add_double_whitespaces, number_of_units, FormatterOptions
+from ..utils import secondaries_suffix
 
 
 class WTCPrinter(DefaultPrinter):
@@ -11,33 +12,34 @@ class WTCPrinter(DefaultPrinter):
     def print(self, roster: RosterView) -> str:
 
         secondaries = roster.secondaries
+        ass = secondaries['assassination']
+        bid = secondaries['bring it down']
+        nop = secondaries['no prisoners']
+        atw = secondaries['abhor the witch']
+        suffix = secondaries_suffix(roster.options.cap_secondaries)
+
         stratagems = []
         for force in roster.forces:
             stratagems.extend(force.stratagems)
 
         header = ''.join([
             '+' * 70 + '\n',
-            '* Player #: \n',
-            '* Team: \n',
-            f"* Factions used: {', '.join(roster.factions)}\n",
-            "" if roster.army_of_renown is None else f"* Army of Renown: {roster.army_of_renown}\n",
-            "\n",
-            f"* Army points: {roster.pts_total}\n",
-            f"* Reinforcement Points: {roster.reinf_points} pts\n",
-            f"* Number of Units / Killpoints: {number_of_units(roster)}\n",
-            "\n",
-            f"* Pre Game Stratagems: {', '.join(stratagems)}\n",
-            f"* Starting Command Points: {roster.cp_total}\n",
-            "\n",
-            "* Warlord: \n",
-            "\n",
-            "* Army Trait: \n",
-            "\n",
-            "* Secondary Objectives Information\n",
-            f"* Assassination: {secondaries['assassination']}\n",
-            f"* Bring it Down: {secondaries['bring it down']}\n",
-            f"* No Prisoners: {secondaries['no prisoners']}\n",
-            f"* Abhor the Witch: {secondaries['abhor the witch']}\n",
+            'Player #: \n',
+            'Team: \n',
+            f"Factions used: {', '.join(roster.factions)}\n",
+            "" if roster.army_of_renown is None else f"Army of Renown: {roster.army_of_renown}\n",
+            f"Army points: {roster.pts_total}\n",
+            f"Reinforcement Points: {roster.reinf_points} pts\n",
+            f"Number of Units / Killpoints: {number_of_units(roster)}\n",
+            f"Pre Game Stratagems: {', '.join(stratagems)}\n",
+            f"Starting Command Points: {roster.cp_total}\n",
+            "Warlord: \n",
+            "Army Trait: \n",
+            "Secondary Objectives Information\n",
+            f"Assassination: {ass}" + suffix(ass),
+            f"Bring it Down: {bid}" + suffix(bid),
+            f"No Prisoners: {nop}" + suffix(nop),
+            f"Abhor the Witch: {atw}" + suffix(atw),
         ])
 
         header += "+" * 70 + "\n\n"
