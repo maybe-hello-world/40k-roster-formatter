@@ -2,7 +2,7 @@ import logging
 import os
 import glob
 from dataclasses import dataclass, fields
-from typing import Optional
+from typing import Optional, Tuple
 
 from yaml import load, FullLoader
 from lxml.objectify import ObjectifiedElement
@@ -247,7 +247,7 @@ def __count_bring_it_down(roster: 'RosterView') -> int:
     return points
 
 
-def __count_no_prisoners(roster: 'RosterView') -> int:
+def __count_no_prisoners(roster: 'RosterView') -> Tuple[int, int]:
     points = 0
     tally = 0
     for force in roster.forces:
@@ -354,8 +354,7 @@ def __count_no_prisoners(roster: 'RosterView') -> int:
         points = 1
     if tally >= 100:
         points = 2
-    tally = tally // 10
-    return points + tally
+    return tally, points + tally // 10
 
 
 def __count_abhor_the_witch(roster: 'RosterView') -> int:

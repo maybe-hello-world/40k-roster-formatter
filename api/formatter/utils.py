@@ -76,6 +76,6 @@ def try_parse_int(_obj) -> Optional[int]:
 
 def secondaries_suffix(cap_secondaries: bool) -> Callable[[int], str]:
     if cap_secondaries:
-        return lambda score: f" ({MAX_SECONDARY_POINTS} max)\n" if score > MAX_SECONDARY_POINTS else "\n"
+        return lambda score: f" ({MAX_SECONDARY_POINTS} max)" if score > MAX_SECONDARY_POINTS else ""
     else:
-        return lambda score: "\n"
+        return lambda score: ""
