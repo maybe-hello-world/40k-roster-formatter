@@ -15,17 +15,17 @@ class DefaultPrinter:
         secondaries = roster.secondaries
         ass = secondaries['assassination']
         bid = secondaries['bring it down']
-        nop = secondaries['no prisoners']
+        nop_tally, nop = secondaries['no prisoners']
         atw = secondaries['abhor the witch']
         suffix = secondaries_suffix(roster.options.cap_secondaries)
 
         header = ""
         header += f"{prefix}\n"
         header += f"{prefix}Number of Units: {number_of_units(roster)}\n"
-        header += f"{prefix}Assassination: {ass} points" + suffix(ass)
-        header += f"{prefix}Bring it Down: {bid} points" + suffix(bid)
-        header += f"{prefix}No Prisoners: {nop} points" + suffix(nop)
-        header += f"{prefix}Abhor the Witch: {atw} points" + suffix(atw)
+        header += f"{prefix}Assassination: {ass} points" + suffix(ass) + "\n"
+        header += f"{prefix}Bring it Down: {bid} points" + suffix(bid) + "\n"
+        header += f"{prefix}No Prisoners: {nop} points" + suffix(nop) + f" (total wounds: {nop_tally})" + "\n"
+        header += f"{prefix}Abhor the Witch: {atw} points" + suffix(atw) + "\n"
         return header
 
     def print(self, roster: RosterView) -> str:

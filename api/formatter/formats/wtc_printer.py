@@ -14,7 +14,7 @@ class WTCPrinter(DefaultPrinter):
         secondaries = roster.secondaries
         ass = secondaries['assassination']
         bid = secondaries['bring it down']
-        nop = secondaries['no prisoners']
+        nop_tally, nop = secondaries['no prisoners']
         atw = secondaries['abhor the witch']
         suffix = secondaries_suffix(roster.options.cap_secondaries)
 
@@ -36,10 +36,10 @@ class WTCPrinter(DefaultPrinter):
             "Warlord: \n",
             "Army Trait: \n",
             "Secondary Objectives Information\n",
-            f"Assassination: {ass}" + suffix(ass),
-            f"Bring it Down: {bid}" + suffix(bid),
-            f"No Prisoners: {nop}" + suffix(nop),
-            f"Abhor the Witch: {atw}" + suffix(atw),
+            f"Assassination: {ass}" + suffix(ass) + "\n",
+            f"Bring it Down: {bid}" + suffix(bid) + "\n",
+            f"No Prisoners: {nop}" + suffix(nop) + f" (total wounds: {nop_tally})" + "\n",
+            f"Abhor the Witch: {atw}" + suffix(atw) + "\n",
         ])
 
         header += "+" * 70 + "\n\n"
