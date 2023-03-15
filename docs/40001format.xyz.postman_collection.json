@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "07b9209b-be12-4d9e-8682-a56f804a515b",
+		"name": "40001format.xyz",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://www.40001format.xyz/api/formatter",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "formats",
+							"value": "default",
+							"description": "default/wtc/rus",
+							"type": "default"
+						},
+						{
+							"key": "hide_basic_selections",
+							"value": "on",
+							"description": "on/off",
+							"type": "default"
+						},
+						{
+							"key": "show_secondaries",
+							"value": "on",
+							"description": "on/off",
+							"type": "default"
+						},
+						{
+							"key": "roster",
+							"description": ".ros or .rosz",
+							"type": "file",
+							"src": "/C:/Users/kell/Desktop/Rosters/11-09-22.rosz"
+						},
+						{
+							"key": "remove_costs",
+							"value": "on",
+							"description": "on/off",
+							"type": "default"
+						},
+						{
+							"key": "show_model_count",
+							"value": "on",
+							"description": "on/off",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://www.40001format.xyz/api/formatter",
+					"protocol": "https",
+					"host": [
+						"www",
+						"40001format",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"formatter"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "https://www.40001format.xyz/api/formatter",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "formats",
+									"value": "default",
+									"type": "default"
+								},
+								{
+									"key": "hide_basic_selections",
+									"value": "on",
+									"type": "default"
+								},
+								{
+									"key": "show_secondaries",
+									"value": "on",
+									"type": "default"
+								},
+								{
+									"key": "roster",
+									"type": "file",
+									"src": "/C:/Users/kell/Desktop/Rosters/11-09-22.rosz"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://www.40001format.xyz/api/formatter",
+							"protocol": "https",
+							"host": [
+								"www",
+								"40001format",
+								"xyz"
+							],
+							"path": [
+								"api",
+								"formatter"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 24 Sep 2022 01:07:37 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "request-context",
+							"value": "appId=cid-v1:11c421a0-8053-4008-9e20-1cad8f17e59a"
+						},
+						{
+							"key": "strict-transport-security",
+							"value": "max-age=31536000; includeSubDomains"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=9S5wR4yHqNxaQpDcPQhg0WxDcrciRUft6rqKahsSjB8%2FSh31DSBVPZbK3M86Ow1miDTZbHagcLWQYb7T5L0d5KnJBEEhjYTuGw4Ob5rEpKAB9q3zGvppSKOyT6zDamF%2FTVs4Yi82\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "NEL",
+							"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "74f79fbf4b897ad7-LAX"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"info\": \"Army name: New Roster  \\nFactions used: T'au Empire  \\nCommand Points: 6+3-1-1-1-3=3  \\nTotal cost: 1999 pts, 97 PL  \\nReinforcement Points: 1 pts  \\n  \\nNumber of Units: 15  \\nAssassination: 13 points  \\nBring it Down: 4 points  \\nNo Prisoners: 12 points  \\nAbhor the Witch: 0 points  \\n++++++++++++++++++++++++++++++++++++++++++++++++++  \\n  \\n== T'au Sept Battalion Detachment == -3 CP, 1849 pts, 89 PL  \\n  \\nNo Force Org Slot:  \\n- Kroot Hounds: 4xKroot Hound [24 pts, 1 PL]  \\n  \\nHQ1: Commander in Coldstar Battlesuit: 1. Precision of the Hunter, Burst Cannon, High-output Burst Cannon, Shield Generator, Stratagem: Promising Pupil, T'au Flamer, Target Lock, Thermoneutronic Projector [170 pts, 8 PL, -1 CP]  \\nHQ2: Ethereal: 2. Sense of Stone, 6. Wisdom of the Guides, 2xMarker Drone, Stratagem: Relic, The Humble Stave [100 pts, 4 PL, -1 CP]  \\nHQ3: Longstrike: 2xGun Drones, Railgun [160 pts, 9 PL]  \\n  \\nTR1: Breacher Team: 9xBreacher Fire Warrior, Breacher Fire Warrior Shas'ui [85 pts, 5 PL]  \\nTR2: Kroot Carnivores: 10xKroot [60 pts, 3 PL]  \\nTR3: Strike Team: Fire Warrior Shas'ui (Pulse Rifle), 9xFire Warrior w/ Pulse Rifle [80 pts, 4 PL]  \\n  \\nEL1: Crisis Battlesuits: 2xCrisis Shas'ui (Burst Cannon, Cyclic Ion Blaster, Plasma Rifle, Shield Generator), Crisis Shas'vre (Burst Cannon, Cyclic Ion Blaster, Iridium battlesuit, Plasma Rifle, Shield Generator, Stimm Injectors), 2xShield Drone [260 pts, 11 PL]  \\nEL2: Crisis Battlesuits: 2xCrisis Shas'ui (Burst Cannon, Cyclic Ion Blaster, Plasma Rifle, Shield Generator), Crisis Shas'vre (Burst Cannon, Cyclic Ion Blaster, Iridium battlesuit, Plasma Rifle, Shield Generator), 2xShield Drone [250 pts, 10 PL]  \\nEL3: Stealth Battlesuits: 2xShield Drone, 2xStealth Shas'ui w/ Burst Cannon, Stealth Shas'vre (Fusion Blaster) [110 pts, 5 PL]  \\n  \\nFA1: Pathfinder Team: 9xPathfinder, Pathfinder Shas'ui [90 pts, 5 PL]  \\nFA2: Vespid Stingwings: 4xVespid Stingwing, Vespid Strain Leader [60 pts, 3 PL]  \\n  \\nHS1: Broadside Battlesuits: Broadside Shas'vre (Heavy Rail Rifle, Stabilised Optics, Twin Smart Missile System), 2xMarker Drone [120 pts, 6 PL]  \\nHS2: Riptide Battlesuit: Early Warning Override, Ion Accelerator, 2xPlasma Rifle, 2xShielded Missile Drone, Target Lock, Velocity Tracker [280 pts, 15 PL]  \\n  \\n== T'au Sept Supreme Command Detachment == 3 CP, 150 pts, 8 PL  \\n  \\nPrimarch | Daemon Primarch | Supreme Commander:  \\nCommander Shadowsun: 5. Exemplar of the Kauyon, 2xHigh-energy Fusion Blaster, Stratagem: Warlord Trait, Warlord [150 pts, 8 PL, -1 CP]  \",\n    \"debug\": \"Assassination: Longstrike - Character\\nAssassination: Ethereal - Character\\nAssassination: Commander in Coldstar Battlesuit - Character\\nAssassination: Commander Shadowsun - Character\\nBring It Down: Longstrike - 1 models - 14 wounds\\nBring It Down: Riptide Battlesuit - 1 models - 14 wounds\\nNo Prisoners: 4xKroot Hounds - 1 wounds - current tally: 4\\nNo Prisoners: 2xMarker Drone - 1 wounds - current tally: 6\\nNo Prisoners: 9xBreacher Fire Warrior - 1 wounds - current tally: 15\\nNo Prisoners: 1xBreacher Fire Warrior Shas'ui - 1 wounds - current tally: 16\\nNo Prisoners: 10xKroot - 1 wounds - current tally: 26\\nNo Prisoners: 1xFire Warrior Shas'ui - 1 wounds - current tally: 27\\nNo Prisoners: 9xFire Warrior w/ Pulse Rifle - 1 wounds - current tally: 36\\nNo Prisoners: 1xCrisis Shas'vre - 4 wounds - current tally: 40\\nNo Prisoners: 1xCrisis Shas'ui - 4 wounds - current tally: 44\\nNo Prisoners: 1xCrisis Shas'ui - 4 wounds - current tally: 48\\nNo Prisoners: 2xShield Drone - 2 wounds - current tally: 52\\nNo Prisoners: 1xStealth Shas'vre - 2 wounds - current tally: 54\\nNo Prisoners: 2xStealth Shas'ui w/ Burst Cannon - 2 wounds - current tally: 58\\nNo Prisoners: 2xShield Drone - 2 wounds - current tally: 62\\nNo Prisoners: 1xCrisis Shas'vre - 4 wounds - current tally: 66\\nNo Prisoners: 1xCrisis Shas'ui - 4 wounds - current tally: 70\\nNo Prisoners: 1xCrisis Shas'ui - 4 wounds - current tally: 74\\nNo Prisoners: 2xShield Drone - 2 wounds - current tally: 78\\nNo Prisoners: 1xVespid Strain Leader - 1 wounds - current tally: 79\\nNo Prisoners: 4xVespid Stingwing - 1 wounds - current tally: 83\\nNo Prisoners: 1xPathfinder Shas'ui - 1 wounds - current tally: 84\\nNo Prisoners: 9xPathfinder - 1 wounds - current tally: 93\\nNo Prisoners: 2xShielded Missile Drone - 2 wounds - current tally: 97\\nNo Prisoners: 1xBroadside Shas'vre - 8 wounds - current tally: 105\\nNo Prisoners: 2xMarker Drone - 1 wounds - current tally: 107\\nNo Prisoners: 1xAdvanced Guardian Drone - 1 wounds - current tally: 108\\nNo Prisoners: 1xCommand-link Drone - 1 wounds - current tally: 109\\n\"\n}"
+				}
+			]
+		}
+	]
+}
