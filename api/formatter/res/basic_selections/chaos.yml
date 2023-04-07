@@ -22,7 +22,7 @@ selections:
     - Twin lascannon
 
   Chaos Predator Annihilator:
-    - Twin lascannon
+    - Twin soulshatter lascannon
 
   Chaos Predator Destructor:
     - Predator autocannon
@@ -61,6 +61,9 @@ selections:
   Chaos Xiphon Interceptor:
     - Xiphon missile battery
     - Twin lascannon
+
+  Heldrake:
+    - Heldrake claws
 
   Hell Talon:
     - Infernal bomb
@@ -129,6 +132,12 @@ selections:
 
   2 Twin Terrax volkite chargers:
     - Twin Terrax volkite Charger
+
+  lascannons:
+    - Lascannon
+
+  twin autocannons:
+    - Twin autocannon
 
   2x twin autocannons:
     - Twin autocannon
