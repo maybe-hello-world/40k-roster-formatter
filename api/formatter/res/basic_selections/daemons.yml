@@ -11,12 +11,8 @@ selections:
   Bloodmaster:
     - Blade of Blood
 
-  Bloodthirster of Insensate Rage:
-    - Great axe of Khorne
-
-  Bloodthirster of Unfettered Fury:
-    - Lash of Khorne
-    - Axe of Khorne
+  Bloodthirster:
+    - Hellfire breath
 
   Changecaster:
     - Ritual dagger
@@ -28,45 +24,24 @@ selections:
   Cor'bax Utterblight:
     - Gaping maw
 
-
-  Daemon Prince of Chaos:
-    - Malefic talon
-    - Hellforged sword
-
   Epidemius:
-    - Balesword
+    - Foul balesword
     - Nurglings
 
   Fateskimmer:
-    - Screamers
-    - Ritual dagger
+    - Screamer bites
 
   Fluxmaster:
-    - Disc of Tzeentch
+    - Disc blades
     - Ritual dagger
 
   Great Unclean One:
-    - Nurglings
-
-  Herald of Slaanesh:
-    - Ravaging claws
-
-  Herald of Slaanesh on Exalted Seeker Chariot:
-    - Lashing tongues
-    - Ravaging claws
-
-  Herald of Slaanesh on Hellflayer:
-    - Lashing tongues
-    - Bladed Axle
-    - Ravaging claws
-
-  Herald of Slaanesh on Seeker Chariot:
-    - Lashing tongues
-    - Ravaging claws
+    - Nurgling claws
+    - Putrid vomit
 
   Horticulus Slimux:
     - Lopping Shears
-    - Mulch
+    - Acidic maw
 
   Infernal Enrapturess:
     - Heartstring Lyre
@@ -90,13 +65,17 @@ selections:
     - Fist of decay
 
   Poxbringer:
-    - Balesword
+    - Foul balesword
 
   Rotigus:
     - Streams of brackish filth
     - Fanged maw
     - Gnarlrod
-    - Nurglings
+    - Nurgling claws
+
+  Rendmaster on Blood Throne:
+    - Attendant's hellblades
+    - Blade of Blood
 
   Shalaxi Helbane:
     - Soulpiercer
@@ -107,7 +86,7 @@ selections:
     - Slaughter and Carnage
 
   Skullmaster:
-    - Juggernaut's Bladed horn
+    - Bladed horn
     - Blade of Blood
 
   Skulltaker:
@@ -122,18 +101,37 @@ selections:
     - Plaguesword
 
   "Syll'Esske":
-    - "the Vengeful Allegiance: Axe of Dominion"
+    - Axe of Dominion
     - Scourging whip
 
   The Blue Scribes:
     - Sharp quills
-    - Disc of Tzeentch
+    - Disc blades
 
   The Changeling:
     - The Trickster's Staff
 
   The Masque of Slaanesh:
     - Serrated claws
+
+  Tormentbringer on Exalted Seeker Chariot:
+    - Exalted Seeker tongues
+    - Lashes of torment
+    - Ravaging claws
+
+  Tormentbringer on Hellflayer:
+    - Bladed Axle
+    - Ravaging claws
+    - Lashes of torment
+    - Seeker tongues
+
+  Tormentbringer on Seeker Chariot:
+    - Lashes of torment
+    - Ravaging claws
+    - Seeker tongues
+
+  Tranceweaver:
+    - Ravaging claws
 
   Uraka the Warfiend:
     - Executioner's Axe
@@ -145,6 +143,9 @@ selections:
 
   Bloodletter:
     - Hellblade
+
+  Blue Horror:
+    - Coruscating flames
 
   Bloodreaper:
     - Hellblade
@@ -175,11 +176,11 @@ selections:
 
   Bloodcrusher:
     - Hellblade
-    - Juggernaut's Bladed horn
+    - Bladed horn
 
   Bloodhunter:
     - Hellblade
-    - Juggernaut's Bladed horn
+    - Bladed horn
 
   Exalted Flamer:
     - Fire of Tzeentch
@@ -187,11 +188,11 @@ selections:
 
   Fiend:
     - Dissecting claws
-    - Vicious barbed tail
+    - Barbed tail
 
   Blissbringer:
     - Dissecting claws
-    - Vicious barbed tail
+    - Barbed tail
 
   Pyrocaster:
     - Flickering flames
@@ -211,12 +212,18 @@ selections:
 
   Hellflayer:
     - Bladed axle
-    - Exalted Alluress
-    - 2 Steeds of Slaanesh
+    - Lashes of torment
+    - Piercing claws
+    - Seeker tongues
 
-  Plague Drone:
+  Plague Drone w/ foul mouthparts:
     - Plaguesword
-    - Rot Fly
+    - Foul mouthparts
+    - Death's heads
+
+  Plague Drone w/ prehensile proboscis:
+    - Plaguesword
+    - Prehensile proboscis
     - Death's heads
 
   Plaguebringer:
@@ -229,30 +236,30 @@ selections:
 
   Heartseeker:
     - Piercing claws
-    - Steed of Slaanesh
+    - Lashing tongue
 
   Seeker:
     - Piercing claws
-    - Steed of Slaanesh
-
-  Burning Chariot:
-    - Screamers
-    - Exalted Flamer
-
-  Exalted Seeker Chariot:
-    - Steeds of Slaanesh
-    - Exalted Alluress
-    - Daemonette Charioteers
-
+    - Lashing tongue
 
   Seeker Chariot:
-    - Steeds of Slaanesh
-    - Exalted Alluress
-    - Daemonette Charioteer
+    - Lashes of torment
+    - Piercing claws
+    - Seeker tongues
+
+  Burning Chariot:
+    - Fire of Tzeentch
+    - Screamer bites
+
+  Exalted Seeker Chariot:
+    - Lashes of torment
+    - Piercing claws
+    - Exalted Seeker tongues
 
   Skull Cannon:
     - Skull cannon
-    - Bloodletter Crew
+    - Biting maw
+    - Attendant's hellblades
 
   Soul Grinder:
     - Harvester cannon
