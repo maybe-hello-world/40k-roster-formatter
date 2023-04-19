@@ -1,11 +1,30 @@
+import os
+
 import azure.functions
 import logging
 import io
 import json
 
+import sentry_sdk
+from sentry_sdk.integrations.logging import LoggingIntegration
+
 from .rosterview import RosterView
 from .utils import FormatterException
 from .formats import RussianTournamentsPrinter, WTCPrinter, DefaultPrinter
+
+sentry_logging = LoggingIntegration(
+    level=logging.INFO,        # Capture info and above as breadcrumbs
+    event_level=logging.WARNING  # Send errors as events
+)
+
+sentry_sdk.init(
+    dsn=os.getenv("SENTRY_DSN"),
+    integrations=[sentry_logging],
+    debug=True,
+    attach_stacktrace=True,
+
+    traces_sample_rate=1.0
+)
 
 logging.basicConfig()
 

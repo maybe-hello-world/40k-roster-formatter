@@ -62,6 +62,7 @@ def is_upgrade(_object: ObjectifiedElement) -> bool:
 
     for hack in damn_dirty_hacks:
         if _object.get('name', '').startswith(hack):
+            logging.warning("Still using dirty hack for is_upgrade", extra={'40k_object': _object})
             return False
 
     return True
