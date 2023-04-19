@@ -35,7 +35,6 @@ class ForceView:
             try:
                 self.cp = int(remove_suffix(cp, "cp"))
             except ValueError:
-                logging.error(f"CP value was not parsed from the detachment name.", extra={"40k_name": name, "40k_cp": cp})
                 self.cp = 0
         self.detachment = name
         self.logger = logging.getLogger(f'ForceView - {self.detachment}')
@@ -98,7 +97,8 @@ class ForceView:
             "Gametype",
             "Game Type",
             "Unit Filter",
-            "Use Beta Rules"
+            "Use Beta Rules",
+            "Arks of Omen Compulsory Type",
         }:
             # not interesting
             return
