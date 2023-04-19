@@ -46,7 +46,7 @@ def main(req: azure.functions.HttpRequest) -> azure.functions.HttpResponse:
         elif filename.endswith(".rosz"):
             result = RosterView(io.BytesIO(content), zipped=True, options=options)
         else:
-            logging.error(f"Provided incorrect filename", extra={"filename": filename})
+            logging.error(f"Provided incorrect filename", extra={"40k_filename": filename})
             raise FormatterException(
                 "Provided file doesn't end with .ros or .rosz and therefore "
                 "couldn't be parsed as valid BattleScribe file."

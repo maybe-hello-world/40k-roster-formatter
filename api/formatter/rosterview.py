@@ -64,7 +64,7 @@ class RosterView:
         self.__set_reinf_points(roster)
         self.factions = set(x.attrib.get("catalogueName", "<ERROR: UNPARSED>") for x in roster.forces.iterchildren())
         if "<ERROR: UNPARSED>" in self.factions:
-            logging.error("Unknown faction in roster.", extra={"factions": self.factions})
+            logging.error("Unknown faction in roster.", extra={"40k_factions": self.factions})
 
         forces = (x for x in roster.forces.iterchildren(tag="{*}force"))
         self.forces = [ForceView(x, self.options) for x in forces]
