@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import logging
+
 from .forceview import ForceView
 from .utils import remove_prefix, FormatterException
 from .extensions import FormatterOptions, count_secondaries
@@ -8,6 +10,7 @@ from lxml import objectify
 from itertools import chain
 from zipfile import ZipFile
 from typing import Mapping
+from sentry_sdk import capture_exception
 
 
 class RosterView:
@@ -22,7 +25,9 @@ class RosterView:
     @staticmethod
     def __read_xml(content: dict) -> objectify.ObjectifiedElement:
         if len(content) != 1:
-            raise FormatterException(f"Unknown structure of provided rosz archive. Content: {content.keys()}")
+            exception = FormatterException(f"Unknown structure of provided rosz archive. Content: {content.keys()}")
+            capture_exception(exception)
+            raise exception
 
         name: str = next(iter(content))
         roster: objectify.ObjectifiedElement = objectify.fromstring(content[name])
@@ -58,6 +63,8 @@ class RosterView:
         self.cabal_points = total_cost.get("Cabal Points", None)
         self.__set_reinf_points(roster)
         self.factions = set(x.attrib.get("catalogueName", "<ERROR: UNPARSED>") for x in roster.forces.iterchildren())
+        if "<ERROR: UNPARSED>" in self.factions:
+            logging.error("Unknown faction in roster.", extra={"factions": self.factions})
 
         forces = (x for x in roster.forces.iterchildren(tag="{*}force"))
         self.forces = [ForceView(x, self.options) for x in forces]

@@ -1,3 +1,4 @@
+import logging
 from collections import Counter
 
 from ..rosterview import RosterView
@@ -121,6 +122,8 @@ class DefaultPrinter:
     def _format_costs(costs: dict) -> str:
         output = ""
         output += f'[{costs.get("pts", "???")} pts, {costs.get("pl", "???")} PL'
+        if "???" in output:
+            logging.warning("Incomplete cost information", extra={'costs': costs})
         if (y := costs.get('cp', 0)) != 0:
             output += f', {y} CP'
         if (y := costs.get('cabal', 0)) != 0:
@@ -133,7 +136,11 @@ class DefaultPrinter:
         if options.show_model_count:
             output += self.unit_model_wrapper.format(unit.get('models')) + " "
 
-        output += unit.get('name', '<Unparsed Unit Name>')
+        name = unit.get('name', None)
+        if name is None:
+            name = '<Unparsed Unit Name>'
+            logging.warning("Unit name not parsed", extra={'unit': unit})
+        output += name
         if selections := unit.get('children', []):
             output += ": "
             output += self._print_unit_selections(selections)
@@ -153,7 +160,11 @@ class DefaultPrinter:
             result = ""
             if (number := selection.get('number', 1)) != 1:
                 result = f"{number}x"
-            result += selection.get('name', "<Unparsed Name>")
+            name = selection.get('name', None)
+            if name is None:
+                logging.warning("Unit selection name not parsed", extra={'selection': selection})
+                name = "<Unparsed Name>"
+            result += name
             if children := selection.get('children', []):
                 result += f" ({DefaultPrinter._print_unit_selections(children)})"
 

@@ -1,3 +1,4 @@
 lxml
 azure-functions
 pyyaml
+sentry-sdk
