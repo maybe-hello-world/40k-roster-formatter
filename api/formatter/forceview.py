@@ -97,7 +97,8 @@ class ForceView:
             "Gametype",
             "Game Type",
             "Unit Filter",
-            "Use Beta Rules"
+            "Use Beta Rules",
+            "Arks of Omen Compulsory Type",
         }:
             # not interesting
             return
