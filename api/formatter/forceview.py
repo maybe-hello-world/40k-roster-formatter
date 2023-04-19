@@ -99,6 +99,7 @@ class ForceView:
             "Unit Filter",
             "Use Beta Rules",
             "Arks of Omen Compulsory Type",
+            "Questor Allegiance",
         }:
             # not interesting
             return
