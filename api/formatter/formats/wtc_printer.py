@@ -1,3 +1,5 @@
+import logging
+
 from .format_printer import DefaultPrinter
 from ..forceview import ForceView
 from ..rosterview import RosterView
@@ -95,6 +97,8 @@ class WTCPrinter(DefaultPrinter):
 
     @staticmethod
     def _format_costs(costs: dict) -> str:
+        if costs.get('pl', None) is None or costs.get('pts', None) is None:
+            logging.warning("Costs are missing for one or more units.", extra={'costs': costs})
         return f'[{costs.get("pl", "???")} PL, {costs.get("pts", "???")} pts]'
 
     def _print_unit(self, unit: dict, options: FormatterOptions):
@@ -103,7 +107,11 @@ class WTCPrinter(DefaultPrinter):
             if unit.get('models', 0) > 1:
                 output += self.unit_model_wrapper.format(unit.get('models')) + " "
 
-        output += unit.get('name', '<Unparsed Unit Name>') + " "
+        name = unit.get('name', None)
+        if name is None:
+            logging.warning("Unit name is missing.", extra={'unit': unit})
+            name = '<Unparsed Unit Name>'
+        output += name + " "
         if not options.remove_costs:
             output += self._format_costs(unit.get('cost', {}))
         if selections := unit.get('children', []):

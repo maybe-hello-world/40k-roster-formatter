@@ -24,7 +24,10 @@ class ForceView:
         self.catalogue = force.get("catalogueName", "")
         self.__collect_cp_modifiers(force)
 
-        name: str = force.get("name", "Unparsed Detachment ?CP")
+        name: str = force.get("name", None)
+        if name is None:
+            name = "Unparsed Detachment ?CP"
+            logging.error(f"Detachment name is not found.")
         self.cp = 0
         if "Detachment" in name:
             name, cp = name.rsplit(" ", maxsplit=1)
@@ -32,6 +35,7 @@ class ForceView:
             try:
                 self.cp = int(remove_suffix(cp, "cp"))
             except ValueError:
+                logging.error(f"CP value was not parsed from the detachment name.", extra={"name": name, "cp": cp})
                 self.cp = 0
         self.detachment = name
         self.logger = logging.getLogger(f'ForceView - {self.detachment}')
@@ -106,7 +110,10 @@ class ForceView:
                     "Terminus Est Assault Force",
                 }
         ):
-            self.army_of_renown = selection.get('name', 'Unparsed Army of Renown')
+            self.army_of_renown = selection.get('name', None)
+            if self.army_of_renown is None:
+                self.army_of_renown = "Unparsed Army of Renown"
+                logging.error(f"Army of Renown name is not found.", extra={"selection": selection})
             return
 
         if "Reference" in selection.get("name", ""):
@@ -116,7 +123,7 @@ class ForceView:
             self.__parse_faction(selection)
             return
 
-        self.logger.debug(f"Unknown unparsed item: {selection.get('name', 'Unknown')}")
+        self.logger.error(f"Unknown unparsed item during configuration dispatching.", extra={"item": selection.get('name', None)})
 
     def __parse_faction(self, faction: ObjectifiedElement):
         if "selections" not in dir(faction) or not (faction := faction.selections.getchildren()):
@@ -124,11 +131,17 @@ class ForceView:
             self.faction = ""
             return
 
-        faction_name = faction[0].get("name", "Unparsed Faction")
+        faction_name = faction[0].get("name", None)
+        if faction_name is None:
+            faction_name = "Unparsed Faction"
+            logging.error(f"Faction name is not found.", extra={"faction": faction})
 
         addons = [x.get("name", "Unparsed Subfaction") for x in faction[0].iterdescendants(tag="{*}selection")]
         if addons:
             faction_name = f"{faction_name} ({', '.join(addons)})"
+            for addon in addons:
+                if addon == "Unparsed Subfaction":
+                    logging.error(f"Subfaction name is not found.", extra={"faction": faction})
         if len(faction) > 1:
             faction_name += " (" + ', '.join(x.get("name", "") for x in faction[1:]) + ")"
 
@@ -194,6 +207,8 @@ class ForceView:
             for element in child.getchildren():
                 number = int(element.get("number", 1))
                 name: str = element.get("name", "<Unparsed selection>")
+                if name == "<Unparsed selection>":
+                    logging.error(f"Selection name is not found.", extra={"selection": element})
                 name, number = self.__parse_multiplied_unit(name, number)
                 elements_inside = self.__enumerate_all_selections(element, modifier=number * modifier)
 
@@ -217,6 +232,8 @@ class ForceView:
             'cost': self.__get_unit_cost(unit),
             'link': unit
         }
+        if result['name'] == "Unparsed Model Name":
+            logging.error(f"Unit name is not found.", extra={"unit": unit})
         result['models'] = self.__get_models_amount(result)
 
         return result
@@ -243,6 +260,8 @@ class ForceView:
     @staticmethod
     def __parse_stratagem(stratagem: objectify.ObjectifiedElement) -> str:
         name = stratagem.get("name", "Unparsed Stratagem")
+        if name == "Unparsed Stratagem":
+            logging.error(f"Stratagem name is not found.", extra={"stratagem": stratagem})
         name = remove_prefix(name, "Stratagem: ")
         _, _, cost, _ = ForceView.__recursive_cost_search(stratagem)
         return f"{name} ({cost} CP)"
