@@ -10,7 +10,6 @@ from lxml import objectify
 from itertools import chain
 from zipfile import ZipFile
 from typing import Mapping
-from sentry_sdk import capture_exception
 
 
 class RosterView:
@@ -26,7 +25,6 @@ class RosterView:
     def __read_xml(content: dict) -> objectify.ObjectifiedElement:
         if len(content) != 1:
             exception = FormatterException(f"Unknown structure of provided rosz archive. Content: {content.keys()}")
-            capture_exception(exception)
             raise exception
 
         name: str = next(iter(content))
