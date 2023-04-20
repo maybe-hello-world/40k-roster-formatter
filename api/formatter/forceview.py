@@ -100,6 +100,7 @@ class ForceView:
             "Use Beta Rules",
             "Arks of Omen Compulsory Type",
             "Questor Allegiance",
+            "Militarum Tempestus Detachment",
         }:
             # not interesting
             return
