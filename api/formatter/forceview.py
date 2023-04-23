@@ -101,6 +101,9 @@ class ForceView:
             "Arks of Omen Compulsory Type",
             "Questor Allegiance",
             "Militarum Tempestus Detachment",
+            "Raiding Forces - CP Refund",
+            "Crusade Tally",
+            "Daemonic Pact",
         }:
             # not interesting
             return
