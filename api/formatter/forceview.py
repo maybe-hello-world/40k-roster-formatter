@@ -104,6 +104,7 @@ class ForceView:
             "Raiding Forces - CP Refund",
             "Crusade Tally",
             "Daemonic Pact",
+            "Other",
         }:
             # not interesting
             return
