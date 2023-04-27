@@ -71,12 +71,12 @@ def main(req: azure.functions.HttpRequest) -> azure.functions.HttpResponse:
     except Exception as e:
         logging.exception(e)
         message = (
-            f"Exception occurred: \n"
-            f"{str(e)} \n"
+            f"Exception occurred: \n\n"
+            f"{str(e)} \n\n"
             f"If you don't know the reason for the exception, "
             f"please consider submitting the bug and your roster "
-            f"here: https://github.com/maybe-hello-world/40k-roster-formatter/issues \n"
-            f"or to my email: maybe.hello.world@gmail.com \n"
+            f"here: https://github.com/maybe-hello-world/40k-roster-formatter/issues "
+            f"or to my email: maybe.hello.world@gmail.com \n\n"
             f"Thanks, and my apologies for this :)"
         )
 
