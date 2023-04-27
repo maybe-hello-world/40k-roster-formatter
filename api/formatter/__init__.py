@@ -48,7 +48,7 @@ def main(req: azure.functions.HttpRequest) -> azure.functions.HttpResponse:
         else:
             raise FormatterException(
                 "Provided file doesn't end with .ros or .rosz and therefore "
-                "couldn't be parsed as valid BattleScribe file."
+                "is not a valid BattleScribe file. Please, submit .ros or .rosz file produced by BattleScribe."
             )
         logging.debug("Roster successfully parsed.")
 
@@ -70,4 +70,16 @@ def main(req: azure.functions.HttpRequest) -> azure.functions.HttpResponse:
 
     except Exception as e:
         logging.exception(e)
-        return azure.functions.HttpResponse(json.dumps({'info': str(e), 'debug': ''}), status_code=400, mimetype='application/json')
+        message = (
+            f"Exception occurred: \n"
+            f"{str(e)} \n"
+            f"If you don't know the reason for the exception, "
+            f"please consider submitting the bug and your roster "
+            f"here: https://github.com/maybe-hello-world/40k-roster-formatter/issues \n"
+            f"or to my email: maybe.hello.world@gmail.com \n"
+            f"Thanks, and my apologies for this :)"
+        )
+
+        return azure.functions.HttpResponse(json.dumps({
+            'info': message, 'debug': message
+        }), status_code=400, mimetype='application/json')
