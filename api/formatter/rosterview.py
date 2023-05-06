@@ -51,10 +51,14 @@ class RosterView:
         roster = self.__read_xml(self.__extract(file, zipped))
         self.name = roster.attrib.get("name", "")
 
-        total_cost = {
-            x.attrib['name'].strip(): int(float(x.attrib['value']))
-            for x in roster.costs.iterchildren()
-        }
+        try:
+            total_cost = {
+                x.attrib['name'].strip(): int(float(x.attrib['value']))
+                for x in roster.costs.iterchildren()
+            }
+        except AttributeError as e:
+            logging.exception(e)
+            total_cost = {}
         self.cp_total = total_cost.get("CP", 0)
         self.pl_total = total_cost.get("PL", 0)
         self.pts_total = total_cost.get("pts", 0)
