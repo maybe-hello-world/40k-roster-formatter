@@ -281,7 +281,7 @@ def __count_no_prisoners(roster: 'RosterView') -> Tuple[int, int]:
                                 x for x in child['link'].profiles.getchildren() if
                                 x.get('typeName', None) == 'Unit'
                             ]
-                            wounds = profiles[0].characteristics.getchildren()[5]
+                            wounds = int(profiles[0].characteristics.getchildren()[5])
                             tally += wounds * child['number']
                             debug_string = f'No Prisoners: {child["number"]}x{child["name"]} - {wounds} wounds - current tally: {tally}'
                             logger.debug(debug_string)
@@ -312,14 +312,14 @@ def __count_no_prisoners(roster: 'RosterView') -> Tuple[int, int]:
                                                 x.get('typeName', None) == 'Unit']
                                     if not profiles:
                                         continue
-                                    wounds = profiles[0].characteristics.getchildren()[5]
+                                    wounds = int(profiles[0].characteristics.getchildren()[5])
                                     tally += wounds * model['number']
                                     debug_string = f'No Prisoners: {model["number"]}x{model["name"]} - {wounds} wounds - current tally: {tally}'
                                     logger.debug(debug_string)
                                     roster.debug_info += debug_string + '\n'
                                 pass
                             else:
-                                wounds = profiles[0].characteristics.getchildren()[5]
+                                wounds = int(profiles[0].characteristics.getchildren()[5])
                                 tally += wounds * model['number']
                                 debug_string = f'No Prisoners: {model["number"]}x{model["name"]} - {wounds} wounds - current tally: {tally}'
                                 logger.debug(debug_string)
@@ -335,7 +335,7 @@ def __count_no_prisoners(roster: 'RosterView') -> Tuple[int, int]:
 
                         # if no children has their own Unit profiles - just number of models * wounds in profiles
                         models = unit['models'] - len(children_with_profiles)
-                        wounds = profiles[0].characteristics.getchildren()[5]
+                        wounds = int(profiles[0].characteristics.getchildren()[5])
                         tally += wounds * models
                         debug_string = f'No Prisoners: {models}x{unit["name"]} - {wounds} wounds - current tally: {tally}'
                         logger.debug(debug_string)
@@ -344,7 +344,7 @@ def __count_no_prisoners(roster: 'RosterView') -> Tuple[int, int]:
                         for child in children_with_profiles:
                             # add them separately
                             children_profile = [x for x in child['link'].profiles.getchildren() if x.get('typeName', None) == 'Unit']
-                            wounds = children_profile[0].characteristics.getchildren()[5]
+                            wounds = int(children_profile[0].characteristics.getchildren()[5])
                             tally += wounds * child['number']
                             debug_string = f'No Prisoners: {child["number"]}x{child["name"]} - {wounds} wounds - current tally: {tally}'
                             logger.debug(debug_string)
