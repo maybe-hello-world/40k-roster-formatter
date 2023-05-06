@@ -104,6 +104,7 @@ class ForceView:
             "Raiding Forces - CP Refund",
             "Crusade Tally",
             "Daemonic Pact",
+            "Ravenwing Outrider Detachment",
             "Other",
         }:
             # not interesting
