@@ -42,7 +42,11 @@ def main(req: azure.functions.HttpRequest) -> azure.functions.HttpResponse:
         logging.debug(f"Received file {filename} with length {len(content)} bytes")
 
         if filename.endswith(".ros"):
-            result = RosterView(content.decode('utf-8'), zipped=False, options=options)
+            try:
+                result = RosterView(content.decode('utf-8'), zipped=False, options=options)
+            except UnicodeDecodeError:
+                # because users somehow submit binary .ros files (seems like renamed from .rosz)
+                result = RosterView(io.BytesIO(content), zipped=True, options=options)
         elif filename.endswith(".rosz"):
             result = RosterView(io.BytesIO(content), zipped=True, options=options)
         else:
