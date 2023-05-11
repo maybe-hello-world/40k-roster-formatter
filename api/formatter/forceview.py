@@ -105,6 +105,9 @@ class ForceView:
             "Crusade Tally",
             "Daemonic Pact",
             "Ravenwing Outrider Detachment",
+            "Patrol Detachment",
+            "Super-Heavy Auxiliary Detachment",
+            "Battalion Detachment",
             "Other",
         }:
             # not interesting
