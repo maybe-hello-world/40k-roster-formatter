@@ -46,7 +46,9 @@
 
 
         <label for="roster" class="form-label">Select BattleScribe Roster (.ros or .rosz) file:</label>
-        <input id="roster" class="form-control form-control-lg" type="file" name="roster" accept=".ros, .rosz">
+        <!-- do not add `accept=".ros, .rosz"` to input tag: https://caniuse.com/input-file-accept
+        majority of mobile devices don't work -->
+        <input id="roster" class="form-control form-control-lg" type="file" name="roster">
         <div id="rosterHint" class="form-text">
             No, we never store any rosters (even before team tournaments&nbsp;&#128513;)
         </div>
