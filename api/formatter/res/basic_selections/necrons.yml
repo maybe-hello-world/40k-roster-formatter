@@ -128,6 +128,9 @@ selections:
     - Hyperphase Threshers
     - Ophydian Claws
 
+  Lokhust Destroyer:
+    - Gauss Cannon
+
   Ophydian Destroyer (Reap-Blade):
     - Two Hyperphase Reap-Blades
     - Ophydian Claws
@@ -180,6 +183,9 @@ selections:
   Tesseract Vault:
     - Tesla Sphere
 
+  Convergence of Dominion:
+    - Starstele
+
   Seraptek Heavy Construct:
     - Titanic Forelimbs
 
@@ -210,3 +216,7 @@ selections:
 
   Two Tesla Cannons:
     - Tesla Cannon
+
+  Hyperphase Sword and Dispersion Shield:
+    - Hyperphase Sword
+    - Dispersion Shield
