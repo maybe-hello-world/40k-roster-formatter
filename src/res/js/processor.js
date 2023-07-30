@@ -53,7 +53,6 @@ document.getElementById('formats').onchange = async (e) => {
     let secondaries = document.getElementById('show_secondaries');
     let costs = document.getElementById('remove_costs');
     let model_count = document.getElementById('show_model_count');
-    let cap_secondaries = document.getElementById('cap_secondaries');
 
     switch (e.target.value) {
         case 'default':
@@ -61,21 +60,18 @@ document.getElementById('formats').onchange = async (e) => {
             secondaries.checked = true;
             costs.checked = false;
             model_count.checked = false;
-            cap_secondaries.checked = false;
             break;
         case 'wtc':
             minimize.checked = true;
             secondaries.checked = true;
             costs.checked = false;
             model_count.checked = true;
-            cap_secondaries.checked = false;
             break;
         case 'rus':
             minimize.checked = true;
             secondaries.checked = true;
             costs.checked = false;
             model_count.checked = false;
-            cap_secondaries.checked = false;
             break;
     }
 };
