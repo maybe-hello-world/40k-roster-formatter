@@ -13,7 +13,7 @@ class DefaultPrinter:
     @staticmethod
     def _format_secondaries(roster: RosterView, prefix: str = "") -> str:
         secondaries = roster.secondaries
-        ass = secondaries['assassination']
+        ass = secondaries['characters']
         bid = secondaries['bring it down']
 
         header = ""
