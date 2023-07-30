@@ -157,14 +157,23 @@ def __count_assasination(roster: 'RosterView') -> (int, int):
 
                     # calculate models
                     if hasattr(unit['link'], 'selections'):
+                        models_found = 0
                         for selection in unit['link'].selections.getchildren():
                             if __check_unit_category(selection, 'Character'):
                                 current_models = try_parse_int(selection.get('number', 1)) or 1
+                                models_found += current_models
                                 models += current_models
                                 debug_string = f'Models: {selection.get("name", "Unknown Name")} - ' \
                                                f'Character - Number: {current_models}'
                                 logger.debug(debug_string)
                                 roster.debug_info += debug_string + "\n"
+                        if models_found == 0:
+                            current_models = try_parse_int(unit.get('models', 1)) or 1
+                            debug_string = f'Models: {unit.get("name", "Unknown Name")} - ' \
+                                           f'Character - Number: {current_models} - Whole Unit is a Character'
+                            logger.debug(debug_string)
+                            roster.debug_info += debug_string + "\n"
+                            models += current_models
 
     return units, models
 
