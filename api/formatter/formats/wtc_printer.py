@@ -3,48 +3,27 @@ import logging
 from .format_printer import DefaultPrinter
 from ..forceview import ForceView
 from ..rosterview import RosterView
-from ..extensions import add_double_whitespaces, number_of_units, FormatterOptions
-from ..utils import secondaries_suffix
+from ..extensions import add_double_whitespaces, FormatterOptions
 
 
 class WTCPrinter(DefaultPrinter):
     force_header = "=="
+    roster_header = "+"
+    roster_header_length = 60
     unit_model_wrapper = "{0}"
 
     def print(self, roster: RosterView) -> str:
-
-        secondaries = roster.secondaries
-        ass = secondaries['assassination']
-        bid = secondaries['bring it down']
-        nop_tally, nop = secondaries['no prisoners']
-        atw = secondaries['abhor the witch']
-        suffix = secondaries_suffix(roster.options.cap_secondaries)
-
-        stratagems = []
-        for force in roster.forces:
-            stratagems.extend(force.stratagems)
-
         header = ''.join([
-            '+' * 70 + '\n',
-            'Player #: \n',
-            'Team: \n',
+            self.roster_header * self.roster_header_length + '\n',
+            'Player Name: \n',
+            'Team Name: \n',
             f"Factions used: {', '.join(roster.factions)}\n",
-            "" if roster.army_of_renown is None else f"Army of Renown: {roster.army_of_renown}\n",
-            f"Army points: {roster.pts_total}\n",
-            f"Reinforcement Points: {roster.reinf_points} pts\n",
-            f"Number of Units / Killpoints: {number_of_units(roster)}\n",
-            f"Pre Game Stratagems: {', '.join(stratagems)}\n",
-            f"Starting Command Points: {roster.cp_total}\n",
-            "Warlord: \n",
-            "Army Trait: \n",
-            "Secondary Objectives Information\n",
-            f"Assassination: {ass}" + suffix(ass) + "\n",
-            f"Bring it Down: {bid}" + suffix(bid) + "\n",
-            f"No Prisoners: {nop}" + suffix(nop) + f" (total wounds: {nop_tally})" + "\n",
-            f"Abhor the Witch: {atw}" + suffix(atw) + "\n",
+            f"Army Points: {roster.pts_total}\n",
+            f"Army Enhancements:\n"
+            f"Detachment Rules: {roster.forces[0].detachment_choice}\n"
         ])
 
-        header += "+" * 70 + "\n\n"
+        header += self.roster_header * self.roster_header_length + "\n\n"
 
         forces = '\n'.join(self._print_force(x) for x in roster.forces)
         forces = forces.strip('\n')
@@ -57,25 +36,11 @@ class WTCPrinter(DefaultPrinter):
 
         output = ""
 
-        faction = force.faction + " " if force.faction else ""
-        header = f"{self.force_header} {faction}{force.detachment} ="
+        header = f"{self.force_header} {force.detachment_choice} {force.detachment}"
         if not force.options.remove_costs:
-            cp = "+" + str(force.cp) if force.cp > 0 else str(force.cp)
-            header += f" {cp} CP, [{force.pl} PL, {force.pts} pts]"
+            header += f" [{force.pts} pts]"
         header += f" {self.force_header}"
-
         output += header + "\n\n"
-
-        if force.agents_of_imperium:
-            output += "Agent of the Imperium:\n"
-            for x in force.agents_of_imperium:
-                output += "- " + self._print_unit(x, force.options) + "\n"
-            output += "\n"
-
-        if force.supreme_commander:
-            for x in force.supreme_commander:
-                output += self._print_unit(x, force.options) + "\n"
-            output += "\n"
 
         for key, value in force.enumerated_unit_categories.items():
             result = []
@@ -88,18 +53,13 @@ class WTCPrinter(DefaultPrinter):
                 result.append(f"{value[0]}: " + self._print_unit(unit, force.options) + "\n")
 
             output += ''.join(result) + '\n'
-
-        if force.no_force_org:
-            for x in force.no_force_org:
-                output += "NFO: " + self._print_unit(x, force.options) + "\n"
-            output += "\n"
         return output
 
     @staticmethod
     def _format_costs(costs: dict) -> str:
-        if costs.get('pl', None) is None or costs.get('pts', None) is None:
+        if costs.get('pts', None) is None:
             logging.warning("Costs are missing for one or more units.", extra={'costs': costs})
-        return f'[{costs.get("pl", "???")} PL, {costs.get("pts", "???")} pts]'
+        return f'[{costs.get("pts", "???")} pts]'
 
     def _print_unit(self, unit: dict, options: FormatterOptions):
         output = ""
@@ -113,7 +73,7 @@ class WTCPrinter(DefaultPrinter):
             name = '<Unparsed Unit Name>'
         output += name + " "
         if not options.remove_costs:
-            output += self._format_costs(unit.get('cost', {}))
+            output += f'[{unit.get("cost", "???")} pts]'
         if selections := unit.get('children', []):
             output += " "
             output += self._print_unit_selections(selections)

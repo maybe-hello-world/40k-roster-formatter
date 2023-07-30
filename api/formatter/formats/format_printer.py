@@ -4,7 +4,6 @@ from collections import Counter
 from ..rosterview import RosterView
 from ..forceview import ForceView
 from ..extensions import add_double_whitespaces, number_of_units, FormatterOptions
-from ..utils import expand_cps, secondaries_suffix
 
 
 class DefaultPrinter:
@@ -16,28 +15,19 @@ class DefaultPrinter:
         secondaries = roster.secondaries
         ass = secondaries['assassination']
         bid = secondaries['bring it down']
-        nop_tally, nop = secondaries['no prisoners']
-        atw = secondaries['abhor the witch']
-        suffix = secondaries_suffix(roster.options.cap_secondaries)
 
         header = ""
         header += f"{prefix}\n"
         header += f"{prefix}Number of Units: {number_of_units(roster)}\n"
-        header += f"{prefix}Assassination: {ass} points" + suffix(ass) + "\n"
-        header += f"{prefix}Bring it Down: {bid} points" + suffix(bid) + "\n"
-        header += f"{prefix}No Prisoners: {nop} points" + suffix(nop) + f" (total wounds: {nop_tally})" + "\n"
-        header += f"{prefix}Abhor the Witch: {atw} points" + suffix(atw) + "\n"
+        header += f"{prefix}Character Units (Models): {ass[0]} ({ass[1]}) \n"
+        header += f"{prefix}Vehicle/Monster Models (Max Points): {bid[0]} ({bid[1]}) \n"
         return header
 
     def print(self, roster: RosterView) -> str:
         header = ''.join([
             f"Army name: {roster.name}\n",
             f"Factions used: {', '.join(roster.factions)}\n",
-            "" if roster.army_of_renown is None else f"Army of Renown: {roster.army_of_renown}\n",
-            f"Command Points: {expand_cps(roster.cp_modifiers)}={roster.cp_total}\n",
-            f"Total cost: {roster.pts_total} pts, {roster.pl_total} PL\n",
-            "" if roster.cabal_points is None else f"Cabal Points: {roster.cabal_points}\n",
-            f"Reinforcement Points: {roster.reinf_points} pts\n",
+            f"Total cost: {roster.pts_total} pts\n",
         ])
 
         if roster.options.show_secondaries:
@@ -53,9 +43,6 @@ class DefaultPrinter:
 
     @staticmethod
     def _clean_obligatory_selections(force: ForceView) -> ForceView:
-        force.no_force_org = [force.options.selector_checker.clean_obligatory_selections(force, x) for x in force.no_force_org]
-        force.supreme_commander = [force.options.selector_checker.clean_obligatory_selections(force, x) for x in force.supreme_commander]
-        force.agents_of_imperium = [force.options.selector_checker.clean_obligatory_selections(force, x) for x in force.agents_of_imperium]
         for key, value in force.enumerated_unit_categories.items():
             force.enumerated_unit_categories[key] = [
                 value[0],
@@ -69,40 +56,12 @@ class DefaultPrinter:
             force = self._clean_obligatory_selections(force)
 
         output = ""
-
-        faction = force.faction + " " if force.faction else ""
-        header = f"{self.force_header} {faction}{force.detachment} {self.force_header}"
+        header = f"{self.force_header} {force.detachment_choice} {force.detachment} "
         if not force.options.remove_costs:
-            header += f" {force.cp} CP, {force.pts} pts, {force.pl} PL"
-        if force.cabal_points > 0:
-            header += "," if not force.options.remove_costs else ""
-            header += f" {force.cabal_points} Cabal Points"
+            header += f"{force.pts} pts "
+        header += f"{self.force_header}"
 
         output += header + "\n\n"
-
-        if force.stratagems:
-            output += "Stratagems:\n"
-            for x in force.stratagems:
-                output += "- " + x + "\n"
-            output += "\n"
-
-        if force.no_force_org:
-            output += "No Force Org Slot:\n"
-            for x in force.no_force_org:
-                output += "- " + self._print_unit(x, force.options) + "\n"
-            output += "\n"
-
-        if force.agents_of_imperium:
-            output += "Agent of the Imperium:\n"
-            for x in force.agents_of_imperium:
-                output += "- " + self._print_unit(x, force.options) + "\n"
-            output += "\n"
-
-        if force.supreme_commander:
-            output += "Primarch | Daemon Primarch | Supreme Commander:\n"
-            for x in force.supreme_commander:
-                output += self._print_unit(x, force.options) + "\n"
-            output += "\n"
 
         for key, value in force.enumerated_unit_categories.items():
             result = []
@@ -120,16 +79,11 @@ class DefaultPrinter:
 
     @staticmethod
     def _format_costs(costs: dict) -> str:
-        output = ""
-        output += f'[{costs.get("pts", "???")} pts, {costs.get("pl", "???")} PL'
-        if "???" in output:
+        total_pts = costs.get('pts', "???")
+        if total_pts == "???":
             logging.warning("Incomplete cost information", extra={'costs': costs})
-        if (y := costs.get('cp', 0)) != 0:
-            output += f', {y} CP'
-        if (y := costs.get('cabal', 0)) != 0:
-            output += f', {y} Cabal Points'
-        output += ']'
-        return output
+
+        return f"[{total_pts} pts]"
 
     def _print_unit(self, unit: dict, options: FormatterOptions):
         output = ""
@@ -147,7 +101,7 @@ class DefaultPrinter:
         output += " "
 
         if not options.remove_costs:
-            output += self._format_costs(unit.get('cost', {}))
+            output += f"[{unit.get('cost', 0)} pts]"
 
         return output
 

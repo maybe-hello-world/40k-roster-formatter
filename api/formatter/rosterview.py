@@ -3,11 +3,10 @@ from __future__ import annotations
 import logging
 
 from .forceview import ForceView
-from .utils import remove_prefix, FormatterException
+from .utils import FormatterException
 from .extensions import FormatterOptions, count_secondaries
 
 from lxml import objectify
-from itertools import chain
 from zipfile import ZipFile
 from typing import Mapping
 
@@ -59,10 +58,7 @@ class RosterView:
         except AttributeError as e:
             logging.exception(e)
             total_cost = {}
-        self.cp_total = total_cost.get("CP", 0)
-        self.pl_total = total_cost.get("PL", 0)
         self.pts_total = total_cost.get("pts", 0)
-        self.cabal_points = total_cost.get("Cabal Points", None)
         self.__set_reinf_points(roster)
         self.factions = set(x.attrib.get("catalogueName", "<ERROR: UNPARSED>") for x in roster.forces.iterchildren())
         if "<ERROR: UNPARSED>" in self.factions:
@@ -70,11 +66,6 @@ class RosterView:
 
         forces = (x for x in roster.forces.iterchildren(tag="{*}force"))
         self.forces = [ForceView(x, self.options) for x in forces]
-        self.cp_modifiers = sorted(chain.from_iterable(x.cp_modifiers for x in self.forces), reverse=True)
-        army_of_renown = [x.army_of_renown for x in self.forces if x.army_of_renown is not None]
-        self.army_of_renown = army_of_renown[0] if army_of_renown else None
-        if self.army_of_renown:
-            self.army_of_renown = remove_prefix(self.army_of_renown, "Army of Renown - ")
 
         self.debug_info = ""
         self.secondaries = count_secondaries(self)
