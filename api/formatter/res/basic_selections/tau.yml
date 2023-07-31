@@ -1,223 +1,281 @@
 ---
-faction: T'au Empire
+faction: Xenos - T'au Empire
 selections:
-  Ethereal Guard:
-    - Honour Blade
+  Commander Farsight:
+    - Dawn Blade
+    - High-intensity plasma rifle
 
-  Cadre Fireblade:
-    - Fireblade Pulse Rifle
-    - Markerlight
+  Aun'shi:
+    - Fidelity
 
-  Commander Shadowsun:
-    - Light Missile Pod
-    - Fletchette Launcher
-    - Pulse Pistol
-    - Advanced Guardian Drone
-    - Command-link Drone
-
-  Darkstrider:
-    - Shade
-    - Markerlight
-
-  Aun'Va:
-    - Aun'Va
+  Aun'va:
+    - Aun'va
     - Ethereal Guard
 
-  Ethereal:
-    - Honour Blade
+  Commander Shadowsun:
+    - Flechette launcher
+    - High-energy fusion blaster
+    - Light missile pod
+    - Pulse pistol
 
-  Breacher Fire Warrior:
-    - Pulse Blaster
-    - Pulse Pistol
+  Darkstrider:
+    - Close combat weapon
+    - Shade
+
+  Longstrike:
+    - Armoured hull
+
+  Cadre Fireblade:
+    - Close combat weapon
+    - Fireblade pulse rifle
+
+  Ethereal:
+    - Honour stave
+
+  Firesight Team:
+    - Close combat weapons
+    - Longshot pulse rifles
+    - Pulse pistol
+
+  Kroot Shaper:
+    - Shaper’s ritual blade
+
+  Breacher Team:
+    - Support turret missile system
 
   Breacher Fire Warrior Shas'ui:
-    - Pulse Blaster
-    - Pulse Pistol
+    - Close combat weapon
+    - Pulse blaster
+    - Pulse pistol
 
-  Kroot:
-    - Quill Grenades
-    - Kroot Rifle
+  Breacher Fire Warriors:
+    - Close combat weapon
+    - Pulse blaster
+    - Pulse pistol
+
+  Strike Team:
+    - Support turret missile system
 
   Fire Warrior Shas'ui:
-    - Pulse Pistol
+    - Close combat weapon
+    - Pulse pistol
+    - Pulse rifle
 
-  Fire Warrior w/ Pulse Rifle:
-    - Pulse Rifle
-    - Pulse Pistol
+  Fire Warrior w/ pulse carbine:
+    - Pulse carbine
+    - Pulse pistol
+    - Close combat weapon
 
-  Fire Warrior w/ Pulse Carbine:
-    - Pulse Carbine
-    - Pulse Pistol
+  Fire Warrior w/ pulse rifle:
+    - Pulse pistol
+    - Pulse rifle
+    - Close combat weapon
 
-  Dahyak Grekh:
-    - Kroot pistol
+  Kroot Carnivores:
     - Kroot rifle
 
-  Firesight Marksman:
-    - Markerlight
-    - Pulse Pistol
+  Kroot Farstalker w/ Dvorgite skinner:
+    - Close combat weapon
+    - Dvorgite skinner
+    - Kroot pistol
 
-  Sniper Drone:
-    - Longshot Pulse Rifle
+  Kroot Farstalker w/ Farstalker firearm and Pech'ra:
+    - Close combat weapon
+    - Farstalker firearm
+    - Kroot pistol
 
-  Ghostkeel Battlesuit:
-    - Ghostkeel Fists
+  Kroot Farstalkers:
+    - Close combat weapon
+    - Farstalker firearm
+    - Kroot pistol
 
-  Krootox Rider:
-    - Kroot Gun
-    - Krootox Fists
+  Kroot Hounds:
+    - Ripping fangs
 
-  Stealth Shas'ui w/ Burst Cannon:
-    - Burst Cannon
+  Kroot Kill-broker:
+    - Kroot pistol
+    - Ritual blade
 
-  Stealth Shas'ui w/ Fusion Blaster:
-    - Fusion Blaster
+  Kroot Farstalker:
+    - Close combat weapon
+    - Farstalker firearm
+    - Kroot pistol
 
-  Kroot Hound:
-    - Ripping Fangs
+  Kroot Farstalker w/ Londaxi tribalest:
+    - Close combat weapon
+    - Kroot pistol
+    - Londaxi tribalest
 
   Pathfinder Shas'ui:
-    - Pulse Pistol
-    - Markerlight
-    - Pulse Carbine
+    - Close combat weapon
 
-  Pathfinder:
-    - Pulse Carbine
-    - Pulse Pistol
-    - Markerlight
+  Pathfinders w/ ion rifle:
+    - Close combat weapon
+    - Ion rifle
 
-  Pathfinder w/ Grenade Launcher:
-    - Semi-automatic Grenade Launcher
-    - Pulse Pistol
-    - Markerlight
-    - Pulse Carbine
+  Pathfinders w/ pulse carbine:
+    - Close combat weapon
+    - Pulse carbine
 
-  Pathfinder w/ Neuroweb System Jammer:
-    - Neuroweb System Jammer
-    - Pulse Pistol
-    - Markerlight
-    - Pulse Carbine
+  Pathfinders w/ pulse carbine and grenade launcher:
+    - Close combat weapon
+    - Pulse carbine
+    - Semi-automatic grenade launcher
 
-  Pathfinder w/ Drone Controller:
-    - Drone Controller
-    - Pulse Pistol
-    - Markerlight
-    - Pulse Carbine
+  Pathfinders w/ rail rifle:
+    - Close combat weapon
+    - Rail rifle
 
-  Pathfinder w/ Ion Rifle:
-    - Ion Rifle
-    - Pulse Pistol
+  Stealth Shas'ui w/ burst cannon:
+    - Burst cannon
 
-  Pathfinder w/ Rail Rifle:
-    - Rail Rifle
-    - Pulse Pistol
+  Stealth Shas'ui w/ fusion blaster:
+    - Fusion blaster
 
-  Piranha:
-    - Gun Drones
+  Stealth Shas'vre:
+    - Homing beacon
 
-  Tetra Scout Speeder:
-    - Pulse Rifle
-    - Markerlight
+  Vespid Stingwings:
+    - Vespid Stingwings
+    - Vespid Strain Leader
 
-  Vespid Stingwing:
-    - Neutron Blaster
-    - Stingwing Claws
-
-  Vespid Strain Leader:
-    - Neutron Blaster
-    - Stingwing Claws
-
-  XV107 R'varna Battlesuit:
-    - Pulse Submunitions Cannon
-
-  XV109 Y'vahra Battlesuit:
-    - Fletchette Pod
-    - Ionic Discharge Cannon
-    - Phased Plasma-flamer
-
-  Broadside Shas'vre:
-    - Crushing Bulk
-
-  Broadside Shas'ui:
-    - Crushing Bulk
-
-  Riptide Battlesuit:
-    - Riptide Fists
-
-  Sky Ray Gunship:
-    - Seeker Missile Rack
-    - Markerlight
+  Krootox Riders:
+    - Kroot gun
+    - Krootox fists
 
   AX-1-0 Tiger Shark:
-    - Missile Pod
-    - Heavy Rail Cannon
+    - Armoured hull
+    - Missile pod
+    - Twin heavy rail cannon
 
-  AX-5-2 Barracuda:
-    - Missile Pod
+  Barracuda:
+    - Armoured hull
+    - Missile pod
 
-  DX-6 Remora Stealth Drone:
-    - Long-barrelled Burst Cannon
-    - Remora Seeker Missile
-    - Markerlight
+  Broadside Shas’ui:
+    - Crushing bulk
 
-  Razorshark Strike Fighter:
-    - Quad Ion Turret
-    - Seeker Missile
+  Broadside Shas’vre:
+    - Crushing bulk
 
-  Sun Shark Bomber:
-    - Seeker Missile
-    - Markerlight
+  Ghostkeel Battlesuit:
+    - Ghostkeel fists
 
-  Tiger Shark:
-    - Missile Pod
-
-  Devilfish:
-    - Accelerator Burst Cannon
-
-  KX139 Ta'unar Supremacy Armour:
-    - Crushing Feet
-    - Smart Missile System
-    - Burst Cannon
+  Hammerhead Gunship:
+    - Armoured hull
 
   Manta:
-    - Heavy Rail Cannon
-    - Ion Cannon
-    - Markerlight
-    - Long-barrelled Burst Cannon
-    - Seeker Missile
-    - Missile Pod
+    - Armoured hull
+    - Heavy rail cannon
+    - Ion cannon
+    - Long-barrelled burst cannon array
+    - Missile pod
+    - Seeker missile
+
+  Piranhas:
+    - Armoured hull
+    - Twin pulse carbine
+
+  R'varna Battlesuit:
+    - Pulse submunitions cannon
+
+  Razorshark Strike Fighter:
+    - Armoured hull
+    - Quad ion turret
+    - Seeker missile
+
+  Remora Stealth Drone:
+    - Close combat weapon
+    - Remora seeker missile
+    - Twin long-barrelled burst cannon
+
+  Riptide Battlesuit:
+    - Riptide fists
+
+  Sky Ray Gunship:
+    - Armoured hull
+    - Seeker missile rack
 
   Stormsurge:
-    - Thunderous Footfalls
-    - Cluster Rocket System
-    - Destroyer Missile
-    - Smart Missile System
+    - Cluster rocket system
+    - Destroyer missiles
+    - Thunderous footfalls
+    - Twin smart missile system
 
-  Recon Drone:
-    - Burst Cannon
+  Sun Shark Bomber:
+    - Armoured hull
+    - Missile pod
+    - Seeker missile
+    - Twin ion rifle
+
+  Ta'unar Supremacy Armour:
+    - Burst cannon
+    - Crushing feet
+    - Smart missile system
+
+  Tetra:
+    - Close combat weapons
+    - Pulse rifle
+
+  Tiger Shark:
+    - Armoured hull
+    - Burst cannon
+    - Missile pod
+
+  Y'vahra Battlesuit:
+    - Flechette pod
+    - Ionic discharge cannon
+    - Phased plasma-flamer
+
+  Tactical Drones:
+    - Close combat weapon
+    - Twin pulse carbine
+
+  Devilfish:
+    - Accelerator burst cannon
+
+  2 Twin pulse carbines:
+    - Twin pulse carbine
 
   Gun Drone:
-    - Pulse Carbine
+    - Twin pulse carbine
 
-  # technical record :)
-  2x Gun Drones:
-    - Gun Drone
+  Battlesuit support system:
+    - Battlesuit support system
 
-  Gun Drones:
-    - Gun Drone
+  2 Burst cannons:
+    - Burst cannon
 
-  Marker Drone:
-    - Markerlight
+  2 Long-barrelled burst cannons:
+    - Long-barrelled burst cannon
 
-  Shield Drone:
-    - Shield Generator
+  2 Cyclic ion blasters:
+    - Cyclic ion blaster
 
-  Shielded Missile Drone:
-    - Shield Generator
-    - Missile Pod
+  2 Accelerator burst cannons:
+    - Accelerator burst cannon
 
-  Missile Drone:
-    - Missile Pod
+  2 Twin smart missile systems:
+    - Twin smart missile system
 
-  Interceptor Drone:
-    - Ion Rifle
+  3 Pulse ordnance drivers:
+    - Pulse ordnance driver
+
+  2 Nexus missile launchers:
+    - Nexus missile launcher
+
+  Heavy rail cannon array and fragmentation cluster shell launcher:
+    - Fragmentation cluster shell launcher
+    - Heavy rail cannon array
+
+  2 Ion cannons:
+    - Ion cannon
+
+  2 Skyspear missile racks:
+    - Skyspear missile rack
+
+  2 Swiftstrike railguns:
+    - Swiftstrike railgun
+
+  2 Swiftstrike burst cannons:
+    - Swiftstrike burst cannon

@@ -156,7 +156,9 @@ def __count_assasination(roster: 'RosterView') -> (int, int):
                     units += 1
 
                     # calculate models
-                    if hasattr(unit['link'], 'selections'):
+                    if not hasattr(unit['link'], 'selections'):
+                        models += 1
+                    else:
                         models_found = 0
                         for selection in unit['link'].selections.getchildren():
                             if __check_unit_category(selection, 'Character'):
