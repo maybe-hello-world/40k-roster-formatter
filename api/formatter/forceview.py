@@ -78,7 +78,9 @@ class ForceView:
             "Detachment",
             "Detachment Choice",
         }:
-            self.detachment_choice = selection.selections.getchildren()[0].get("name", "")
+            children = selection.selections.getchildren()
+            if len(children):
+                self.detachment_choice = children[0].get("name", "")
             return
 
         self.logger.error(f"Unknown unparsed item during configuration dispatching.", extra={"40k_item": selection.get('name', None)})
