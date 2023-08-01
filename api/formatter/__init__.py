@@ -10,7 +10,7 @@ from sentry_sdk.integrations.logging import LoggingIntegration
 
 from .rosterview import RosterView
 from .utils import FormatterException
-from .formats import RussianTournamentsPrinter, WTCPrinter, DefaultPrinter
+from .formats import RussianTournamentsPrinter, WTCPrinter, DefaultPrinter, GWPrinter
 
 sentry_logging = LoggingIntegration(
     level=logging.INFO,        # Capture info and above as breadcrumbs
@@ -62,6 +62,8 @@ def main(req: azure.functions.HttpRequest) -> azure.functions.HttpResponse:
             representation = RussianTournamentsPrinter().print(result)
         elif print_format == 'wtc':
             representation = WTCPrinter().print(result)
+        elif print_format == "gw":
+            representation = GWPrinter().print(result)
         else:
             representation = DefaultPrinter().print(result)
 
