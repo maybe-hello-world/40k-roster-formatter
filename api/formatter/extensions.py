@@ -57,44 +57,22 @@ class BasicSelectorChecker:
                 data = load(f, Loader=FullLoader)
                 self.database[data['faction']] = data['selections']
 
-    def is_basic(self, catalogue: str, holder_name: str, selection_name: str):
+    @staticmethod
+    def is_basic(child: ObjectifiedElement):
+        selection_name = child.get('name', "")
         if "warlord" in selection_name.lower():
             return False  # 'warlord' is never a basic selection
 
-        # check in the general catalogue
-        if selection_name.lower() in {x.lower() for x in self.database.get('general', set())}:
-            return True
+        if child['link'].attrib['type'] == 'model':
+            return False  # show all models
 
-        # check in the exact catalogue
-        if selection_name.lower() in {x.lower() for x in self.database.get(catalogue, {}).get(holder_name, {})}:
-            return True
-
-        # check if everything should be omitted here
-        if "*" in self.database.get(catalogue, {}).get(holder_name, {}):
-            return True
-
-        # remove last dash-separated word iteratively and check again
-        # it would allow constructing catalogues like
-        # "Imperium",
-        # "Imperium - Adeptus Astartes",
-        # and "Imperium - Adeptus Astartes - Iron Hands"
-        dash_separated = catalogue.split('-')
-        while len(dash_separated) > 1:
-            dash_separated = dash_separated[:-1]
-            catalogue = '-'.join(dash_separated).strip()
-            if (
-                    selection_name.lower() in {x.lower() for x in
-                                               self.database.get(catalogue, {}).get(holder_name, {})} or
-                    "*" in self.database.get(catalogue, {}).get(holder_name, {})
-            ):
-                return True
-
-        return False
+        result = "entryGroupId" in child['link'].attrib
+        return not result
 
     def clean_obligatory_selections(self, force: 'ForceView', result: dict) -> dict:
         result['children'] = [
             self.clean_obligatory_selections(force, child) for child in result['children']
-            if not force.options.selector_checker.is_basic(force.catalogue, result['name'], child.get("name"))
+            if not force.options.selector_checker.is_basic(child)
         ]
         return result
 
