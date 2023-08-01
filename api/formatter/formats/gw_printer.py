@@ -20,7 +20,10 @@ class GWPrinter(DefaultPrinter):
             f"Detachment Rules: {roster.forces[0].detachment_choice}\n"
         ])
 
+        if roster.options.show_secondaries:
+            header += self._format_secondaries(roster, "")
         header += self.roster_header * self.roster_header_length + "\n\n"
+
 
         forces = '\n'.join(self._print_force(x) for x in roster.forces)
         forces = forces.strip('\n')
