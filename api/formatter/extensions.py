@@ -1,10 +1,7 @@
 import logging
-import os
-import glob
 from dataclasses import dataclass, fields
 from typing import Optional
 
-from yaml import load, FullLoader
 from lxml.objectify import ObjectifiedElement
 
 from .utils import is_upgrade, try_parse_int
@@ -42,31 +39,25 @@ class FormatterOptions:
 
 
 class BasicSelectorChecker:
-    def __init__(self):
-        self.database = dict()
 
-        # load general selections
-        with open(os.path.join("formatter", "res", "basic_selections", "general.yml"), "r") as f:
-            data = load(f, Loader=FullLoader)
-            self.database['general'] = set(data)
-
-        files = glob.glob(os.path.join("formatter", "res", "basic_selections", "*.yml"))
-        files = set(files) - {os.path.join("formatter", "res", "basic_selections", "general.yml")}
-        for file in files:
-            with open(file, "r") as f:
-                data = load(f, Loader=FullLoader)
-                self.database[data['faction']] = data['selections']
+    # oh well here we go again
+    # problem: some selections in bsdata have to be visible but are upgrades with no cost (e.g., Chaos icon)
+    dirty_hacks = [
+        "Chaos icon",
+    ]
 
     @staticmethod
     def is_basic(child: ObjectifiedElement):
         selection_name = child.get('name', "")
+        if selection_name in BasicSelectorChecker.dirty_hacks:
+            return False
         if "warlord" in selection_name.lower():
             return False  # 'warlord' is never a basic selection
 
         if child['link'].attrib['type'] == 'model':
             return False  # show all models
 
-        result = "entryGroupId" in child['link'].attrib
+        result = "entryGroupId" in child['link'].attrib  # if it is a part of selection group - it is not basic
         return not result
 
     def clean_obligatory_selections(self, force: 'ForceView', result: dict) -> dict:
