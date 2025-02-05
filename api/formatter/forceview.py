@@ -70,6 +70,7 @@ class ForceView:
     def __dispatch_configuration(self, selection: ObjectifiedElement):
         if selection.get("name", "") in {
             "Battle Size",
+            "Show/Hide Options",
         } or selection.get("name", "").startswith("Show "):
             # not interesting
             return
@@ -78,6 +79,8 @@ class ForceView:
             "Detachment",
             "Detachment Choice",
         }:
+            if not hasattr(selection, 'selections'):
+                return
             children = selection.selections.getchildren()
             if len(children):
                 self.detachment_choice = children[0].get("name", "")
