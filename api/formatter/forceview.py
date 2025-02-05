@@ -70,6 +70,7 @@ class ForceView:
     def __dispatch_configuration(self, selection: ObjectifiedElement):
         if selection.get("name", "") in {
             "Battle Size",
+            "Show/Hide Options",
         } or selection.get("name", "").startswith("Show "):
             # not interesting
             return
