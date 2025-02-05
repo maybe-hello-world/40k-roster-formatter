@@ -79,6 +79,8 @@ class ForceView:
             "Detachment",
             "Detachment Choice",
         }:
+            if not hasattr(selection, 'selections'):
+                return
             children = selection.selections.getchildren()
             if len(children):
                 self.detachment_choice = children[0].get("name", "")
